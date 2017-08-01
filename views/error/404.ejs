@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>404</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="renderer" content="webkit">
+    <meta name="applicable-device" content="pc,mobile">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="application-name" content="">
+    <meta name="description" content="">
+    <meta name="Keywords" content="" >
+    <% include  ../version.ejs%>
+    <script type="text/javascript">
+        (function(){
+
+            var css ='<link type="text/css" rel="stylesheet" href="'+ GV.STATIC_ROOT+'stylesheets/pages/err.css">'
+            document.write(css);
+        })();
+    </script>
+</head>
+<body>
+404
+<%=error%>
+</body>
+
+
+</html>

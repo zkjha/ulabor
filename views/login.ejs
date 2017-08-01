@@ -1,0 +1,87 @@
+<!--<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title><%= title %></title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="renderer" content="webkit">
+    <meta name="applicable-device" content="pc,mobile">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="application-name" content="">
+    <meta name="description" content="">
+    <meta name="Keywords" content="" >
+
+    <script type="text/javascript">
+        (function(){
+
+            var css ='<link type="text/css" rel="stylesheet" href="'+ GV.STATIC_ROOT+'stylesheets/pages/login.css">'
+            document.write(css);
+        })();
+    </script>
+</head>
+<body>
+登录
+</body>
+
+<script type="text/javascript">
+    (function(){
+        var footer = '<script src="'+ GV.STATIC_ROOT+'javascripts/lib/require.js" data-main="'+ GV.STATIC_ROOT+'javascripts/page/user/sign"><\/script>';
+        document.write(footer);
+    })();
+
+</script>
+</html>-->
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title><%= title %></title>
+    <% include version.ejs%>
+    <script type="text/javascript">
+        (function(){
+
+            var css ='<link type="text/css" rel="stylesheet" href="'+ GV.STATIC_ROOT+'stylesheets/pages/login.css">'
+            document.write(css);
+        })();
+    </script>
+</head>
+
+<body>
+
+<div class="container">
+
+    <form class="form-signin">
+        <h2 class="form-signin-heading">U-LABOR登录</h2>
+        <label for="inputEmail" class="sr-only">用户名</label>
+        <input type="text" id="inputEmail" class="form-control" placeholder="用户名"  autofocus>
+        <label for="inputPassword" class="sr-only">密码</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="密码" >
+
+        <div class="btn btn-lg btn-primary btn-block" >Sign in</div>
+    </form>
+
+</div> <!-- /container -->
+
+<div class="background">
+
+</div>
+</body>
+
+<script type="text/javascript">
+    (function(){
+        var footer = '<script src="'+ GV.STATIC_ROOT+'javascripts/lib/require.js" data-main="'+ GV.STATIC_ROOT+'javascripts/page/user/sign"><\/script>';
+        document.write(footer);
+    })();
+
+</script>
+</html>
+
