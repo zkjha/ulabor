@@ -15,7 +15,7 @@ var multipart = require('connect-multiparty');
 var loginIntercepter = require('./intercepter/loginIntercepter');
 
 var login = require('./routes/web/login');
-
+var manage=require('./routes/web/manage');
 var ajax_login = require('./routes/ajax/login');
 
 
@@ -66,7 +66,7 @@ app.use("/",session({
     rolling:true
 }));
 //用户登陆拦截
-app.use("/admin/manage/*",loginIntercepter);
+//app.use("/admin/manage/*",loginIntercepter);
 
 //http://www.open-open.com/lib/view/open1421307039328.html
 //app.use('/system', system);
@@ -74,6 +74,7 @@ app.use("/admin/manage/*",loginIntercepter);
 app.use('/admin/sign-in-web', login);
 app.use('/admin/ajax-sign-in-web', ajax_login);
 
+app.use('/admin/manage',manage);
 
 
 // catch 404 and forward to error handler

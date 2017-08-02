@@ -1,0 +1,225 @@
+@import "../lib/bootstrap";
+/*
+* Base structure
+*/
+
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  padding-top: 30px;
+}
+
+
+/*
+ * Global add-ons
+ */
+
+.sub-header {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+/*
+ * Top navigation
+ * Hide default border to remove 1px line.
+ */
+.navbar-fixed-top {
+  border: 0;
+}
+
+/*
+ * Sidebar
+ */
+
+/* Hide for mobile, show later */
+.sidebar {
+  display: none;
+}
+@media (min-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 40px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: block;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    background-color: #333333;
+    border-right: 1px solid #eee;
+  }
+}
+
+/* Sidebar navigation */
+.nav-sidebar {
+  margin-right: -21px; /* 20px padding + 1px border */
+  margin-bottom: 1px;
+  margin-left: -20px;
+}
+.nav-sidebar > li > a {
+  padding-right: 20px;
+  padding-left: 20px;
+}
+.nav-sidebar a{
+  color: #fff;
+}
+.nav-sidebar a:focus
+{
+
+  background-color: #eee;
+}
+.nav-sidebar>.lpy-sidebar-first>a,
+.nav-sidebar>.lpy-sidebar-first> a:hover,
+.nav-sidebar>.lpy-sidebar-first>a:focus
+{
+  color: #fff;
+  background-color: #428bca;
+}
+
+.nav-sidebar > .active > a,
+.nav-sidebar > .active > a:hover,
+.nav-sidebar > .active > a:focus {
+  color: #fff;
+  background-color: #101010;
+}
+
+.nav-sidebar >ul>li >  a:hover,
+.nav-sidebar >ul>li >  a:focus {
+  color: #fff;
+  background-color: #333;
+}
+
+/*
+ * Main content
+ */
+
+/*
+ * Main content
+ */
+
+
+@media (min-width: 768px) {
+  .main {
+    padding-right: 0px;
+    padding-left: 0px;
+  }
+}
+.main .page-header {
+  margin-top: 0;
+}
+.iframe{
+  width: 100%;
+  height: 100%;
+  border: 0;
+  margin-top: 20px;
+}
+.main .page-header {
+  margin-top: 0;
+}
+.lpy-sidebar-second{
+  display: none;
+}
+.lpy-sidebar-second>li >a{
+  padding-right: 20px;
+  padding-left: 50px;
+}
+.m-pagination{
+  width:700px;
+  margin:0 auto;
+  text-align: center;
+}
+.red{
+  color:#ff0000;
+}
+
+
+/**
+锟斤拷锟斤拷页锟斤拷
+*/
+.title{
+  margin: 20px 20px 0 0;
+  font-size: 20px;
+  color: #156aa4;
+  word-break: break-all;
+}
+.laixininfo{
+  width: 80%;
+  margin: 10px auto;
+  padding: 10px;;
+}
+
+.laixininfo_baseinf{
+  color: #156aa4;
+}
+.laixininfo_baseinf span{
+  color: #666666;
+}
+.laixinshijian{
+  font-size: 12px;
+  padding-top: 5px;
+}
+.fengexian{
+  width: 100%;
+  height: 1px;
+  background: #666;
+  margin: 5px auto;
+}
+
+.main_container{
+  padding: 0 20px;
+  color: #666666;
+}
+.main_container .gray{
+  font-size:16px;
+  color: #666666;
+}
+.cb{
+  clear: both;
+}
+.base_info{
+  margin: 10px 0;
+}
+.time,.from{
+  float: left;
+  font-size: 12px;
+
+}
+.from{
+  margin-left: 20px;
+}
+#br{
+  background: #ccc;
+  height: 1px;
+}
+.main_content{
+  margin: 15px auto;
+  line-height: 18px;;
+}
+
+.errorInfo{
+  display:none;
+  padding:5px 0;
+  color: #ff0000;
+}
+.no_data{
+  font-size: 18px;
+}
+.dhx_edit_form {
+  padding-top: 50px;
+}
+.lpy_alert{
+  position: absolute;
+  width: 300px;
+  top: 25px;
+  left:238px;
+}
+.no_data{
+  width: 100%;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+}
+span.error{
+  color:red;
+  display: inline-block;
+}
