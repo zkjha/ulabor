@@ -19,6 +19,11 @@ var manage=require('./routes/web/manage');
 var ajax_login = require('./routes/ajax/login');
 
 
+//资源管理
+var resourse = require('./routes/web/resourse');
+var ajaxResourse = require('./routes/ajax/resourse');
+
+
 var app = express();
 app.use(helmet());
 // 设置  view engine
@@ -66,7 +71,7 @@ app.use("/",session({
     rolling:true
 }));
 //用户登陆拦截
-//app.use("/admin/manage/*",loginIntercepter);
+app.use("/admin/manage/*",loginIntercepter);
 
 //http://www.open-open.com/lib/view/open1421307039328.html
 //app.use('/system', system);
@@ -75,6 +80,12 @@ app.use('/admin/sign-in-web', login);
 app.use('/admin/ajax-sign-in-web', ajax_login);
 
 app.use('/admin/manage',manage);
+
+
+app.use('/admin/manage/resourse',resourse);
+app.use('/admin/manage/ajaxResourse',ajaxResourse);
+
+
 
 
 // catch 404 and forward to error handler

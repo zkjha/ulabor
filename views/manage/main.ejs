@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+
+    <!--配置本业默认国际化文件位置-->
+    <meta name="description" id="i18n_pagename" content="main">
+
+
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title><%= title %></title>
+    <% include ../version.ejs%>
+    <script type="text/javascript">
+        (function(){
+
+            var css ='<link type="text/css" rel="stylesheet" href="'+ GV.STATIC_ROOT+'stylesheets/pages/manage.css">'
+            document.write(css);
+        })();
+    </script>
+
+</head>
+
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">U-Labor</span> <span
+                        class="icon-bar"></span> <span class="icon-bar"></span> <span
+                        class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand i18n" data-title="title" href="javascript:void(0);"><%= title %></a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="javascript:void(0);"><label class="i18n" data-title="welcome">欢迎您，</label>&nbsp&nbsp<%= strname %></a>
+                </li>
+                <li><a id="quit" href="javascript:void(0);" class="i18n" data-title="quit">退出</a>
+                </li>
+                <li><a href="modifyPwdIndex.do" target="J_iframe" class="i18n" data-title="Modifypassword">修改密码</a>
+                </li>
+                <li class="changLan">
+                    <select id="changLan_select">
+                        <option value="zh" class="i18n" data-title="Chinese">简体中文</option>
+                        <option value="en" class="i18n" data-title="English">英文</option>
+                    </select>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li class="lpy-sidebar-first"><a href="javascript:void(0)" class="i18n" data-title="resource_management">资源管理</a></li>
+                <ul class="nav nav-sidebar lpy-sidebar-second">
+                    <li class="active"><a class="i18n" href="javascript:void(0)" data-title="resource_list" data-url="/admin/manage/resourse/resourseList">资源列表</a></li>
+                    <!--<li class="active"><a class="" href="javascript:void(0)"  data-title="resource_list" data-url="/admin/manage/resourse/storageList">入库管理</a></li>-->
+                </ul>
+            </ul>
+            <!--<ul class="nav nav-sidebar">-->
+                <!--<li class="lpy-sidebar-first"><a href="javascript:void(0)">商家管理</a></li>-->
+                <!--<ul class="nav nav-sidebar lpy-sidebar-second">-->
+                    <!--<li class="active"><a href="javascript:void(0)" data-url="../adminMerchant/queryMerchant">商家信息</a></li>-->
+                    <!--<li class="active"><a href="javascript:void(0)" data-url="../adminMerchant/queryMerchant">商家信息</a></li>-->
+                    <!--<li class="active"><a href="javascript:void(0)" data-url="../adminMerchant/queryMerchant">商家信息</a></li>-->
+                <!--</ul>-->
+            <!--</ul>-->
+
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <iframe id="J_iframe" name="J_iframe" class="iframe"> </iframe>
+        </div>
+    </div>
+</div>
+
+</body>
+
+<script type="text/javascript">
+   (function(){
+        var footer = '<script src="'+ GV.STATIC_ROOT+'javascripts/lib/require.js" data-main="'+ GV.STATIC_ROOT+'javascripts/page/manage/main"><\/script>';
+        document.write(footer);
+    })();
+
+</script>
+</html>

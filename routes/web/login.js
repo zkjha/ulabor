@@ -3,7 +3,9 @@ var router = express.Router();
 
 /* GET users listing. */
     router.get('/', function(req, res, next) {
-
+    var session = req.session;
+    session.api_session_id = '';
+    session.userInfo = "";
     var fullUrl=req.originalUrl;
     var findStr="/admin/sign-in-web/?url=";
     var index= fullUrl.indexOf(findStr);

@@ -40,6 +40,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+
+    <!--在此配置本页面国际化文件的名字-->
+    <meta id="i18n_pagename" content="index">
+
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
@@ -59,15 +63,52 @@
 
 <div class="container">
 
-    <form class="form-signin">
-        <h2 class="form-signin-heading">U-LABOR登录</h2>
-        <label for="inputEmail" class="sr-only">用户名</label>
-        <input type="text" id="inputEmail" class="form-control" placeholder="用户名"  autofocus>
-        <label for="inputPassword" class="sr-only">密码</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="密码" >
+    <form class="form-signin  email">
+        <h2 class="form-signin-heading i18n" data-title="title">U-LABOR</h2>
+            <!--<label for="inputEmail" class="sr-only">用户名</label>-->
+        <input type="text" id="inputEmail" class="form-control i18n-input" selectattr="userName_placeholder" placeholder="用户名"  autofocus>
+        <input type="password" id="inputPassword" selectattr="password_placeholder" data-type="email" class="form-control password i18n-input" placeholder="密码" >
 
-        <div class="btn btn-lg btn-primary btn-block" >Sign in</div>
+        <!--<label for="inputPassword" class="sr-only">密码</label>-->
+
+
+        <div id="loginBtn" class=" btn btn-lg btn-primary btn-block i18n loginBtn" data-type="email" data-title="login"></div>
+        <div><span class="changeLoginMethod i18n" data-title="phoneLogin" data-method="email">手机登录</span></div>
     </form>
+    <div class="form-signin phone hidden">
+        <h2 class="form-signin-heading i18n" data-title="title">U-LABOR</h2>
+        <div class="phoneLogin">
+            <div class="flex1">
+                <label class="i18n" data-title="area">地区</label>
+            </div>
+            <div class="">
+                <select id="areaNo">
+                    <option value="+86" selected>中国</option>
+                    <option value="+001">America</option>
+                    <option value="+44">Britain</option>
+                    <option value="+49">Deutschland</option>
+                </select>
+            </div>
+        </div>
+        <div class="phoneLogin">
+            <div class="flex1">
+                <label class="areaNo">+86</label>
+            </div>
+            <div class="">
+                <input type="text" id="strUserPhone" class="phoneNum">
+            </div>
+        </div>
+        <div class="phoneLogin">
+            <div class="flex1">
+                <label class="i18n" data-title="password_placeholder" >密码</label>
+            </div>
+            <div>
+                <input id="phonePassword" type="password" class="phone-password password i18n-input" data-type="phone" selectattr="password_placeholder" placeholder="请输入密码">
+            </div>
+        </div>
+        <div id="loginBtn1" class=" btn btn-lg btn-primary btn-block i18n loginBtn" data-type="phone" data-title="login"></div>
+        <div><span class="changeLoginMethod i18n" data-title="emailLogin" data-method="phone">邮箱登录</span></div>
+    </div>
 
 </div> <!-- /container -->
 

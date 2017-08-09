@@ -12,10 +12,8 @@ var fs = require('fs');
 var router = express.Router();
 
 //登陆
-router.post("/ajax-login",function(req, res, next){
-
-    var session=req.session;
-
+router.post("/",function(req, res, next){
+    var session  = req.session;
     var form_data= securityUtil(req);
 
 
@@ -23,17 +21,18 @@ router.post("/ajax-login",function(req, res, next){
         form:form_data
     };
     request.post(remoteUrl.userLogin,options, function (error, response, body) {
-
+        console.log('zzz');
         if (!error) {
 
             try {
                 var json_body = JSON.parse(body);
-
+                console.log(json_body);
                 var code = json_body.code;//获取返回码
                 if(code==codeEnum.Ok){
 
                     var data=json_body.data;
-                    session.api_session_id=data.session_id
+                    session.api_session_id=data.session_id;
+                    session.userInfo = data.userinfo;
 
                 }
 
@@ -55,26 +54,28 @@ router.post("/ajax-login",function(req, res, next){
 });
 
 
-//获取图形验证码
-router.post("/getImageVerifyCode",function(req, res, next){
-
+//手机登录
+router.post("/phoneLogin",function(req, res, next){
+    var session = req.session;
+    var data = securityUtil(req);
     var options = {
-
-        headers:{
-            "access_token": storage.get("access_token")
-        }
-    };
-    request.post(remoteUrl.getImageVerifyCode,options, function (error, response, body) {
-
+        form:data,
+    }
+    request.post(remoteUrl.phoneLogin,options, function (error, response, body) {
         if (!error) {
             try {
                 var json_body = JSON.parse(body);
+                if(json_body.code == codeEnum.Ok){
+                    session.api_session_id = json_body.data.session_id;
+                }
+                console.log(json_body);
                 res.send(json_body);
             }
             catch (err) {
                 console.error(err);
                 res.send({"code":codeEnum.SYSTEM_ERROR,"msg":err.message});
             }
+
 
         }else{
             console.error(error);

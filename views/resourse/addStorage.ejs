@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+
+
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title><%= title %></title>
+    <% include ../version.ejs%>
+    <script type="text/javascript">
+        (function(){
+
+            var css ='<link type="text/css" rel="stylesheet" href="'+ GV.STATIC_ROOT+'stylesheets/pages/resourse.css">'
+            document.write(css);
+        })();
+    </script>
+</head>
+
+<body>
+<!--<div><%=title%></div>-->
+<div class="margin30">
+    <form class="add">
+        <!--<div class="addInput">-->
+            <!--<label  class="addLabel mustInput"><i style="color:red">*</i>资源名称:</label>-->
+            <!--<input id="strName" type="text" class="form-control" placeholder="请输入资源名称">-->
+        <!--</div>-->
+        <!--<div class="addInput ">-->
+            <!--<label class="addLabel mustInput"><i style="color:red">*</i>资源类型:</label>-->
+            <!--&lt;!&ndash;<input id="strType" type="text" class="form-control" placeholder="请输入资源类型">&ndash;&gt;-->
+            <!--<select id="strType" class="form-control">-->
+                <!--<option value="1" selected>耗材</option>-->
+                <!--<option value="2">试剂</option>-->
+                <!--<option value="3">动物</option>-->
+                <!--<option value="4">仪器</option>-->
+            <!--</select>-->
+
+        <!--</div>-->
+        <!--<div class="addInput ">-->
+
+            <!--<label class="addLabel mustInput"><i style="color:red">*</i>单位:</label>-->
+            <!--<input id="strUnit" type="text" class="form-control" placeholder="请输入单位">-->
+
+        <!--</div>-->
+
+        <div class="addInput">
+            <label class="addLabel i18n" data-title="strDealer">经销商:</label>
+            <input id="strDealer" type="text" class="form-control i18n-input" selectattr="strDealer_placeholder" placeholder="请输入经销商">
+
+        </div>
+        <div class="addInput">
+            <label class="addLabel i18n" data-title="strComeFrome">来源:</label>
+            <input id="strComeFrome" type="text" class="form-control i18n-input" selectattr="strComeFrome_placeholder"  placeholder="请输入来源">
+
+        </div>
+        <div class="addInput">
+            <label class="addLabel i18n" data-title="decMoney">入库单价:</label>
+            <input id="decMoney" type="text" class="form-control i18n-input"selectattr="decMoney_placeholder"  placeholder="请输入入库单价">
+
+        </div>
+        <div class="addInput">
+            <label class="addLabel i18n" data-title="iNumber">入库数量:</label>
+            <input id="iNumber" type="text" class="form-control i18n-input"selectattr="iNumber_placeholder"  placeholder="请输入入库数量">
+
+        </div>
+        <div class="addInput">
+            <label class="addLabel i18n" data-title="strPostion">存放位置:</label>
+            <input id="strPosition" type="text" class="form-control i18n-input" selectattr="strPosition_placeholder" placeholder="请输入存放位置">
+
+        </div>
+        <div class="addInput">
+            <label class="addLabel i18n" data-title="strVoucher">凭证:</label>
+            <input id="strVoucher" type="text" class="form-control i18n-input" selectattr="strVoucher_placeholder" placeholder="请输入凭证">
+
+        </div>
+        <!--<div class="addInput">-->
+            <!--<label class="addLabel i18n" data-title="addButton">获取数据来源:</label>-->
+            <!--<input id="strComeFrome" type="text" class="form-control" placeholder="请输入获取数据来源">-->
+
+        <!--</div>-->
+        <!--<div class="addInput ">-->
+            <!--<label class="addLabel mustInput"><i style="color:red">*</i>获取规格:</label>-->
+            <!--<input id="strSpecifications" type="text" class="form-control" placeholder="请输入获取规格">-->
+
+        <!--</div>-->
+        <div class="addInput">
+            <label class="addLabel i18n" data-title="strRemarks">备注信息:</label>
+            <input id="strRemarks" type="text" class="form-control  i18n-input" selectattr="strRemarks_placeholder"  placeholder="请输入备注信息">
+
+        </div>
+        <div class="addInput">
+            <label class="addLabel i18n" data-title="strProductionDate">入库时间:</label>
+            <input id="strProductionDate" type="date" selectattr="strProductionDate_placeholder" class="form-control i18n-input" value="<%= (new Date())%>">
+
+        </div>
+        <div class="addBtn">
+            <span type="button" id="addbutton" class="btn btn-success addbutton i18n " data-title="addButton">新增</span>
+
+        </div>
+
+
+
+
+    </form>
+</div>
+</body>
+
+<script type="text/javascript">
+    (function(){
+        var footer = '<script src="'+ GV.STATIC_ROOT+'javascripts/lib/require.js" data-main="'+ GV.STATIC_ROOT+'javascripts/page/manage/addStorage.js"><\/script>';
+        document.write(footer);
+    })();
+
+</script>
+</html>
+

@@ -14,8 +14,12 @@ var SecurityUtil=function(req){
     var sign_body={};
 
     for(var paramName in body){
-        paramArray.push(paramName);
-        sign_body[paramName]=body[paramName];
+        if(!body[paramName]){
+            continue;
+        }else{
+            paramArray.push(paramName);
+            sign_body[paramName]=body[paramName];
+        }
     }
     var time_str=new Date().getTime()
     var nonce_str= UUID.v1();

@@ -6,13 +6,16 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-
-    res.render('manage/index',
+    var userInfo = req.session.userInfo||{};
+    var name = userInfo.strNickName||'朋友';
+    console.log(name);
+    res.render('manage/main',
         {
-            title:	'U-Labor管理后台'
-
+            title:	'U-Labor管理后台',
+            strname:name
         }
     );
 });
+
 
 module.exports = router;
