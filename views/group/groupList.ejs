@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+
+    <!--在此配置本页面国际化文件的名字-->
+    <meta id="i18n_pagename" content="">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title><%= title %></title>
+    <% include ../version.ejs%>
+    <script type="text/javascript">
+        (function(){
+
+            var css ='<link type="text/css" rel="stylesheet" href="'+ GV.STATIC_ROOT+'stylesheets/pages/group.css">'
+            document.write(css);
+        })();
+    </script>
+</head>
+
+<body>
+<div class="margin30">
+
+    <div class="flex">
+        <!--<div class="Storage_option">-->
+            <!--<select id="search_select">-->
+                <!--<option class="i18n" data-title="objectType1" value="1" selected></option>-->
+                <!--<option class="i18n" data-title="objectType2" value="2">试剂</option>-->
+                <!--<option class="i18n" data-title="objectType3" value="3">动物</option>-->
+                <!--<option class="i18n" data-title="objectType4" value="4">仪器</option>-->
+            <!--</select>-->
+        <!--</div>&lt;!&ndash; /btn-group &ndash;&gt;-->
+        <!--<div class="searchInput">-->
+            <!--<input id="seach_input" type="text" class="form-control">-->
+        <!--</div>-->
+        <!--<a id="searchBtn" class="btn btn-large btn-primary i18n" data-title="searcBtn" >搜索</a>-->
+        <span id="addGroup" class="btn btn-large btn-primary otherBtn "><i class="glyphicon-plus"></i><span class="i18n" data-title="addBtn">新增分组</span></span>
+    </div>
+
+</div>
+<div class="margin30">
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th class="i18n" data-title="resourseName">分组名称</th>
+            <th class="i18n" data-title="resourseType">创建时间</th>
+            <th class="i18n" data-title="unit">所属实验室名称</th>
+            <th class="i18n" data-title="strParentUnit">实验室所属单位</th>
+            <th class="i18n" data-title="isShare">状态</th>
+            <th class="i18n" data-title="action">操作</th>
+        </tr>
+        </thead>
+        <tbody id="j_body"></tbody>
+    </table>
+    <div>
+        <span id="j_footer"></span>
+        <span id="j_pageNum" class="j_pageNum"></span>
+    </div>
+
+</div>
+</body>
+
+<script type="text/javascript">
+    (function(){
+        var footer = '<script src="'+ GV.STATIC_ROOT+'javascripts/lib/require.js" data-main="'+ GV.STATIC_ROOT+'javascripts/page/manage/group/groupList.js"><\/script>';
+        document.write(footer);
+    })();
+
+</script>
+</html>
+

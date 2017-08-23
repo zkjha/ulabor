@@ -67,6 +67,7 @@ router.post("/phoneLogin",function(req, res, next){
                 var json_body = JSON.parse(body);
                 if(json_body.code == codeEnum.Ok){
                     session.api_session_id = json_body.data.session_id;
+                    session.userInfo = json_body.data.userinfo;
                 }
                 console.log(json_body);
                 res.send(json_body);

@@ -61,6 +61,7 @@ requirejs(['lib/jquery',"lib/layer","lib/myi18n",'lib/requstUtil',"lib/bootstrap
                                     }
                                 });
 
+
                             }else{
                                 alert(data.msg);
                                 return;

@@ -18,11 +18,55 @@ requirejs(['lib/jquery','lib/layer',"lib/requstUtil",'lib/myi18n',"lib/jqueryPag
     var resourseList = {
         nowPage:'',
         init:function () {
+            //获取当前登录人的身份信息
+            resourseList.userType = $(".userType").attr("data-type");
             resourseList.event();
             resourseList.getPageToView(1);
 
         },
         event:function () {
+            //manager设置资源共享点击事件
+            $("#j_body").on("click",".shareSetting",function () {
+                var id = $(this).attr("data-id");
+                location.href="/admin/manage/resourse/shareSetting?strId="+id;
+
+            })
+            //pi设置具体资源是否可以共享
+            $("#j_body").on("click",".shareBtn",function () {
+                var _this = this;
+                var iCanShare = $(this).attr("data-type");
+                var strResourcesId = $(this).attr("data-id");
+                Layer.loading();
+                requstUtil.request({
+                    url:'/admin/manage/ajaxResourse/piShareResource',
+                    data:{
+                        iCanShare:iCanShare,
+                        strResourcesId:strResourcesId
+                    },
+                    callback:function (data) {
+                        Layer.removeLoading();
+                        if(data.code == 1){
+
+                            resourseList.shareShow(strResourcesId,_this);
+                            //刷新列表页面
+                            resourseList.getPageToView(resourseList.nowPage)
+                            // Layer.alert({
+                            //     title:"alerCommon",
+                            //     time:15000,
+                            //     lan:resourseList.lan,
+                            //     dom:parent.document.body,
+                            //     name:"index"
+                            // })
+                            // alert("操作成功");
+                        }else{
+                            alert(data.msg);
+                            return
+                        }
+                    }
+                });
+            })
+
+
             //绑定新增按钮点击事件
             $("#addResourse").on("click",function () {
                location.href="/admin/manage/resourse/addResourse";
@@ -31,6 +75,11 @@ requirejs(['lib/jquery','lib/layer',"lib/requstUtil",'lib/myi18n',"lib/jqueryPag
 
             //搜索资源按钮点击事件
             $("#searchBtn").on("click",function () {
+                // Layer.layer({
+                //     type:"layer",
+                //     title:'test',
+                //     url:"/admin/manage/resourse/resourseList"
+                // });
                 //获取搜索类型
                 var strType = $("#search_select").val();
                 //资源名称
@@ -50,10 +99,21 @@ requirejs(['lib/jquery','lib/layer',"lib/requstUtil",'lib/myi18n',"lib/jqueryPag
 
             //监听topwindow的切换语言
             $(parent.document.body).on("change","#changLan_select",function (e) {
-                var lan = e.target.value;
+                var lan =resourseList.lan =  e.target.value;
                 resourseList.changeLan(lan);
             });
 
+        },
+        //共享和取消共享的视图控制
+        shareShow:function (selector,option) {
+            //隐藏掉当前点击的按钮
+            var allSpan = $("."+selector+"");
+            allSpan.hide();
+            $("."+selector+"").each(function (i,dom) {
+                if(dom  !== option){
+                    $(dom).show();
+                }
+            })
         },
         getPageToView:function (nowPage,options) {
             var option = {
@@ -109,13 +169,50 @@ requirejs(['lib/jquery','lib/layer',"lib/requstUtil",'lib/myi18n',"lib/jqueryPag
                 str +="<td>"+(data.strUnit||0)+"</td>";//单位
 
                 str +="<td>"+(data.strSpecifications||'')+"</td>";//获取规格
-                str +="<td>"+(data.decMoney||'')+"</td>";//单价
+                if(data.iIsShare == 1){
+                    str +="<td class='sharing_td' ><span class='sharing i18n'  data-title='Shared'>共享中</span></td>";//是否共享
+                }else{
+                    str +="<td class='unShare_td'><span class='i18n unShare ' data-title='unShare'>不共享</span></td>";//是否共享
+                }
+                // str +="<td>"+(data.iIsShare||'')+"</td>";//是否共享
                 str +="<td>"+(data.iNumber||0)+"</td>";//库存
                 str +="<td>"+(data.strCompany||'')+"</td>";//公司品牌
                 str +="<td>"+(data.strModel||'')+"</td>";//公司型号
                 // str +="<td>"+(data.strPosition||'')+"</td>";//存放位置
                 str +="<td>"+(data.strRemarks||'')+"</td>";//获取备注
-                str +="<td style='text-align: center'><span class=''><a href='#' class='storage_event i18n' data-title='actionName'  data-id='"+dataId+"'>入库</a></span></td>";//操作
+                if(resourseList.userType == 2){
+                    //pi
+                    if(data.iCanShare == 0){
+                        // str +="<td class='joinType_td groupType_td' style='text-align: center'><span class='joinType_td notInGroup groupType'><a href='#' class='storage_event i18n' data-title='actionName'  data-id='"+dataId+"'>入库</a></span>" +
+                        //     "&nbsp&nbsp<span class=joinType_td notInGroup groupType''><a href='#'   class='shareBtn "+dataId+" i18n' data-type='1' data-title='shareTitle_share'  data-id='"+dataId+"'>共享</a></span>" +
+                        //     "<span class='joinType_td notInGroup groupType'><a href='#' style='display: none' class='shareBtn "+dataId+" i18n ' data-type='0' data-title='shareTitle_cancel'  data-id='"+dataId+"'>取消共享</a></span>" +
+                        //     "</td>";//操作
+                        str +="<td class='joinType_td groupType_td' style='text-align: center'><span class='joinType_td notInGroup groupType storage_event i18n' data-title='actionName'  data-id='"+dataId+"'>入库</span>" +
+                            "&nbsp&nbsp<span class='joinType_td notInGroup groupType shareBtn "+dataId+" i18n' data-type='1' data-title='shareTitle_share'  data-id='"+dataId+"'>共享</span>" +
+                            "<span class='joinType_td notInGroup groupType shareBtn "+dataId+" i18n ' data-type='0' data-title='shareTitle_cancel'  data-id='"+dataId+"'  style='display: none' >取消共享</span>" +
+                            "</td>";//操作
+                    }else if(data.iCanShare == 1){
+                        str +="<td class='joinType_td groupType_td' style='text-align: center'><span class='joinType_td notInGroup groupType storage_event i18n' data-title='actionName'  data-id='"+dataId+"'>入库</span>" +
+                            "&nbsp&nbsp<span class='joinType_td notInGroup groupType shareBtn "+dataId+" i18n'  data-type='1' data-title='shareTitle_share'  data-id='"+dataId+"' style='display: none'>共享</span>" +
+                            "<span class='joinType_td notInGroup groupType shareBtn "+dataId+" i18n '  data-type='0' data-title='shareTitle_cancel'  data-id='"+dataId+"'>取消共享</span>" +
+                            "</td>";//操作
+                    }
+                }else{
+                    if(data.iCanShare == 1){
+                        //管理员
+                        //资源可以共享时，显示共享设置。否则不显示共享设置
+                        // str +="<td class='joinType_td groupType_td' style='text-align: center'><span class='joinType_td notInGroup groupType '><a href='#' class='storage_event i18n' data-title='actionName'  data-id='"+dataId+"'>入库</a></span>" +
+                        //     "&nbsp&nbsp<span class='joinType_td notInGroup groupType'><a href='#'  class='shareSetting  i18n' data-title='shareTitle_setting'  data-id='"+dataId+"'>共享设置</a></span>"
+                        //     "</td>";
+                        str +="<td class='joinType_td groupType_td' style='text-align: center'><span class='joinType_td notInGroup groupType storage_event i18n' data-id='"+dataId+"' data-title='actionName'>入库</span>" +
+                            "&nbsp&nbsp<span class='joinType_td notInGroup groupType shareSetting  i18n' data-title='shareTitle_setting' data-id='"+dataId+"'>共享设置</span>"
+                            "</td>";
+                    }else{
+                        str +="<td   class='joinType_td groupType_td' style='text-align: center'><span class='joinType_td notInGroup groupType storage_event i18n' data-title='actionName'  data-id='"+dataId+"'>入库</span>" +
+                            "</td>";
+                    }
+                }
+
 
                 str +="</tr>"
 
@@ -139,7 +236,7 @@ requirejs(['lib/jquery','lib/layer',"lib/requstUtil",'lib/myi18n',"lib/jqueryPag
             resourseList.changeLan();
         },
         changeLan:function (lan) {
-            var lan  = lan||localStorage.getItem("lan");
+            var lan  = resourseList.lan=lan||localStorage.getItem("lan");
             myi18n.common({
                 name:"resourse",
                 lan:lan

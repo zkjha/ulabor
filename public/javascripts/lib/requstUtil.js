@@ -23,9 +23,7 @@ define(
 				    		callback(result);
 				        },
 						error:function(xhr,errorText,errorType){
-								
-							$.tips.toast("网络请求错误");
-                            loading.close();
+
 						}
 				    });
     		},

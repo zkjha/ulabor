@@ -67,6 +67,7 @@ router.post("/resourseList",function(req, res, next){
             session_id:session.api_session_id
         }
     }
+    console.log(remoteUrl.getResourseList);
     request.post(remoteUrl.getResourseList,options, function (error, response, body) {
         if (!error) {
             try {
@@ -121,6 +122,133 @@ router.post("/addStorage",function(req, res, next){
     })
 
 
+});
+
+//pi设置资源是否可以共享
+router.post("/piShareResource",function(req, res, next){
+    var session  =req.session;
+    var data = securityUtil(req);
+    var options = {
+        form:data,
+        headers:{
+            session_id:session.api_session_id
+        }
+    }
+    console.log(options);
+    request.post(remoteUrl.setResourceSharing,options, function (error, response, body) {
+        if (!error) {
+            try {
+                var json_body = JSON.parse(body);
+                console.log(json_body);
+                res.send(json_body);
+            }
+            catch (err) {
+                console.error(err);
+                res.send({"code":codeEnum.SYSTEM_ERROR,"msg":err.message});
+            }
+
+
+        }else{
+            console.error(error);
+            res.send({"code":codeEnum.SYSTEM_ERROR,"msg":error.message});
+        }
+
+    })
+
+
+});
+//获取分组
+router.post("/getGroups",function(req, res, next){
+    var session  =req.session;
+    var data = securityUtil(req);
+    var options = {
+        form:data,
+        headers:{
+            session_id:session.api_session_id
+        }
+    }
+    console.log(options);
+    request.post(remoteUrl.getGroups,options, function (error, response, body) {
+        if (!error) {
+            try {
+                var json_body = JSON.parse(body);
+                console.log(json_body);
+                res.send(json_body);
+            }
+            catch (err) {
+                console.error(err);
+                res.send({"code":codeEnum.SYSTEM_ERROR,"msg":err.message});
+            }
+
+
+        }else{
+            console.error(error);
+            res.send({"code":codeEnum.SYSTEM_ERROR,"msg":error.message});
+        }
+
+    })
+});
+//共享设置
+router.post("/managerSettingShare",function(req, res, next){
+    var session  =req.session;
+    var data = securityUtil(req);
+    var options = {
+        form:data,
+        headers:{
+            session_id:session.api_session_id
+        }
+    }
+    console.log(options);
+    request.post(remoteUrl.setShare,options, function (error, response, body) {
+        if (!error) {
+            try {
+                var json_body = JSON.parse(body);
+                console.log(json_body);
+                res.send(json_body);
+            }
+            catch (err) {
+                console.error(err);
+                res.send({"code":codeEnum.SYSTEM_ERROR,"msg":err.message});
+            }
+
+
+        }else{
+            console.error(error);
+            res.send({"code":codeEnum.SYSTEM_ERROR,"msg":error.message});
+        }
+
+    })
+});
+//获取单条资源信息
+router.post("/getDateByStrResourcesId",function(req, res, next){
+    var session  =req.session;
+    var data = securityUtil(req);
+    var options = {
+        form:data,
+        headers:{
+            session_id:session.api_session_id
+        }
+    }
+    console.log(options);
+    request.post(remoteUrl.getDataById,options, function (error, response, body) {
+        if (!error) {
+            try {
+                var json_body = JSON.parse(body);
+                console.log(json_body);
+                res.send(json_body);
+            }
+            catch (err) {
+                console.error(err);
+                res.send({"code":codeEnum.SYSTEM_ERROR,"msg":err.message});
+            }
+
+
+        }else{
+            console.error(error);
+            res.send({"code":codeEnum.SYSTEM_ERROR,"msg":error.message});
+        }
+
+    })
 });
 
 

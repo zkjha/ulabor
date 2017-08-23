@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title><%= title %></title>
+    <% include ../version.ejs%>
+    <script type="text/javascript">
+        (function(){
+
+            var css ='<link type="text/css" rel="stylesheet" href="'+ GV.STATIC_ROOT+'stylesheets/pages/resourse.css">'
+            document.write(css);
+        })();
+    </script>
+</head>
+
+<body>
+<!--<div><%=title%></div>-->
+<div class="margin30">
+    <form class="add">
+        <div class="share_div">
+            <label  class="addLabel mustInput source_label"><i style="color:red">*</i><span class="i18n" data-title="resourseName">资源名称</span>:</label>
+            <div id="uploader">
+                <div class="queueList">
+                    <div id="dndArea" class="placeholder">
+                        <div id="filePicker"></div>
+                    </div>
+                </div>
+                <div class="statusBar" style="display:none;">
+                    <div class="progress">
+                        <span class="text">0%</span>
+                        <span class="percentage"></span>
+                    </div><div class="info"></div>
+                    <div class="btns">
+                        <div id="filePicker2"></div><div class="uploadBtn">开始上传</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="share_div">
+            <label class="share_addLabel i18n" data-title="strRemarks">共享数量:</label>
+            <input id="iShareNumber" type="text" class="share_Num form-control display_inline i18n-input" selectattr="strRemarks_placeholder" placeholder="请输入共享数量">
+        </div>
+        <div class="share_div">
+            <label  class="share_addLabel i18n" data-title="strRemarks">共享金额:</label>
+            <input id="iShareMoney" type="text" class="share_Num form-control display_inline i18n-input" selectattr="strRemarks_placeholder" placeholder="请输入共享金额">
+        </div>
+        <div class="share_div share_checked">
+            <label class="share_addLabel i18n" data-title="strRemarks">是否归还:</label>
+            <div class="bg_con display_inline">
+                <input id="checked_1" type="checkbox" class="switch" />
+                <label class="switchLabel" for="checked_1"></label>
+            </div>
+        </div>
+        <div class="share_div">
+            <label class="share_addLabel i18n" data-title="strRemarks">谁可以借:</label>
+            <select id="iIsPublic">
+                <option class="i18n" data-title="" value="1">公开</option>
+                <option class="i18n" data-title="" value="0">部分可见</option>
+            </select>
+        </div>
+        <!--部分可见分组-->
+        <div class="groups_div" style="display: none;position: relative">
+            <label class="share_adLabel share_groups i18n" data-title="">部分可见</label>
+            <div id="groups" class="i18n groupIds display_inline " data-title=""></div>
+        </div>
+        <div class="share_div">
+            <label class="share_addLabel i18n" data-title="strRemarks">备注信息:</label>
+            <textarea id="strShareRemarks" type="text" class="share_Num form-control display_inline i18n-input" selectattr="strRemarks_placeholder" placeholder="请输入备注信息"></textarea>
+        </div>
+        <div class="addBtn">
+            <span type="button" id="addbutton" class="btn btn-success addbutton i18n" data-title="">确认共享</span>
+
+        </div>
+    </form>
+</div>
+</body>
+
+<script type="text/javascript">
+    (function(){
+        var footer = '<script src="'+ GV.STATIC_ROOT+'javascripts/lib/require.js" data-main="'+ GV.STATIC_ROOT+'javascripts/page/manage/shareSetting.js"><\/script>';
+        document.write(footer);
+    })();
+
+</script>
+</html>
+

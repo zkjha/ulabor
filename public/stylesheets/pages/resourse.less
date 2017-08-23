@@ -1,4 +1,5 @@
 @import "../lib/bootstrap";
+@import "../lib/webuploader";
 
 .margin30{
   margin: 30px;
@@ -78,4 +79,187 @@
   float: right;
   margin-top: -25px;
 }
+.switch{
+  display:none;
+}
+.switchLabel{
+  width: 50px;
+  position:relative;
+  display: block;
+  padding: 1px;
+  border-radius: 24px;
+  height: 22px;
+  margin-bottom: 15px;
+  background-color: #eee;
+  cursor: pointer;
+  vertical-align: top;
+  -webkit-user-select: none;
+}
+.switchLabel:before{
+  content: '';
+  display: block;
+  border-radius: 24px;
+  height: 22px;
+  background-color: #ecebeb;
+  -webkit-transform: scale(1, 1);
+  -webkit-transition: all 0.3s ease;
+}
+.switchLabel:after{
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -11px;
+  margin-left: -11px;
+  width: 22px;
+  height: 22px;
+  border-radius: 22px;
+  background-color: white;
+  box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.08);
+  -webkit-transform: translateX(-9px);
+  -webkit-transition: all 0.3s ease;
+}
+.switch:checked~.switchLabel:after{
+  -webkit-transform: translateX(9px);
+}
 
+.switch:checked~.switchLabel:before{
+  background-color:green;
+}
+.shareSetting{
+  margin: 20px;
+}
+.switchDiv{
+  display: flex;
+  border: 1px solid #dcd9d9;
+  margin: 20px;
+  padding: 20px;
+  line-height: 28px;
+  margin-right: 15px;
+}
+.bg_con{
+  margin-left:15px ;
+}
+.uploader-demo{
+  display: flex;
+}
+.uploader-list{
+  width: 150px;
+}
+.filelist{
+  display: flex;
+}
+.share_Num{
+  width: 30%;
+}
+
+.share_div{
+  margin: 10px;
+}
+.display_inline{
+  display: inline-block;
+  margin-left: 50px;
+}
+select{
+  height: 30px;
+  border:1px solid #ccc;
+  border-radius: 5px;
+  width: 100px;
+  text-align: center;
+  margin-left: 50px;
+}
+.share_checked{
+  margin-top: 30px;
+  display: flex;
+}
+.source_label{
+  line-height: 80px;
+}
+.group_item{
+  //width:150px;
+  //margin-right:20px;
+  //margin-left:20px;
+  //margin:0 20px 20px 20px;
+word-wrap:break-word;
+  min-width: 18%;
+  height: 50px;
+  padding: 10px;
+}
+.groups_all{
+//display: flex;
+//flex-wrap:wrap ;
+table-layout:fixed;
+}
+.span_1{
+position: relative;
+font-size: 16px;
+}
+.span_2{
+position: absolute;
+font-size: 10px;
+bottom: -20px;
+left:0px;
+width: 140px;
+}
+.share_groups{
+position: absolute;
+left:10px;
+}
+.groupIds{
+margin-left: 100px;
+}
+.sharing{
+  background: #5cb85c ;
+  color:white;
+  padding: 5px;
+  border-radius: 5px;
+}
+.unShare{
+  background: #d9534f;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+}
+.sharing_td,.unShare_td{
+  text-align: center;
+}
+.detailImg{
+  height:150px;
+  margin: 20px;
+}
+#resImg{
+  display: flex;
+}
+.groupType_td{
+  color:white;
+  text-align: center;
+}
+.notInGroup{
+  background: #5bc0de;
+  border-radius: 5px;
+  padding:5px;
+}
+.joinGroup{
+  background: #5cb85c;
+  border-radius: 5px;
+  padding:5px;
+}
+.refuseGroup{
+  background: #d9534f;
+  border-radius: 5px;
+  padding:5px;
+}
+.action_span{
+  color:white;
+  color: white;
+  background: #5bc0de;
+  margin: 0px 10px 0px 10px;
+  padding: 5px;
+  margin-left: 10px;
+  border-radius: 5px;
+  font-size: 12px;
+}
+.checkedname{
+  line-height: 30px;
+  margin-left: 10px;
+}

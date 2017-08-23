@@ -64,9 +64,45 @@
                 <li class="lpy-sidebar-first"><a href="javascript:void(0)" class="i18n" data-title="resource_management">资源管理</a></li>
                 <ul class="nav nav-sidebar lpy-sidebar-second">
                     <li class="active"><a class="i18n" href="javascript:void(0)" data-title="resource_list" data-url="/admin/manage/resourse/resourseList">资源列表</a></li>
+                    <!--<li class="active"><a class="i18n" href="javascript:void(0)" data-title="carousel_list" data-url="/admin/manage/carousel/carouselList">轮播图列表</a></li>-->
                     <!--<li class="active"><a class="" href="javascript:void(0)"  data-title="resource_list" data-url="/admin/manage/resourse/storageList">入库管理</a></li>-->
                 </ul>
             </ul>
+            <ul class="nav nav-sidebar">
+                <li class="lpy-sidebar-first"><a href="javascript:void(0)" class="i18n" data-title="group_management">分组管理</a></li>
+                <ul class="nav nav-sidebar lpy-sidebar-second">
+                    <li class="active"><a class="i18n" href="javascript:void(0)" data-title="group_list" data-url="/admin/manage/group/groupList">分组列表</a></li>
+                    <!--<li class="active"><a class="i18n" href="javascript:void(0)" data-title="carousel_list" data-url="/admin/manage/carousel/carouselList">轮播图列表</a></li>-->
+                    <!--<li class="active"><a class="" href="javascript:void(0)"  data-title="resource_list" data-url="/admin/manage/resourse/storageList">入库管理</a></li>-->
+                </ul>
+            </ul>
+            <ul class="nav nav-sidebar">
+                <li class="lpy-sidebar-first"><a href="javascript:void(0)" class="i18n" data-title="examine_management">审核管理</a></li>
+                <ul class="nav nav-sidebar lpy-sidebar-second">
+                    <li class="active"><a class="i18n" href="javascript:void(0)" data-title="addUlabor_list" data-url="/admin/manage/review/applicationList">加入审核</a></li>
+                    <li class="active"><a class="i18n" href="javascript:void(0)" data-title="loan_list" data-url="/admin/manage/review/loanList">借出审核</a></li>
+                </ul>
+            </ul>
+
+            <!--pi才能看到的操作项-->
+            <%if(strUserType == 2){ %>
+            <ul class="nav nav-sidebar">
+                <li class="lpy-sidebar-first"><a href="javascript:void(0)" class="i18n" data-title="userManage">用户管理</a></li>
+                <ul class="nav nav-sidebar lpy-sidebar-second">
+                    <li class="active"><a class="i18n" href="javascript:void(0)" data-title="manageSetting" data-url="/admin/manage/userSetting/Administrator">管理员设置</a></li>
+                </ul>
+            </ul>
+
+
+            <%}else{%>
+            <!--管理员所看见的操作项-->
+            <ul class="nav nav-sidebar">
+                <li class="lpy-sidebar-first"><a href="javascript:void(0)" class="i18n" data-title="lendManage">借出管理</a></li>
+                <ul class="nav nav-sidebar lpy-sidebar-second">
+                    <li class="active"><a class="i18n" href="javascript:void(0)" data-title="myLend" data-url="/admin/manage/lend/myLend">我的借出</a></li>
+                </ul>
+            </ul>
+            <%}%>
             <!--<ul class="nav nav-sidebar">-->
                 <!--<li class="lpy-sidebar-first"><a href="javascript:void(0)">商家管理</a></li>-->
                 <!--<ul class="nav nav-sidebar lpy-sidebar-second">-->

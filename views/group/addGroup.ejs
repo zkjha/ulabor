@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title><%= title %></title>
+    <% include ../version.ejs%>
+    <script type="text/javascript">
+        (function(){
+
+            var css ='<link type="text/css" rel="stylesheet" href="'+ GV.STATIC_ROOT+'stylesheets/pages/resourse.css">'
+            document.write(css);
+        })();
+    </script>
+</head>
+
+<body>
+<!--<div><%=title%></div>-->
+<div class="margin30">
+    <form class="add">
+
+        <div class="">
+            <label class="addLabel">分组名称:</label>
+            <input id="strGroupName" type="text" class="form-control" placeholder="请输入分组名称">
+        </div>
+        <div class="">
+            <label class="addLabel">选择成员:</label>
+            <span class="checkedname"></span>
+            <div>
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th><input type="checkbox" class="allChecked">全选</th>
+                        <th class="i18n" data-title="resourseName">实验室名称</th>
+                        <th class="i18n" data-title="resourseType">所属单位</th>
+
+                    </tr>
+                    </thead>
+                    <tbody id="j_body"></tbody>
+                </table>
+                <div>
+                    <span id="j_footer"></span>
+                    <span id="j_pageNum" class="j_pageNum"></span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="addBtn">
+            <span type="button" id="addbutton" class="btn btn-success addbutton i18n" data-title="addButton">新增</span>
+
+        </div>
+
+
+
+
+    </form>
+</div>
+</body>
+
+<script type="text/javascript">
+    (function(){
+        var footer = '<script src="'+ GV.STATIC_ROOT+'javascripts/lib/require.js" data-main="'+ GV.STATIC_ROOT+'javascripts/page/manage/group/addGroup.js"><\/script>';
+        document.write(footer);
+    })();
+
+</script>
+</html>
+

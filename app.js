@@ -14,6 +14,14 @@ var multipart = require('connect-multiparty');
  */
 var loginIntercepter = require('./intercepter/loginIntercepter');
 
+
+//超级管理员
+var superLogin = require("./routes/web/superLogin");
+var ajaxSuperLogin = require("./routes/ajax/superLogin");
+
+
+
+
 var login = require('./routes/web/login');
 var manage=require('./routes/web/manage');
 var ajax_login = require('./routes/ajax/login');
@@ -22,6 +30,35 @@ var ajax_login = require('./routes/ajax/login');
 //资源管理
 var resourse = require('./routes/web/resourse');
 var ajaxResourse = require('./routes/ajax/resourse');
+
+
+//分组管理
+var group = require('./routes/web/group');
+var ajaxGroup = require('./routes/ajax/group');
+
+
+//审核管理
+var review = require('./routes/web/review');
+var ajaxReview = require('./routes/ajax/review');
+
+//用户管理
+var userSetting = require('./routes/web/userSetting');
+var ajaxUserSetting = require('./routes/ajax/userSetting');
+
+//借出管理
+var lend = require('./routes/web/lend');
+var ajaxLend = require('./routes/ajax/lend');
+
+
+
+//轮播图
+var carousel = require('./routes/web/carousel');
+var ajaxCarousel = require('./routes/ajax/carousel');
+
+
+
+//文件上传
+var upload = require('./routes/ajax/upload');
 
 
 var app = express();
@@ -51,7 +88,7 @@ app.use(bodyParser.json());
 app.use(multipart());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(require('less-middleware')(path.join(__dirname, 'public')));
-app.use("/static",express.static(path.join(__dirname, 'public')));
+ app.use("/static",express.static(path.join(__dirname, 'public')));
 
 // 设置 Session
 app.use("/",session({
@@ -72,18 +109,51 @@ app.use("/",session({
 }));
 //用户登陆拦截
 app.use("/admin/manage/*",loginIntercepter);
+app.use("/super/manage/*",loginIntercepter);
 
 //http://www.open-open.com/lib/view/open1421307039328.html
 //app.use('/system', system);
 
+
+//超级管理员登录页
+app.use("/super/sign-in-web",superLogin);
+app.use("/super/ajax-sign-in-web",ajaxSuperLogin);
+
+
+//登录
 app.use('/admin/sign-in-web', login);
 app.use('/admin/ajax-sign-in-web', ajax_login);
 
 app.use('/admin/manage',manage);
 
-
+//资源管理
 app.use('/admin/manage/resourse',resourse);
 app.use('/admin/manage/ajaxResourse',ajaxResourse);
+
+//分组管理
+app.use('/admin/manage/group',group);
+app.use('/admin/manage/ajaxGroup',ajaxGroup);
+
+
+//审核管理
+app.use("/admin/manage/review",review);
+app.use("/admin/manage/ajaxReview",ajaxReview);
+
+//用户设置
+app.use("/admin/manage/userSetting",userSetting);
+app.use("/admin/manage/ajaxUserSetting",ajaxUserSetting);
+
+//借出管理
+app.use("/admin/manage/lend",lend);
+app.use("/admin/manage/ajaxLend",ajaxLend);
+
+//轮播图
+app.use('/admin/manage/carousel',carousel);
+app.use('/admin/manage/ajaxCarousel',ajaxCarousel);
+
+
+//文件上传
+app.use('/admin/manage/upload',upload);
 
 
 

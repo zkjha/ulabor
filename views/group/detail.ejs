@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+
+
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title><%= title %></title>
+    <% include ../version.ejs%>
+    <script type="text/javascript">
+        (function(){
+
+            var css ='<link type="text/css" rel="stylesheet" href="'+ GV.STATIC_ROOT+'stylesheets/pages/group.css">'
+            document.write(css);
+        })();
+    </script>
+</head>
+
+<body>
+<!--<div><%=title%></div>-->
+<div class="margin30">
+    <form >
+        <div><label class="i18n" data-title>分组名称:</label><span class="i18n groupName" data-title></span></div>
+        <div class="">
+            <div>
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>头像</th>
+                        <th class="i18n" data-title="resourseName">实验室名称</th>
+                        <th class="i18n" data-title="resourseType">所属单位</th>
+                        <th class="i18n" data-title="resourseType">状态</th>
+                    </tr>
+                    </thead>
+                    <tbody id="j_body"></tbody>
+                </table>
+                <div>
+                    <span id="j_footer"></span>
+                    <span id="j_pageNum" class="j_pageNum"></span>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+    </form>
+</div>
+</body>
+
+<script type="text/javascript">
+    (function(){
+        var footer = '<script src="'+ GV.STATIC_ROOT+'javascripts/lib/require.js" data-main="'+ GV.STATIC_ROOT+'javascripts/page/manage/group/detail.js"><\/script>';
+        document.write(footer);
+    })();
+
+</script>
+</html>
+

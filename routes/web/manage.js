@@ -12,7 +12,8 @@ router.get('/', function(req, res, next) {
     res.render('manage/main',
         {
             title:	'U-Labor管理后台',
-            strname:name
+            strname:name,
+            strUserType:userInfo.strUserType
         }
     );
 });

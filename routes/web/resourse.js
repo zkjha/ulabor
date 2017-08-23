@@ -6,14 +6,27 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/resourseList', function(req, res, next) {
+    var userInfo = req.session.userInfo
     console.log("11");
     res.render('resourse/resourseList',
         {
-            title:	'U-Labor管理后台'
+            title:	'U-Labor管理后台',
+            strUserType:userInfo.strUserType
 
         }
     );
 });
+
+//资源共享管理
+router.get('/shareManage',function (req,res,next) {
+    var session = req.session;
+    var userInfo = session.userInfo;
+    console.log(userInfo);
+    res.render('resourse/resourseShareList',{
+        strUserType:userInfo.strUserType,
+        title:	'U-Labor管理后台'
+    });
+})
 //入库管理
 router.get('/storageList', function(req, res, next) {
     console.log("11");
@@ -33,6 +46,17 @@ router.get('/addResourse',function (req,res,next) {
 router.get('/storage', function(req, res, next) {
     // console.log(req.query);
     res.render('resourse/addStorage',
+        {
+            title:	'U-Labor管理后台'
+
+        }
+    );
+});
+
+//共享设置界面
+router.get('/shareSetting', function(req, res, next) {
+    // console.log(req.query);
+    res.render('resourse/shareSetting',
         {
             title:	'U-Labor管理后台'
 

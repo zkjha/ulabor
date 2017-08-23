@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title><%= title %></title>
+    <% include ../version.ejs%>
+    <script type="text/javascript">
+        (function(){
+
+            var css ='<link type="text/css" rel="stylesheet" href="'+ GV.STATIC_ROOT+'stylesheets/pages/resourse.css">'
+            document.write(css);
+        })();
+    </script>
+</head>
+
+<body>
+<!--<div><%=title%></div>-->
+<div class="margin30">
+    <form class="add">
+        <div class="addInput">
+            <label  class="addLabel mustInput"><span class="i18n" data-title="resourseName">申请人</span>:</label>
+            <input id="strNickName" type="text" class="form-control i18n-input" selectattr="resourseName_placeholder" readonly value="">
+        </div>
+        <div class="addInput ">
+            <label class="addLabel mustInput"><span class="i18n" data-title="resourseType">所属单位</span>:</label>
+            <input id="strLaborName" type="text" class="form-control" placeholder="" readonly>
+        </div>
+        <div class="addInput ">
+            <label class="addLabel mustInput"><span class="i18n" data-title="resourseType">申请时间</span>:</label>
+            <input id="strCreateTime" type="text" class="form-control" placeholder="" readonly>
+        </div>
+        <div class="addInput ">
+            <label class="addLabel mustInput"><span class="i18n" data-title="resourseType">归还时间</span>:</label>
+            <input id="strDeleteTime" type="text" class="form-control" placeholder="" readonly>
+        </div>
+
+        <div class="addInput ">
+            <label class="addLabel mustInput"><span class="i18n" data-title="resourseType">资源名称</span>:</label>
+            <input id="resName" type="text" class="form-control" placeholder="" readonly>
+        </div>
+
+
+        <div class="addInput ">
+            <label class="addLabel mustInput"><span class="i18n" data-title="resourseType">资源类型</span>:</label>
+            <input id="resType" type="text" class="form-control" placeholder="" readonly>
+        </div>
+
+        <div class="addInput ">
+            <label class="addLabel mustInput"><span class="i18n" data-title="resourseType">实验币</span>:</label>
+            <input id="resdecMoney" type="text" class="form-control" placeholder="" readonly>
+        </div>
+
+        <div class="addInput ">
+            <label class="addLabel mustInput"><span class="i18n" data-title="resourseType">库存</span>:</label>
+            <input id="resiNumber" type="text" class="form-control" placeholder="" readonly>
+        </div>
+
+        <div class="addInput ">
+            <label class="addLabel mustInput"><span class="i18n" data-title="resourseType">资源图片</span>:</label>
+            <div id="resImg"></div>
+        </div>
+
+    </form>
+</div>
+</body>
+
+<script type="text/javascript">
+    (function(){
+        var footer = '<script src="'+ GV.STATIC_ROOT+'javascripts/lib/require.js" data-main="'+ GV.STATIC_ROOT+'javascripts/page/manage/review/loanDetail.js"><\/script>';
+        document.write(footer);
+    })();
+
+</script>
+</html>
+
