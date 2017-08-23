@@ -14,7 +14,7 @@
     <link rel="icon" href="../../favicon.ico">
 
     <title><%= title %></title>
-    <% include ../version.ejs%>
+    <% include ../../version.ejs%>
     <script type="text/javascript">
         (function(){
 
@@ -48,10 +48,10 @@
     <table class="table table-bordered">
         <thead>
         <tr>
-            <th class="i18n" data-title="resourseName">图片</th>
-            <th class="i18n" data-title="resourseType">类型</th>
-            <th class="i18n" data-title="unit">是否显示</th>
-            <th class="i18n" data-title="strSpecifications">操作</th>
+            <th class="i18n textCenter" data-title="resourseName">图片</th>
+            <th class="i18n textCenter" data-title="resourseType">类型</th>
+            <th class="i18n textCenter" data-title="unit">是否显示</th>
+            <th class="i18n textCenter" data-title="strSpecifications">操作</th>
             <!--<th class="i18n" data-title="isShare">共享状态</th>-->
             <!--<th class="i18n" data-title="iNumber">库存</th>-->
             <!--<th class="i18n" data-title="strCompany">公司品牌</th>-->
@@ -74,7 +74,7 @@
 
 <script type="text/javascript">
     (function(){
-        var footer = '<script src="'+ GV.STATIC_ROOT+'javascripts/lib/require.js" data-main="'+ GV.STATIC_ROOT+'javascripts/page/manage/carouselList.js"><\/script>';
+        var footer = '<script src="'+ GV.STATIC_ROOT+'javascripts/lib/require.js" data-main="'+ GV.STATIC_ROOT+'javascripts/page/superAdmin/carouselList.js"><\/script>';
         document.write(footer);
     })();
 

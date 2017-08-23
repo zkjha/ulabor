@@ -4,15 +4,15 @@
  */
 var express = require('express');
 var request = require('request');
-var remoteUrl = require('../../util/RemoteUrl');
-var storage = require('../../util/storage');
-var codeEnum = require('../../util/codeEnum.js');
-var securityUtil = require('../../util/SecurityUtil.js');
+var remoteUrl = require('../../../util/RemoteUrl');
+var storage = require('../../../util/storage');
+var codeEnum = require('../../../util/codeEnum.js');
+var securityUtil = require('../../../util/SecurityUtil.js');
 var fs = require('fs');
 var router = express.Router();
 
-//新增资源请求
-router.post("/addResourse",function(req, res, next){
+//获取轮播图列表
+router.post("/carouselList",function(req, res, next){
     var session=req.session;
 
     var form_data= securityUtil(req);
@@ -25,7 +25,7 @@ router.post("/addResourse",function(req, res, next){
         }
     };
     console.log(options);
-    request.post(remoteUrl.addResourse,options, function (error, response, body) {
+    request.post(remoteUrl.getAllCarouselList,options, function (error, response, body) {
 
         if (!error) {
 
@@ -57,8 +57,8 @@ router.post("/addResourse",function(req, res, next){
 });
 
 
-//轮播图列表管理
-router.post("/carouselList",function(req, res, next){
+//删除轮播图
+router.post("/delete",function(req, res, next){
     var session  =req.session;
     var data = securityUtil(req);
     var options = {
@@ -68,7 +68,7 @@ router.post("/carouselList",function(req, res, next){
         }
     }
     console.log(options);
-    request.post(remoteUrl.getCarouselList,options, function (error, response, body) {
+    request.post(remoteUrl.deleteCarouse,options, function (error, response, body) {
         if (!error) {
             try {
                 var json_body = JSON.parse(body);
@@ -91,8 +91,8 @@ router.post("/carouselList",function(req, res, next){
 
 });
 
-//资源列表获取
-router.post("/addStorage",function(req, res, next){
+//新增图片资源
+router.post("/addNewCarousel",function(req, res, next){
     var session  =req.session;
     var data = securityUtil(req);
     var options = {
@@ -101,7 +101,7 @@ router.post("/addStorage",function(req, res, next){
             session_id:session.api_session_id
         }
     }
-    request.post(remoteUrl.addStorage,options, function (error, response, body) {
+    request.post(remoteUrl.addCarousel,options, function (error, response, body) {
         if (!error) {
             try {
                 var json_body = JSON.parse(body);

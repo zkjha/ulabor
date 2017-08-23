@@ -20,7 +20,7 @@ router.post("/",function(req, res, next){
     var options = {
         form:form_data
     };
-    request.post(remoteUrl.userLogin,options, function (error, response, body) {
+    request.post(remoteUrl.superAdminLogin,options, function (error, response, body) {
         console.log('zzz');
         if (!error) {
 

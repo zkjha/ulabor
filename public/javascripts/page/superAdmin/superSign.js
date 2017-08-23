@@ -32,24 +32,7 @@ requirejs(
             },
             event:function() {
 
-                //点击切换登录方式
-                $(".changeLoginMethod").on("click", function (e) {
-                    var method = $(this).attr("data-method");
-                    var rootDoms = $(".form-signin");
-                    rootDoms.each(function (index, rootDom) {
-                        if ($(rootDom).hasClass(method)) {
-                            $(rootDom).hasClass("hidden") ? "" : $(rootDom).addClass("hidden");
-                        } else {
-                            $(rootDom).removeClass("hidden");
-                        }
-                    })
-                });
 
-                //手机登录时选择区域刷新电话label值
-                $("#areaNo").on("change", function (e) {
-                    var value = e.target.value;
-                    $(".areaNo").html(value);
-                })
 
                 //登录按钮点击事件
                 $(".loginBtn").on("click",Sign.userLogin);
@@ -62,21 +45,13 @@ requirejs(
                 })
             },
             userLogin:function (dom) {
-                //判断是那种形式登录
-                var type = $(this).attr("data-type");
+
                 var msg = "";
                 //用户输入值获取d对象
                 var options = {};
-                if (type == "email") {
                     //邮箱登录
-                    options.strUserEmail = $("#inputEmail").val();//邮箱输入
-                    options.strPassword = $("#inputPassword").val();//密码输入
-                } else {
-                    options.strRegionNumber = $(".areaNo").html();//国家区号
-                    options.strPassword = $("#phonePassword").val();//手机登录密码
-                    options.strUserPhone = $("#strUserPhone").val();//手机登录密码
-
-                }
+                options.adminName = $("#userName").val();//用户名
+                options.strPassword = $("#inputPassword").val();//密码
                 msg = Sign.checkParams(options);
                 if (msg) {
                     layer.alert(msg,1000);
@@ -96,12 +71,15 @@ requirejs(
                     return
                 }
                 requstUtil.request({
-                    url: type=="email"?"/admin/ajax-sign-in-web":"/admin/ajax-sign-in-web/phoneLogin",
-                    data: options,
+                    url: "/superAdmin/ajax-sign-in-web",
+                    data: {
+                        adminName:options.adminName,
+                        adminPassword:options.strPassword
+                    },
                     callback: function (data) {
                         if (data.code == 1) {
                             layer.alert("loginSuc",1000);
-                            location.href = "/admin/manage";
+                            location.href = "/superAdmin/manage";
                         } else {
                             if(data.code == 100004){
                                 layer.alert("passwordError",1000);
@@ -109,8 +87,8 @@ requirejs(
                             }else if(data.code ==100010){
                                 layer.alert("emailNotFound",1000);
                                 return;
-                            }else if(data.code == 100014){
-                                layer.alert("numberNotUse",1000);
+                            }else if(data.code == 100003){
+                                layer.alert("emailNotFound",1000);
                                 return;
                             }else if(data.code == 100012){
                                 layer.alert("phoneNotRegistry",1000);
@@ -132,22 +110,6 @@ requirejs(
 
                         errMsg =  name+"Null";
                         return errMsg;
-                    }else{
-                        //验证具体值的合法性
-                        if(name == "strUserEmail"){
-                            var myreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
-                            if(!myreg.test(params[name])){
-                                errMsg = name+"Error";
-                                return errMsg
-                            }
-                        }
-                        if(name == "strUserPhone" ){
-                            var phone = /^1[3|4|5|7|8][0-9]{9}$/;
-                            if(!phone.test(params[name])){
-                                errMsg =name+"Error";
-                                return errMsg;
-                            }
-                        }
                     }
                 }
                 return errMsg;

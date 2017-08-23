@@ -15,11 +15,11 @@
     <link rel="icon" href="../../favicon.ico">
 
     <title><%= title %></title>
-    <% include version.ejs%>
+    <% include ../version.ejs%>
     <script type="text/javascript">
         (function(){
 
-            var css ='<link type="text/css" rel="stylesheet" href="'+ GV.STATIC_ROOT+'stylesheets/pages/login.css">'
+            var css ='<link type="text/css" rel="stylesheet" href="'+ GV.STATIC_ROOT+'stylesheets/pages/superAdmin/login.css">'
             document.write(css);
         })();
     </script>
@@ -32,7 +32,7 @@
     <form class="form-signin  email">
         <h2 class="form-signin-heading i18n" data-title="title">U-LABOR</h2>
         <!--<label for="inputEmail" class="sr-only">用户名</label>-->
-        <input type="text" id="inputEmail" class="form-control i18n-input" selectattr="userName_placeholder" placeholder="用户名"  autofocus>
+        <input type="text" id="userName" class="form-control userName i18n-input" selectattr="userName_placeholder" placeholder="用户名"  autofocus>
         <input type="password" id="inputPassword" selectattr="password_placeholder" data-type="email" class="form-control password i18n-input" placeholder="密码" >
 
         <!--<label for="inputPassword" class="sr-only">密码</label>-->
@@ -50,7 +50,7 @@
 
 <script type="text/javascript">
     (function(){
-        var footer = '<script src="'+ GV.STATIC_ROOT+'javascripts/lib/require.js" data-main="'+ GV.STATIC_ROOT+'javascripts/page/user/superSign"><\/script>';
+        var footer = '<script src="'+ GV.STATIC_ROOT+'javascripts/lib/require.js" data-main="'+ GV.STATIC_ROOT+'javascripts/page/superAdmin/superSign"><\/script>';
         document.write(footer);
     })();
 

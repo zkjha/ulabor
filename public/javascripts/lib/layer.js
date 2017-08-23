@@ -37,7 +37,7 @@ define(
                 var width = rootDom.scrollWidth;
                 var totalDom = this.createBackDom(rootDom);
                 // var totalDom = $("<div style='position:fixed;left:0px;top:0px;width: 100%;height: 100%;opacity: 0.5;background: black'></div>");
-                var alertDom = $("<div class='alert' data-title='' style='line-height:50px;background:white;width: 240px;height: 100px;margin: 0 auto;position: relative '></div>");
+                var alertDom = $("<div class='alert' data-title='' style='line-height:50px;background:white;width: 240px;height: 100px;margin: 0 auto;position: relative ;z-index: 9999'></div>");
                 myi18n.changeLan({
                     lan:lan,
                     name:options.name||'',

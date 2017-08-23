@@ -51,9 +51,18 @@ var ajaxLend = require('./routes/ajax/lend');
 
 
 
+
+
+
+
+//超级管理员相关
+
+var superManage = require("./routes/web/superAdmin/manage");
+
+
 //轮播图
-var carousel = require('./routes/web/carousel');
-var ajaxCarousel = require('./routes/ajax/carousel');
+var carousel = require('./routes/web/superAdmin/carousel');
+var ajaxCarousel = require('./routes/ajax/superAdmin/carousel');
 
 
 
@@ -115,9 +124,7 @@ app.use("/super/manage/*",loginIntercepter);
 //app.use('/system', system);
 
 
-//超级管理员登录页
-app.use("/super/sign-in-web",superLogin);
-app.use("/super/ajax-sign-in-web",ajaxSuperLogin);
+
 
 
 //登录
@@ -147,9 +154,28 @@ app.use("/admin/manage/ajaxUserSetting",ajaxUserSetting);
 app.use("/admin/manage/lend",lend);
 app.use("/admin/manage/ajaxLend",ajaxLend);
 
+
+
+
+//超级管理员相关
+//超级管理员登录页
+app.use("/superAdmin/sign-in-web",superLogin);
+app.use("/superAdmin/ajax-sign-in-web",ajaxSuperLogin);
+
+//超级管理员主页
+app.use("/superAdmin/manage",superManage);
+
+
+
+
+
 //轮播图
-app.use('/admin/manage/carousel',carousel);
-app.use('/admin/manage/ajaxCarousel',ajaxCarousel);
+app.use('/superAdmin/manage/carousel',carousel);
+app.use('/superAdmin/manage/ajaxCarousel',ajaxCarousel);
+
+
+
+
 
 
 //文件上传

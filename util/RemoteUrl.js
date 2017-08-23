@@ -65,6 +65,23 @@ var  RemoteUrl= {
 
 
 
+
+
+
+
+    //超级管理员
+            //登录
+            superAdminLogin:staticValue.API_BASE_PATH+"/adminUser/login",//超级管理员登录
+
+            //轮播图管理
+            getAllCarouselList:staticValue.API_BASE_PATH+"/admin/had-login/getAllCarouselList",//获取轮播图列表
+            deleteCarouse:staticValue.API_BASE_PATH+"/admin/had-login/reviseCarousel",//隐藏轮播图
+            addCarousel:staticValue.API_BASE_PATH+"/admin/had-login/addCarousel",//新增轮播图
+
+
+
+
+
 };
 
 

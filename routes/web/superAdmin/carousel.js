@@ -7,20 +7,19 @@ var router = express.Router();
 /* GET users listing. */
 router.get('/carouselList', function(req, res, next) {
 
-    res.render('carousel/carouselList',
+    res.render('superAdmin/carousel/carouselList',
         {
             title:	'U-Labor管理后台'
         }
     );
 });
 
-//资源共享管理
-router.get('/shareManage',function (req,res,next) {
+//新增轮播图
+router.get('/addNewCarousel',function (req,res,next) {
     var session = req.session;
     var userInfo = session.userInfo;
     console.log(userInfo);
-    res.render('resourse/resourseShareList',{
-        strUserType:userInfo.strUserType,
+    res.render('superAdmin/carousel/addNewCarousel',{
         title:	'U-Labor管理后台'
     });
 })

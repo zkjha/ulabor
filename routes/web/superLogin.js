@@ -20,7 +20,7 @@ router.get('/', function(req, res, next) {
     if(!url){
         url="";
     }
-    res.render('superLogin',
+    res.render('superAdmin/superLogin',
         {
             title:	'用户登录',
             url:url
