@@ -31,7 +31,10 @@ requirejs(['lib/jquery',"lib/layer","lib/myi18n",'lib/requstUtil',"lib/webupload
 
             },
             initView:function(){
-                var strId = location.href.split("?")[1].split("=")[1];
+                //处理参数
+                var param= location.href.split("?")[1].split("=")[1];
+                var strId = Add.strId = param.split(",")[0] ;
+                Add.num =param.split(",")[1] ;
                 requstUtil.request({
                     url:"/admin/manage/ajaxResourse/getDateByStrResourcesId",
                     data:{
@@ -82,6 +85,13 @@ requirejs(['lib/jquery',"lib/layer","lib/myi18n",'lib/requstUtil',"lib/webupload
 
             },
             initViewByData:function (data) {
+                //如果资源入库数量为零，禁止输入共享数量
+                if(Add.num == 0){
+                    $("#iShareNumber").attr("readonly",true);
+                    $("#iShareNumber").attr("placeholder","当前资源入库数量为0，不能输入共享数量");
+                    //国际化
+                    //$("#iShareNumber").attr("data-title","ishareNumNUll");
+                }
                if(data.iShareMoney) {
                    $("#iShareMoney").val(data.iShareMoney);
                }
@@ -106,7 +116,7 @@ requirejs(['lib/jquery',"lib/layer","lib/myi18n",'lib/requstUtil',"lib/webupload
             getParamsAndChecked:function () {
                 var options = {};
                 var url = location.href;
-                options.strResourcesId = url.split("?")[1].split("=")[1];
+                options.strResourcesId = Add.strId;
                 if(!options.strResourcesId){
                     return options.msg='not found resources' ;
                 }
@@ -126,6 +136,10 @@ requirejs(['lib/jquery',"lib/layer","lib/myi18n",'lib/requstUtil',"lib/webupload
                 options.iShareNumber = $("#iShareNumber").val();
                 if(isNaN(options.iShareNumber)){
                     options.msg = "请输入数字类型的共享数量";
+                    return options;
+                }
+                if(options.iShareNumber>Add.num){
+                    options.msg = "输入的共享数量不能超过资源数量";
                     return options;
                 }
                 document.getElementById("checked_1").checked == true?(options.iIsNeedBack=1):(options.iIsNeedBack=0);//是否归还

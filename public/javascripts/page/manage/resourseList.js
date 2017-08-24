@@ -28,7 +28,8 @@ requirejs(['lib/jquery','lib/layer',"lib/requstUtil",'lib/myi18n',"lib/jqueryPag
             //manager设置资源共享点击事件
             $("#j_body").on("click",".shareSetting",function () {
                 var id = $(this).attr("data-id");
-                location.href="/admin/manage/resourse/shareSetting?strId="+id;
+                var num = $(this).attr("data-number")
+                location.href="/admin/manage/resourse/shareSetting?strId="+(id+","+num);
 
             })
             //pi设置具体资源是否可以共享
@@ -182,7 +183,10 @@ requirejs(['lib/jquery','lib/layer',"lib/requstUtil",'lib/myi18n',"lib/jqueryPag
                 str +="<td>"+(data.strRemarks||'')+"</td>";//获取备注
                 if(resourseList.userType == 2){
                     //pi
+                    //pi是能设置该资源是否可以共享，字段是icanshare，具体是否共享由管理员操作
+
                     if(data.iCanShare == 0){
+                        //设置共享
                         // str +="<td class='joinType_td groupType_td' style='text-align: center'><span class='joinType_td notInGroup groupType'><a href='#' class='storage_event i18n' data-title='actionName'  data-id='"+dataId+"'>入库</a></span>" +
                         //     "&nbsp&nbsp<span class=joinType_td notInGroup groupType''><a href='#'   class='shareBtn "+dataId+" i18n' data-type='1' data-title='shareTitle_share'  data-id='"+dataId+"'>共享</a></span>" +
                         //     "<span class='joinType_td notInGroup groupType'><a href='#' style='display: none' class='shareBtn "+dataId+" i18n ' data-type='0' data-title='shareTitle_cancel'  data-id='"+dataId+"'>取消共享</a></span>" +
@@ -192,6 +196,7 @@ requirejs(['lib/jquery','lib/layer',"lib/requstUtil",'lib/myi18n',"lib/jqueryPag
                             "<span class='joinType_td notInGroup groupType shareBtn "+dataId+" i18n ' data-type='0' data-title='shareTitle_cancel'  data-id='"+dataId+"'  style='display: none' >取消共享</span>" +
                             "</td>";//操作
                     }else if(data.iCanShare == 1){
+                        //取消共享
                         str +="<td class='joinType_td groupType_td' style='text-align: center'><span class='joinType_td notInGroup groupType storage_event i18n' data-title='actionName'  data-id='"+dataId+"'>入库</span>" +
                             "&nbsp&nbsp<span class='joinType_td notInGroup groupType shareBtn "+dataId+" i18n'  data-type='1' data-title='shareTitle_share'  data-id='"+dataId+"' style='display: none'>共享</span>" +
                             "<span class='joinType_td notInGroup groupType shareBtn "+dataId+" i18n '  data-type='0' data-title='shareTitle_cancel'  data-id='"+dataId+"'>取消共享</span>" +
@@ -205,7 +210,7 @@ requirejs(['lib/jquery','lib/layer',"lib/requstUtil",'lib/myi18n',"lib/jqueryPag
                         //     "&nbsp&nbsp<span class='joinType_td notInGroup groupType'><a href='#'  class='shareSetting  i18n' data-title='shareTitle_setting'  data-id='"+dataId+"'>共享设置</a></span>"
                         //     "</td>";
                         str +="<td class='joinType_td groupType_td' style='text-align: center'><span class='joinType_td notInGroup groupType storage_event i18n' data-id='"+dataId+"' data-title='actionName'>入库</span>" +
-                            "&nbsp&nbsp<span class='joinType_td notInGroup groupType shareSetting  i18n' data-title='shareTitle_setting' data-id='"+dataId+"'>共享设置</span>"
+                            "&nbsp&nbsp<span class='joinType_td notInGroup groupType shareSetting  i18n' data-title='shareTitle_setting'data-number='"+data.iNumber+"' data-id='"+dataId+"'>共享设置</span>"
                             "</td>";
                     }else{
                         str +="<td   class='joinType_td groupType_td' style='text-align: center'><span class='joinType_td notInGroup groupType storage_event i18n' data-title='actionName'  data-id='"+dataId+"'>入库</span>" +
