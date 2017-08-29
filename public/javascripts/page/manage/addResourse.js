@@ -17,6 +17,8 @@ requirejs(['lib/jquery',"lib/layer","lib/myi18n",'lib/requstUtil',"lib/bootstrap
     function ($,layer,myi18n,requstUtil) {
         var Add = {
             init:function () {
+                //获取当前新增资源类型
+                Add.strType = location.href.split("?")[1];
                 Add.event();
                 Add.changeLan();
             },
@@ -29,7 +31,9 @@ requirejs(['lib/jquery',"lib/layer","lib/myi18n",'lib/requstUtil',"lib/bootstrap
                 //绑定新增按钮点击事件
                 $("#addbutton").on("click",function () {
                     var inputs = $(".form-control");
-                    var params = [],options={};
+                    var params = [],options={
+                        strType:Add.strType
+                    };
                     inputs.each(function (index,param) {
                         var id = $(param).attr("id");
                         var value = $(param).val();
@@ -54,9 +58,9 @@ requirejs(['lib/jquery',"lib/layer","lib/myi18n",'lib/requstUtil',"lib/bootstrap
                                     title:'addResourseSuc',
                                     callback:function (datas) {
                                         if(datas == 1){
-                                            location.href= "/admin/manage/resourse/storage?strResourcesId="+id
+                                            location.href= "/admin/manage/resourse/storage?strResourcesId="+id+","+Add.strType
                                         }else{
-                                            location.href="/admin/manage/resourse/resourseList";
+                                            location.href="/admin/manage/resourse/resourseList?"+Add.strType;
                                         }
                                     }
                                 });
@@ -80,9 +84,9 @@ requirejs(['lib/jquery',"lib/layer","lib/myi18n",'lib/requstUtil',"lib/bootstrap
                     if(name =='strName'&&!value){
                         return msg="请输入资源名称";
                     }
-                    if(name =='strType'&&!value){
-                        return msg = "请选择资源类型";
-                    }
+                    // if(name =='strType'&&!value){
+                    //     return msg = "请选择资源类型";
+                    // }
                     if(name == 'strUnit'&&!value){
                         return msg = "请输入单位";
                     }

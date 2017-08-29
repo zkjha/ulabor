@@ -7202,6 +7202,7 @@ button.close {
   padding: 5px;
 }
 .action_span {
+  cursor: pointer;
   color: white;
   background: #5bc0de;
   margin: 0px 10px 0px 10px;
@@ -7218,6 +7219,7 @@ button.close {
 }
 .userImg {
   height: 50px;
+  width: 50px;
 }
 .joinType_td {
   line-height: 50px;

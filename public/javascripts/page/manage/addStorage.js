@@ -11,6 +11,9 @@ requirejs(['lib/jquery','lib/requstUtil',"lib/myi18n"],
     function ($,requstUtil,myi18n) {
         var Add = {
             init:function () {
+                //获取当前资源类型，用作操作成功后的跳转
+                var param = location.href.split("?")[1];
+                Add.strType = param.split(",")[1]
                 Add.event();
                 Add.changeLan();
             },
@@ -22,7 +25,8 @@ requirejs(['lib/jquery','lib/requstUtil',"lib/myi18n"],
                 //绑定新增按钮点击事件
                 $("#addbutton").on("click",function () {
                     var strResourcesId;
-                    var searchParam = location.href.split("?")[1];
+                    var param = location.href.split("?")[1];
+                    var searchParam = param.split(",")[0];
                     if(searchParam){
                         strResourcesId = searchParam.split("=")[1];
                     }
@@ -45,7 +49,7 @@ requirejs(['lib/jquery','lib/requstUtil',"lib/myi18n"],
                         callback:function (data) {
                             if(data.code == 1){
                                 alert("新增成功");
-                                location.href="/admin/manage/resourse/resourseList";
+                                location.href="/admin/manage/resourse/resourseList?"+Add.strType;
                             }else{
                                 alert(data.msg);
                                 return;

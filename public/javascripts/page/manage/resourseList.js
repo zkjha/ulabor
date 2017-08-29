@@ -10,21 +10,35 @@ require.config({
         },
         "lib/bootstrap":{
             deps: ['lib/jquery']
+        },
+        "lib/webuploader":{
+            deps:['lib/jquery']
         }
     }
 });
-requirejs(['lib/jquery','lib/layer',"lib/requstUtil",'lib/myi18n',"lib/jqueryPage","lib/bootstrap"],
-    function ($,Layer,requstUtil,myi18n) {
+requirejs(['lib/jquery','lib/layer',"lib/requstUtil",'lib/myi18n',"lib/webuploader","lib/jqueryPage","lib/bootstrap"],
+    function ($,Layer,requstUtil,myi18n,WebUploader) {
     var resourseList = {
         nowPage:'',
         init:function () {
+            //获取当前页面的type
+            resourseList.strType = location.href.split("?")[1];
+            //根据当前的页面的type来更改相应的表格顶部的
+            resourseList.changeTitle();
+
             //获取当前登录人的身份信息
             resourseList.userType = $(".userType").attr("data-type");
             resourseList.event();
             resourseList.getPageToView(1);
+            resourseList.initUploadFile();
 
         },
         event:function () {
+            //批量导入按钮点击事件
+            $("#addResourse_all").on('click',function () {
+                resourseList.uploadFile();
+            })
+
             //manager设置资源共享点击事件
             $("#j_body").on("click",".shareSetting",function () {
                 var id = $(this).attr("data-id");
@@ -70,7 +84,7 @@ requirejs(['lib/jquery','lib/layer',"lib/requstUtil",'lib/myi18n',"lib/jqueryPag
 
             //绑定新增按钮点击事件
             $("#addResourse").on("click",function () {
-               location.href="/admin/manage/resourse/addResourse";
+               location.href="/admin/manage/resourse/addResourse?"+resourseList.strType;
             });
 
 
@@ -82,11 +96,10 @@ requirejs(['lib/jquery','lib/layer',"lib/requstUtil",'lib/myi18n',"lib/jqueryPag
                 //     url:"/admin/manage/resourse/resourseList"
                 // });
                 //获取搜索类型
-                var strType = $("#search_select").val();
+                // var strType = $("#search_select").val();
                 //资源名称
                 var  strName = $("#seach_input").val();
                 resourseList.getPageToView(1,{
-                    strType:strType,
                     strName:strName
                 });
             })
@@ -95,13 +108,14 @@ requirejs(['lib/jquery','lib/layer',"lib/requstUtil",'lib/myi18n',"lib/jqueryPag
             $("#j_body").on("click",".storage_event",function () {
                 var id= $(this).attr("data-id");
                 //跳转到入库页面
-                location.href = "/admin/manage/resourse/storage?strResourcesId="+id;
+                location.href = "/admin/manage/resourse/storage?strResourcesId="+id+","+resourseList.strType;
             });
 
             //监听topwindow的切换语言
             $(parent.document.body).on("change","#changLan_select",function (e) {
+                // Layer.loading();
                 var lan =resourseList.lan =  e.target.value;
-                resourseList.changeLan(lan);
+                // resourseList.changeLan(lan);
             });
 
         },
@@ -119,7 +133,8 @@ requirejs(['lib/jquery','lib/layer',"lib/requstUtil",'lib/myi18n',"lib/jqueryPag
         getPageToView:function (nowPage,options) {
             var option = {
                 pageSize:10,
-                pageNumber:nowPage
+                pageNumber:nowPage,
+                strType:resourseList.strType
             }
             if(options){
                 for(var i in options){
@@ -191,15 +206,15 @@ requirejs(['lib/jquery','lib/layer',"lib/requstUtil",'lib/myi18n',"lib/jqueryPag
                         //     "&nbsp&nbsp<span class=joinType_td notInGroup groupType''><a href='#'   class='shareBtn "+dataId+" i18n' data-type='1' data-title='shareTitle_share'  data-id='"+dataId+"'>共享</a></span>" +
                         //     "<span class='joinType_td notInGroup groupType'><a href='#' style='display: none' class='shareBtn "+dataId+" i18n ' data-type='0' data-title='shareTitle_cancel'  data-id='"+dataId+"'>取消共享</a></span>" +
                         //     "</td>";//操作
-                        str +="<td class='joinType_td groupType_td' style='text-align: center'><span class='joinType_td notInGroup groupType storage_event i18n' data-title='actionName'  data-id='"+dataId+"'>入库</span>" +
-                            "&nbsp&nbsp<span class='joinType_td notInGroup groupType shareBtn "+dataId+" i18n' data-type='1' data-title='shareTitle_share'  data-id='"+dataId+"'>共享</span>" +
-                            "<span class='joinType_td notInGroup groupType shareBtn "+dataId+" i18n ' data-type='0' data-title='shareTitle_cancel'  data-id='"+dataId+"'  style='display: none' >取消共享</span>" +
+                        str +="<td class='joinType_td groupType_td' style='text-align: center'><span class=' joinType_td notInGroup groupType storage_event i18n' data-title='actionName'  data-id='"+dataId+"'>入库</span>" +
+                            "&nbsp&nbsp<span class=' joinType_td notInGroup groupType shareBtn "+dataId+" i18n' data-type='1' data-title='shareTitle_share'  data-id='"+dataId+"'>共享</span>" +
+                            "<span class=' joinType_td notInGroup groupType shareBtn "+dataId+" i18n ' data-type='0' data-title='shareTitle_cancel'  data-id='"+dataId+"'  style='display: none' >取消共享</span>" +
                             "</td>";//操作
                     }else if(data.iCanShare == 1){
                         //取消共享
-                        str +="<td class='joinType_td groupType_td' style='text-align: center'><span class='joinType_td notInGroup groupType storage_event i18n' data-title='actionName'  data-id='"+dataId+"'>入库</span>" +
-                            "&nbsp&nbsp<span class='joinType_td notInGroup groupType shareBtn "+dataId+" i18n'  data-type='1' data-title='shareTitle_share'  data-id='"+dataId+"' style='display: none'>共享</span>" +
-                            "<span class='joinType_td notInGroup groupType shareBtn "+dataId+" i18n '  data-type='0' data-title='shareTitle_cancel'  data-id='"+dataId+"'>取消共享</span>" +
+                        str +="<td class='joinType_td groupType_td' style='text-align: center'><span class=' joinType_td notInGroup groupType storage_event i18n' data-title='actionName'  data-id='"+dataId+"'>入库</span>" +
+                            "&nbsp&nbsp<span class=' joinType_td notInGroup groupType shareBtn "+dataId+" i18n'  data-type='1' data-title='shareTitle_share'  data-id='"+dataId+"' style='display: none'>共享</span>" +
+                            "<span class=' joinType_td notInGroup groupType shareBtn "+dataId+" i18n '  data-type='0' data-title='shareTitle_cancel'  data-id='"+dataId+"'>取消共享</span>" +
                             "</td>";//操作
                     }
                 }else{
@@ -209,11 +224,11 @@ requirejs(['lib/jquery','lib/layer',"lib/requstUtil",'lib/myi18n',"lib/jqueryPag
                         // str +="<td class='joinType_td groupType_td' style='text-align: center'><span class='joinType_td notInGroup groupType '><a href='#' class='storage_event i18n' data-title='actionName'  data-id='"+dataId+"'>入库</a></span>" +
                         //     "&nbsp&nbsp<span class='joinType_td notInGroup groupType'><a href='#'  class='shareSetting  i18n' data-title='shareTitle_setting'  data-id='"+dataId+"'>共享设置</a></span>"
                         //     "</td>";
-                        str +="<td class='joinType_td groupType_td' style='text-align: center'><span class='joinType_td notInGroup groupType storage_event i18n' data-id='"+dataId+"' data-title='actionName'>入库</span>" +
-                            "&nbsp&nbsp<span class='joinType_td notInGroup groupType shareSetting  i18n' data-title='shareTitle_setting'data-number='"+data.iNumber+"' data-id='"+dataId+"'>共享设置</span>"
+                        str +="<td class='joinType_td groupType_td' style='text-align: center'><span class=' joinType_td notInGroup groupType storage_event i18n' data-id='"+dataId+"' data-title='actionName'>入库</span>" +
+                            "&nbsp&nbsp<span class=' joinType_td notInGroup groupType shareSetting  i18n' data-title='shareTitle_setting'data-number='"+data.iNumber+"' data-id='"+dataId+"'>共享设置</span>"
                             "</td>";
                     }else{
-                        str +="<td   class='joinType_td groupType_td' style='text-align: center'><span class='joinType_td notInGroup groupType storage_event i18n' data-title='actionName'  data-id='"+dataId+"'>入库</span>" +
+                        str +="<td   class='joinType_td groupType_td' style='text-align: center'><span class=' joinType_td notInGroup groupType storage_event i18n' data-title='actionName'  data-id='"+dataId+"'>入库</span>" +
                             "</td>";
                     }
                 }
@@ -238,15 +253,151 @@ requirejs(['lib/jquery','lib/layer',"lib/requstUtil",'lib/myi18n',"lib/jqueryPag
             });
 
             //转换语言
-            resourseList.changeLan();
+            // resourseList.changeLan();
         },
-        changeLan:function (lan) {
-            var lan  = resourseList.lan=lan||localStorage.getItem("lan");
-            myi18n.common({
-                name:"resourse",
-                lan:lan
-            })
+        // changeLan:function (lan) {
+        //     var lan  = resourseList.lan=lan||localStorage.getItem("lan");
+        //     myi18n.common({
+        //         name:"resourse",
+        //         lan:lan
+        //     })
+        // },
+        initUploadFile:function () {
+            jQuery(function() {
+                var $ = jQuery,
+                    $list = $('#thelist'),
+                    $btn = $('#ctlBtn'),
+                    state = 'pending',
+                    uploader;
+
+                uploader = WebUploader.create({
+                    //同一文件重复上传
+                    duplicate :true,
+
+                    // 不压缩image
+                    resize: false,
+
+                    // 文件接收服务端。
+                    server: '/admin/manage/upload/uploadFile',
+
+                    // 选择文件的按钮。可选。
+                    // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+                    pick: '#picker',
+                    accept:{
+                        title: 'File',
+                        extensions: 'xlsx,xls',
+                        mimeTypes: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+                    }
+                });
+
+                // 当有文件添加进来的时候
+                uploader.on( 'fileQueued', function( file ) {
+                    $list.append( '<div id="' + file.id + '" class="item">' +
+                        '<h4 class="info">' + file.name + '</h4>' +
+                        '<p class="state">等待上传...</p>' +
+                        '</div>' );
+                });
+
+                // 文件上传过程中创建进度条实时显示。
+                uploader.on( 'uploadProgress', function( file, percentage ) {
+                    var $li = $( '#'+file.id ),
+                        $percent = $li.find('.progress .progress-bar');
+
+                    // 避免重复创建
+                    if ( !$percent.length ) {
+                        $percent = $('<div class="progress progress-striped active">' +
+                            '<div class="progress-bar" role="progressbar" style="width: 0%">' +
+                            '</div>' +
+                            '</div>').appendTo( $li ).find('.progress-bar');
+                    }
+
+                    $li.find('p.state').text('上传中');
+
+                    $percent.css( 'width', percentage * 100 + '%' );
+                });
+
+                uploader.on( 'uploadSuccess', function( file,response) {
+                    Layer.removeLoading();
+                    var data = response.data||{};
+                    var url = data.filePath,rootUrl=data.strRootpath;
+                    //如果返回状态不为1，提醒错误
+                    if(response.code == 1){
+                        if(url){
+                            var errImg = $("#errImg");
+                            //如果返回值有url,则显示按钮
+                            errImg.html("<a href='"+(rootUrl+url)+"'>导入资源部分失败，查看原因</a>")
+                            // $("#errImg").show();
+
+                        }else{
+                            alert("操作成功");
+                        }
+                    }else{
+                        alert(response.msg);
+                        return
+                    }
+
+
+                });
+
+                uploader.on( 'uploadError', function( file ) {
+                    Layer.removeLoading();
+                });
+
+                uploader.on( 'uploadComplete', function( file ,data) {
+                    console.log(data);
+                    $( '#'+file.id ).find('.progress').fadeOut();
+                });
+                uploader.on( 'all', function( type ) {
+                    if ( type === 'startUpload' ) {
+                        state = 'uploading';
+                    } else if ( type === 'stopUpload' ) {
+                        state = 'paused';
+                    } else if ( type === 'uploadFinished' ) {
+                        state = 'done';
+                    }
+
+                    if ( state === 'uploading' ) {
+                        $btn.text('暂停上传');
+                    } else {
+                        $btn.text('开始上传');
+                    }
+                });
+
+
+                $btn.on( 'click', function() {
+                    if ( state === 'uploading' ) {
+                        uploader.stop();
+                    } else {
+                        uploader.upload();
+                    }
+                });
+            });
+        },
+        uploadFile:function () {
+            $("#errImg").html("");
+            var $btn = $('#ctlBtn')
+            var pickerDom = document.getElementById("picker");
+            if(!pickerDom){
+                var time = setTimeout(function () {
+                    clearTimeout(time);
+                    if(pickerDom){
+                        time = "";
+                        $("#picker input").click();
+                        $("#picker input").on("change",function () {
+                            Layer.loading();
+                            $btn.click();
+                        })
+                    }
+                },100);
+            }else{
+                $("#picker input").click();
+                $("#picker input").on("change",function () {
+                    Layer.loading();
+                    $btn.click();
+                })
+            }
         }
+
 
     }
     resourseList.init();

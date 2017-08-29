@@ -184,20 +184,20 @@ requirejs([
 
                     //如果还没有加入，则只能处理是否加入
                     if(data.isAgree == 0){
-                        str +="<td><span class='i18n action_span agree_group in_group' data-title='' data-id='"+data.strGroupAndLaboratoryId+"'>同意</span><span class='action_span i18n refuse_group in_group' data-title='' data-id='"+data.strGroupAndLaboratoryId+"'>拒绝</span>"
+                        str +="<td><span class=' i18n action_span agree_group in_group' data-title='' data-id='"+data.strGroupAndLaboratoryId+"'>同意</span><span class=' action_span i18n refuse_group in_group' data-title='' data-id='"+data.strGroupAndLaboratoryId+"'>拒绝</span>"
                     }else{
                         //查看群成员
-                        str +="<td><span class='i18n detail action_span' data-name='"+data.strGroupName+"' data-id='"+dataId+"' data-title=''>查看</span>";
+                        str +="<td><span class=' i18n detail action_span' data-name='"+data.strGroupName+"' data-id='"+dataId+"' data-title=''>查看</span>";
                         //如果该分组为本实验所有
                         if(data.strCreateLaboratory == userInfo.strLaboratoryId){
                             //本实验室可以有修改群名片和解散分组动作
                             if(userInfo.strUserType == 2||userInfo.strUserinfoId == data.strCreateUserId){
                                 //实验室pi和创建者manage可以进行解散分组及修改名称动作
-                                str +="<span class='i18n update_groupName action_span' data-id='"+dataId+"' data-title=''>修改</span><span class='i18n delete_group action_span' data-id='"+dataId+"' data-title=''>删除</span>"
+                                str +="<span class=' i18n update_groupName action_span' data-id='"+dataId+"' data-title=''>修改</span><span class=' i18n delete_group action_span' data-id='"+dataId+"' data-title=''>删除</span>"
                             }
                         }else{
                             //否则就只能退出
-                            str +="<span class='i18n quit_group action_span'>退出</span>"
+                            str +="<span class=' i18n quit_group action_span'>退出</span>"
                         }
 
 

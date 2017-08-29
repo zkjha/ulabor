@@ -28,19 +28,30 @@
     <div class="margin30">
 
         <div class="flex">
-            <div class="Storage_option">
-                <select id="search_select">
-                    <option class="i18n" data-title="objectType1" value="1" selected>耗材</option>
-                    <option class="i18n" data-title="objectType2" value="2">试剂</option>
-                    <option class="i18n" data-title="objectType3" value="3">动物</option>
-                    <option class="i18n" data-title="objectType4" value="4">仪器</option>
-                </select>
-            </div><!-- /btn-group -->
+            <!--<div class="Storage_option">-->
+                <!--<select id="search_select">-->
+                    <!--<option class="i18n" data-title="objectType1" value="1" selected>耗材</option>-->
+                    <!--<option class="i18n" data-title="objectType2" value="2">试剂</option>-->
+                    <!--<option class="i18n" data-title="objectType3" value="3">动物</option>-->
+                    <!--<option class="i18n" data-title="objectType4" value="4">仪器</option>-->
+                <!--</select>-->
+            <!--</div>&lt;!&ndash; /btn-group &ndash;&gt;-->
             <div class="searchInput">
                 <input id="seach_input" type="text" class="form-control">
             </div>
             <a id="searchBtn" class="btn btn-large btn-primary i18n" data-title="searcBtn" >搜索</a>
             <span id="addResourse" class="btn btn-large btn-primary otherBtn "><i class="glyphicon-plus"></i><span class="i18n" data-title="addBtn">新增资源</span></span>
+            <span id="addResourse" class="btn btn-large btn-primary otherBtn "><i class="glyphicon-plus"></i><a class="i18n muban" data-title="Template_download" href="/static/images/muban.xlsx">批量模板下载</a></span>
+            <span id="addResourse_all" class="btn btn-large btn-primary otherBtn "><i class="glyphicon-plus"></i><span class="i18n" data-title="addBtn_all">批量导入</span></span>
+            <span id="errImg" ></span>
+        </div>
+        <div id="uploader" class="wu-example" style="display: none">
+            <!--用来存放文件信息-->
+            <div id="thelist" class="uploader-list"></div>
+            <div class="btns">
+                <div id="picker">选择文件</div>
+                <button id="ctlBtn" class="btn btn-default">开始上传</button>
+            </div>
         </div>
 
     </div>

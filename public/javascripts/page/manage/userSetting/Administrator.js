@@ -105,7 +105,7 @@ requirejs(['lib/jquery','lib/layer',"lib/requstUtil",'lib/myi18n',"lib/jqueryPag
 
                     //如果还没有加入，则只能处理是否加入
                     if(data.strUserType == 0){
-                        str +="<td><span class='i18n action_span agree_group in_group joinType_td' data-title='' data-id='"+dataId+"'>设为管理员</span>"
+                        str +="<td><span class=' i18n action_span agree_group in_group joinType_td' data-title='' data-id='"+dataId+"'>设为管理员</span>"
                     }else if(data.strUserType == 1){
                         // //查看群成员
                         // str +="<td><span class='i18n detail action_span' data-name='"+data.strGroupName+"' data-id='"+dataId+"' data-title=''>查看</span>";
@@ -120,7 +120,7 @@ requirejs(['lib/jquery','lib/layer',"lib/requstUtil",'lib/myi18n',"lib/jqueryPag
                         //     //否则就只能退出
                         //     str +="<span class='i18n quit_group action_span'>退出</span>"
                         // }
-                        str +="<td><span class='i18n action_span agree_group in_group joinType_td' data-title='' data-id='"+dataId+"'>设为成员</span>"
+                        str +="<td><span class=' i18n action_span agree_group in_group joinType_td' data-title='' data-id='"+dataId+"'>设为成员</span>"
 
 
                     }else{

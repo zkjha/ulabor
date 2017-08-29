@@ -10,6 +10,7 @@ var  RemoteUrl= {
 
             //上传图片
             upload:staticValue.API_BASE_PATH+"/app/had-login/file/imageUpload",
+            uploadFile:staticValue.API_BASE_PATH+"/app/had-login/resources/batch/add",
 
             //登录接口
             userLogin:staticValue.API_BASE_PATH+"/app/email/password/login",//邮箱登录
