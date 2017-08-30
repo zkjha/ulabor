@@ -184,7 +184,8 @@ requirejs([
 
                     //如果还没有加入，则只能处理是否加入
                     if(data.isAgree == 0){
-                        str +="<td><span class=' i18n action_span agree_group in_group' data-title='' data-id='"+data.strGroupAndLaboratoryId+"'>同意</span><span class=' action_span i18n refuse_group in_group' data-title='' data-id='"+data.strGroupAndLaboratoryId+"'>拒绝</span>"
+                        str +="<td><span class=' i18n action_span agree_group in_group' data-title='' data-id='"+data.strGroupAndLaboratoryId+"'>同意</span>" +
+                            "<span class=' action_span i18n refuse_group in_group' data-title='' data-id='"+data.strGroupAndLaboratoryId+"'>拒绝</span>"
                     }else{
                         //查看群成员
                         str +="<td><span class=' i18n detail action_span' data-name='"+data.strGroupName+"' data-id='"+dataId+"' data-title=''>查看</span>";

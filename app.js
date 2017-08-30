@@ -64,6 +64,10 @@ var superManage = require("./routes/web/superAdmin/manage");
 var carousel = require('./routes/web/superAdmin/carousel');
 var ajaxCarousel = require('./routes/ajax/superAdmin/carousel');
 
+//实验室审核
+var laborManage = require('./routes/web/superAdmin/laborManage');
+var ajaxLaborManage = require('./routes/ajax/superAdmin/laborManage');
+
 
 
 //文件上传
@@ -118,7 +122,7 @@ app.use("/",session({
 }));
 //用户登陆拦截
 app.use("/admin/manage/*",loginIntercepter);
-app.use("/super/manage/*",loginIntercepter);
+app.use("/superAdmin/manage/*",loginIntercepter);
 
 //http://www.open-open.com/lib/view/open1421307039328.html
 //app.use('/system', system);
@@ -172,6 +176,10 @@ app.use("/superAdmin/manage",superManage);
 //轮播图
 app.use('/superAdmin/manage/carousel',carousel);
 app.use('/superAdmin/manage/ajaxCarousel',ajaxCarousel);
+
+//实验室审核
+app.use('/superAdmin/manage/laborManage',laborManage);
+app.use('/superAdmin/manage/ajaxLaborManage',ajaxLaborManage);
 
 
 

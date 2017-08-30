@@ -6885,6 +6885,9 @@ select {
   color: black;
   border-radius: 5px;
 }
+.loginBtn {
+  height: 46px;
+}
 .flex1 {
   flex: 1;
   line-height: 44px;

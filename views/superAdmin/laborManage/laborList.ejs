@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+
+    <!--在此配置本页面国际化文件的名字-->
+    <meta id="i18n_pagename" content="">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title><%= title %></title>
+    <% include ../../version.ejs%>
+    <script type="text/javascript">
+        (function(){
+
+            var css ='<link type="text/css" rel="stylesheet" href="'+ GV.STATIC_ROOT+'stylesheets/pages/group.css">'
+            document.write(css);
+        })();
+    </script>
+</head>
+
+<body>
+<div class="margin30">
+
+    <div class="flex">
+        <div class="Storage_option">
+            <label class="i18n" data-title="">申请状态:</label>
+            <select id="strReviewResult">
+                <!--<option class="i18n" data-title="objectType1" value="" selected>全部</option>-->
+                <option class="i18n" data-title="objectType3" value="REVIEWING" selected>待审核</option>
+                <option class="i18n" data-title="objectType1" value="REVIEWPASS" >审核通过</option>
+                <option class="i18n" data-title="objectType2" value="REVIEWREJECT">审核拒绝</option>
+            </select>
+        </div>
+        <!--<div class="Storage_option">-->
+            <!--<label class="i18n" data-title="">审核状态:</label>-->
+            <!--<select id="strIsHadReview">-->
+                <!--<option class="i18n" data-title="objectType1" value="" selected>全部</option>-->
+                <!--<option class="i18n" data-title="objectType2" value="true">已审核</option>-->
+            <!--</select>-->
+        <!--</div>&lt;!&ndash; /btn-group &ndash;&gt;-->
+        <!--<div class="searchInput">-->
+        <!--<input id="seach_input" type="text" class="form-control">-->
+        <!--</div>-->
+        <a id="searchBtn" class="searchBtn btn btn-large btn-primary i18n" data-title="searcBtn" >查询</a>
+        <!--<span id="addResourse" class="btn btn-large btn-primary otherBtn "><i class="glyphicon-plus"></i><span class="i18n" data-title="addBtn">新增资源</span></span>-->
+    </div>
+
+</div>
+<div class="margin30">
+    <table class="table table-bordered">
+        <!--通过或者待审核时使用-->
+        <thead class="agree">
+        <tr>
+            <th class="i18n" data-title="resourseName">申请人姓名</th>
+            <th class="i18n" data-title="resourseName">申请人电话</th>
+            <th class="i18n" data-title="resourseName">验证邮箱</th>
+            <th class="i18n" data-title="resourseName">实验室名称</th>
+            <th class="i18n" data-title="resourseName">所属单位</th>
+            <th class="i18n" data-title="resourseName">实验室类型</th>
+            <th class="i18n" data-title="resourseType">申请时间</th>
+            <th class="i18n" data-title="resourseType">状态</th>
+            <th class="i18n" data-title="resourseType">操作</th>
+        </tr>
+        </thead>
+        <!--适应不同的状态，拒绝后使用-->
+        <thead class="refuse" style="display: none">
+        <tr>
+            <th class="i18n" data-title="resourseName">申请人姓名</th>
+            <th class="i18n" data-title="resourseName">申请人电话</th>
+            <th class="i18n" data-title="resourseName">验证邮箱</th>
+            <th class="i18n" data-title="resourseType">申请时间</th>
+            <th class="i18n" data-title="resourseType">状态</th>
+        </tr>
+        </thead>
+        <tbody id="j_body"></tbody>
+    </table>
+    <div>
+        <span id="j_footer"></span>
+        <span id="j_pageNum" class="j_pageNum"></span>
+    </div>
+
+</div>
+</body>
+
+<script type="text/javascript">
+    (function(){
+        var footer = '<script src="'+ GV.STATIC_ROOT+'javascripts/lib/require.js" data-main="'+ GV.STATIC_ROOT+'javascripts/page/superAdmin/laborList.js"><\/script>';
+        document.write(footer);
+    })();
+
+</script>
+</html>
+

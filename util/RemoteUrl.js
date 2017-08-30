@@ -79,6 +79,9 @@ var  RemoteUrl= {
             deleteCarouse:staticValue.API_BASE_PATH+"/admin/had-login/reviseCarousel",//隐藏轮播图
             addCarousel:staticValue.API_BASE_PATH+"/admin/had-login/addCarousel",//新增轮播图
 
+            //实验室审核列表
+            getLaborList:staticValue.API_BASE_PATH+"/admin/had-login/review/create/labor/list",//获取实验室列表
+
 
 
 

@@ -24,7 +24,7 @@ requirejs(['lib/jquery','lib/layer',"lib/requstUtil",'lib/myi18n',"lib/webupload
             //获取当前页面的type
             resourseList.strType = location.href.split("?")[1];
             //根据当前的页面的type来更改相应的表格顶部的
-            resourseList.changeTitle();
+            // resourseList.changeTitle();
 
             //获取当前登录人的身份信息
             resourseList.userType = $(".userType").attr("data-type");
