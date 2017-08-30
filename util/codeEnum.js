@@ -5,7 +5,7 @@
 var codeEnum={
 
     Ok:"1",
-    SYSTEM_ERROR:"-5"
+    SYSTEM_ERROR:"-5",
 
 };
 

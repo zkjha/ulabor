@@ -42,10 +42,17 @@ console.log(options);
         if (error){
              res.send(err);
              return
+        }else{
+            try{
+                var json_body = JSON.parse(body);
+                console.log(json_body);
+                res.send(json_body);
+            }catch (err){
+                console.log(err);
+                res.send({"code":codeEnum.SYSTEM_ERROR,"msg":err.message});
+            }
         }
-        var json_body = JSON.parse(body);
-        console.log(json_body);
-        res.send(json_body);
+
     });
 
 
@@ -124,10 +131,17 @@ console.log(options);
         if (error){
              res.send(err);
              return
+        }else{
+            try{
+                var json_body = JSON.parse(body);
+                console.log(json_body);
+                res.send(json_body);
+            }catch (err){
+                console.log(err);
+                res.send({"code":codeEnum.SYSTEM_ERROR,"msg":err.message});
+            }
         }
-        var json_body = JSON.parse(body);
-        console.log(json_body);
-        res.send(json_body);
+
     });
 
 
