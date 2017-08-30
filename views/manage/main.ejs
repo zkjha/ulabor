@@ -87,15 +87,20 @@
                     <li class="active"><a class="i18n" href="javascript:void(0)" data-title="loan_list" data-url="/admin/manage/review/loanList">借出审核</a></li>
                 </ul>
             </ul>
-
-            <!--pi才能看到的操作项-->
-            <%if(strUserType == 2){ %>
             <ul class="nav nav-sidebar">
                 <li class="lpy-sidebar-first"><a href="javascript:void(0)" class="i18n" data-title="userManage">用户管理</a></li>
                 <ul class="nav nav-sidebar lpy-sidebar-second">
+                    <%if(strUserType == 2){%>
                     <li class="active"><a class="i18n" href="javascript:void(0)" data-title="manageSetting" data-url="/admin/manage/userSetting/Administrator">管理员设置</a></li>
+                    <%}%>
+                    <li class="active"><a class="i18n" href="javascript:void(0)" data-title="member_management" data-url="/admin/manage/userSetting/menberManage">成员管理</a></li>
                 </ul>
+
+
             </ul>
+            <!--pi才能看到的操作项-->
+            <%if(strUserType == 2){ %>
+
 
 
             <%}else{%>
@@ -120,6 +125,7 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <iframe id="J_iframe" name="J_iframe" class="iframe"> </iframe>
         </div>
+
     </div>
 </div>
 

@@ -61,6 +61,7 @@ var  RemoteUrl= {
             //用户管理
             getAllMenbers:staticValue.API_BASE_PATH+"app/had-login/usercenter/access/information",//获取所有实验室成员
             changeRole:staticValue.API_BASE_PATH+"app/had-login/usercenter/access/userright",//改变权限
+            removeMenber:staticValue.API_BASE_PATH+"/app/kick/out/labor",//踢出成员
 
 
 
@@ -81,6 +82,7 @@ var  RemoteUrl= {
 
             //实验室审核列表
             getLaborList:staticValue.API_BASE_PATH+"/admin/had-login/review/create/labor/list",//获取实验室列表
+            agreeOrRefuse:staticValue.API_BASE_PATH+"admin/had-login/review/create/Labor/review",//获取实验室列表
 
 
 

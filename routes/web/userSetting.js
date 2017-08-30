@@ -17,6 +17,18 @@ router.get('/Administrator', function(req, res, next) {
     );
 });
 
+//成员管理
+router.get('/menberManage', function(req, res, next) {
+    var userInfo = req.session.userInfo
+    console.log("11");
+    res.render('userSetting/menber',
+        {
+            title:	'U-Labor管理后台',
+
+        }
+    );
+});
+
 
 
 module.exports = router;

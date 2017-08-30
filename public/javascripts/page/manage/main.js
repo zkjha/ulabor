@@ -40,7 +40,12 @@ requirejs(['lib/jquery','lib/bootstrap','lib/myi18n'],function($,bootstrap,myi18
 
 	//点击退出按钮事件
 	$("#quit").on("click",function () {
-		location.href="/admin/sign-in-web"
+		if(localStorage.getItem("superAdmin")){
+            location.href="/superAdmin/sign-in-web"
+		}else{
+            location.href="/admin/sign-in-web"
+		}
+
     })
 	$(window).resize(function(){
 	    changeiframesize();

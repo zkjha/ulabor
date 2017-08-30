@@ -58,7 +58,7 @@ router.post("/laborManage",function(req, res, next){
 
 
 //删除轮播图
-router.post("/delete",function(req, res, next){
+router.post("/agreeOrRefuse",function(req, res, next){
     var session  =req.session;
     var data = securityUtil(req);
     var options = {
@@ -68,7 +68,7 @@ router.post("/delete",function(req, res, next){
         }
     }
     console.log(options);
-    request.post(remoteUrl.deleteCarouse,options, function (error, response, body) {
+    request.post(remoteUrl.agreeOrRefuse,options, function (error, response, body) {
         if (!error) {
             try {
                 var json_body = JSON.parse(body);

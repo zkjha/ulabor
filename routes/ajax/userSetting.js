@@ -33,12 +33,7 @@ router.post("/getAllMenbers",function(req, res, next){
             try {
                 var json_body = JSON.parse(body);
                 console.log(json_body);
-                var code = json_body.code;//获取返回码
-                if(code==codeEnum.Ok){
-
-                    var data=json_body.data;
-
-                }
+                json_body.userType = userInfo.strUserType;
 
                 res.send(json_body);
             }
@@ -72,6 +67,51 @@ router.post("/changeRole",function(req, res, next){
     };
     console.log(options);
     request.post(remoteUrl.changeRole,options, function (error, response, body) {
+
+        if (!error) {
+
+            try {
+                var json_body = JSON.parse(body);
+                console.log(json_body);
+                var code = json_body.code;//获取返回码
+                if(code==codeEnum.Ok){
+
+                    var data=json_body.data;
+
+                }
+
+                res.send(json_body);
+            }
+            catch (err) {
+                console.error(err);
+                res.send({"code":codeEnum.SYSTEM_ERROR,"msg":err.message});
+            }
+
+        }else{
+            console.error(error);
+            res.send({"code":codeEnum.SYSTEM_ERROR,"msg":error.message});
+        }
+
+    })
+
+
+});
+
+//踢出成员
+router.post("/removeMenber",function(req, res, next){
+    var session=req.session;
+
+    var form_data= securityUtil(req);
+
+
+    var options = {
+        form:form_data,
+        headers:{
+            "session_id":session.api_session_id
+        }
+    };
+    console.log(options);
+    request.post(remoteUrl.removeMenber,options, function (error, response, body) {
 
         if (!error) {
 

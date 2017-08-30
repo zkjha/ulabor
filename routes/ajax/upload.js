@@ -35,6 +35,7 @@ router.post("/",function(req, res, next){
                         contentType: file.type
                     }
             }
+
         }
     };
 console.log(options);
@@ -103,6 +104,7 @@ console.log(options);
 //上传文件
 router.post("/uploadFile",function(req, res, next){
     var session=req.session;
+    var strType = req.query.strType;
     var file = req.files&&req.files.file;
     var path = file.path;
     var requestFileName="file";
@@ -123,7 +125,8 @@ router.post("/uploadFile",function(req, res, next){
                         filename: file.name,
                         contentType: file.type
                     }
-            }
+            },
+            strType:strType
         }
     };
 console.log(options);

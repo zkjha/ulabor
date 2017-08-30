@@ -278,7 +278,7 @@ requirejs(['lib/jquery','lib/layer',"lib/requstUtil",'lib/myi18n',"lib/webupload
                     resize: false,
 
                     // 文件接收服务端。
-                    server: '/admin/manage/upload/uploadFile',
+                    server: '/admin/manage/upload/uploadFile?strType='+resourseList.strType,
 
                     // 选择文件的按钮。可选。
                     // 内部根据当前运行是创建，可能是input元素，也可能是flash.
@@ -330,6 +330,7 @@ requirejs(['lib/jquery','lib/layer',"lib/requstUtil",'lib/myi18n',"lib/webupload
 
                         }else{
                             alert("操作成功");
+                            location.href="/admin/manage/resourse/resourseList?"+resourseList.strType;
                         }
                     }else{
                         alert(response.msg);

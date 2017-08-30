@@ -18,16 +18,45 @@ requirejs(["lib/jquery","lib/requstUtil","lib/layer","lib/jqueryPage","lib/boots
             //获取当前查询的类型
             List.strReviewResult = $("#strReviewResult").val();
             List.event();
-            List.getPage(1)
+            List.getPage(1);
+
         },
         event:function () {
-            if(List.strReviewResult == "REVIEWREJECT"){
-                $(".agree").hide();
-                $(".refuse").show();
-            }else{
-                $(".refuse").hide();
-                $(".agree").show();
-            }
+            //待审核点击事件
+            $("#j_body").on("click",".action_span",function () {
+                var strReviewInfoId = $(this).attr("data-id");
+                var strReviewResult = "",strReviewNotes;
+                if($(this).hasClass("agree_group")){
+                    //同意按钮点击事件
+                    strReviewResult = 'REVIEWPASS';
+                    List.getAgreeRequest({
+                        strReviewInfoId:strReviewInfoId,
+                        strReviewResult:strReviewResult
+                    })
+                }else{
+                    //拒绝按钮点击事件
+                    strReviewResult = 'REVIEWREJECT';
+                    Layer.layer({
+                        type:"search",
+                        title:'请输入拒绝理由',
+                        callback:function (datas) {
+                            strReviewNotes = datas;
+                            List.getAgreeRequest({
+                                strReviewInfoId:strReviewInfoId,
+                                strReviewResult:strReviewResult,
+                                strReviewNotes:strReviewNotes
+                            })
+                        }
+                    });
+                }
+            })
+
+            //查询按钮点击事件
+            $("#searchBtn").on("click",function () {
+                List.strReviewResult = $("#strReviewResult").val();
+                List.getPage(1);
+            })
+
             //监听点击删除按钮
             $("#j_body").on("click",".iIsDelete",function () {
                 Layer.loading();
@@ -60,7 +89,33 @@ requirejs(["lib/jquery","lib/requstUtil","lib/layer","lib/jqueryPage","lib/boots
             })
 
         },
+        getAgreeRequest:function (options) {
+            requstUtil.request({
+                url:"/superAdmin/manage/ajaxlaborManage/agreeOrRefuse",
+                data:options,
+                callback:function (data) {
+                    if(data.code == 1){
+                        alert("操作成功");
+                        location.href = "/admin/manage/review/loanList";
+                    }else{
+                        // alert(data.msg);
+                        return;
+                    }
+                }
+
+            });
+        },
         getPage:function (nowPage) {
+            if(List.strReviewResult == "REVIEWREJECT"){
+                $(".agree").hide();
+                $(".refuse").show();
+            }else{
+                $(".refuse").hide();
+                $(".agree").show();
+            }
+            $("#j_body").empty();
+            $("#j_footer").empty();
+            $("#j_pageNum").empty();
             var option = {
                 pageSize:10,
                 pageNumber:nowPage,
@@ -96,7 +151,7 @@ requirejs(["lib/jquery","lib/requstUtil","lib/layer","lib/jqueryPage","lib/boots
                    str +="<td>"+(data.strUserPhone||'')+"</td>";//申请人电话
                    str +="<td>"+(data.strReviewNotes||'')+"</td>";//验证邮箱
                    str +="<td>"+(data.strCreateTime||'')+"</td>";//申请时间
-                   str +="<td><span class='notInGroup groupType i18n' data-title=''>审核拒绝</span></td>";//申请状态
+                   str +="<td><span class='refuseGroup groupType_td  groupType i18n' data-title=''>审核拒绝</span></td>";//申请状态
                    str +="</tr>"
 
                }
@@ -107,28 +162,27 @@ requirejs(["lib/jquery","lib/requstUtil","lib/layer","lib/jqueryPage","lib/boots
                     var data = list[i]||{};
                     var dataId = data.strReviewInfoId||'';
                     str +="<tr>";
+                    str +="<td>"+(data.strNickName||'')+"</td>";//申请人姓名
+                    str +="<td>"+(data.strUserPhone||'')+"</td>";//申请人电话
+                    str +="<td>"+(data.strReviewNotes||'')+"</td>";//验证邮箱
                     str +="<td>"+(data.strLaborName||'')+"</td>";//实验室名称
                     str +="<td>"+(data.strLaborParentUnit||'')+"</td>";//所属单位
-                    str +="<td>"+(data.strNickName||'')+"</td>";//创建者姓名
-                    str +="<td>"+(data.strUserPhone||'')+"</td>";//创建者电话
+                    str +="<td>"+(data.strLaborParentUnit||'')+"</td>";//实验室类型
                     str +="<td>"+(data.strCreateTime||'')+"</td>";//申请时间
                     //审核状态
                     switch (data.strReviewResult){
-                        case 0:
+                        case "0":
                             str +="<td class='groupType_td' ><span class='notInGroup groupType i18n'  data-title='Shared'>未审核</span></td>";//是否审核
-                            str +="<td><span class=' i18n action_span agree_group in_group' data-title='' data-id='"+data.strGroupAndLaboratoryId+"'>同意</span>" +
-                                "<span class=' action_span i18n refuse_group in_group' data-title='' data-id='"+data.strGroupAndLaboratoryId+"'>拒绝</span>";//操作
+                            str +="<td class='groupType_td' <span class=' i18n action_span agree_group in_group' data-title='' data-id='"+dataId+"'>同意</span>" +
+                                "<span class=' action_span i18n refuse_group in_group' data-title='' data-id='"+dataId+"'>拒绝</span></td>";//操作
                             break;
-                        case 1:
+                        case "1":
                             str +="<td class='groupType_td' ><span class='groupType joinGroup i18n'  data-title='Shared'>审核通过</span></td>";//审核通过
                             str +="<td></td>"
                             break;
-                        case -1:
-                            str +="<td class='groupType_td' ><span class='groupType refuseGroup i18n'  data-title='Shared'>审核拒绝</span></td>";//审核拒绝
-                            str +="<td></td>"
-                            break;
                         default:
-                            str +="<td class='groupType_td' ><span class='groupType i18n'  data-title='Shared'></td>";
+                            str +="<td class='groupType_td' ><span class='groupType i18n'  data-title='Shared'></span></td>";
+                            str +="<td class='groupType_td' ><span class='groupType i18n'  data-title='Shared'></span></td>";
                     }
                     str +="</tr>"
 

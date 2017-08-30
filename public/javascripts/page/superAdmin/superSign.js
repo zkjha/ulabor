@@ -79,6 +79,7 @@ requirejs(
                     callback: function (data) {
                         if (data.code == 1) {
                             layer.alert("loginSuc",1000);
+                            localStorage.setItem("superAdmin",true);
                             location.href = "/superAdmin/manage";
                         } else {
                             if(data.code == 100004){
