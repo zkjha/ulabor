@@ -25,7 +25,7 @@ requirejs(['lib/jquery','lib/layer',"lib/requstUtil",'lib/myi18n',"lib/jqueryPag
                 $("#j_body").on("click",".in_group",function () {
                     var User_Id = $(this).attr("data-id");
                     List.getAgreeRequest({
-                        User_Id:User_Id
+                        strUserinfoId:User_Id
                     })
                 });
 

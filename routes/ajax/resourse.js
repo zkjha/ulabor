@@ -95,6 +95,7 @@ router.post("/resourseList",function(req, res, next){
 router.post("/addStorage",function(req, res, next){
     var session  =req.session;
     var data = securityUtil(req);
+    console.log(data);
     var options = {
         form:data,
         headers:{

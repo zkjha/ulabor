@@ -40,15 +40,15 @@ var SecurityUtil=function(req){
     }
     result_array.push("key="+staticValue.SECRET);
    var sign_string= result_array.join('&');
+   console.log(sign_string);
    var md5_sign_string = md5(sign_string).toUpperCase();
 
     sign_body.sign=md5_sign_string;
-    console.log(md5_sign_string)
     return sign_body;
 };
 
 var md5 = function(str) {
-    str = (new Buffer(str)).toString("binary");
+    str = (new Buffer(str)).toString("utf-8");
     var ret = crypto.createHash('md5').update(str).digest("hex");
     return ret;
 }
