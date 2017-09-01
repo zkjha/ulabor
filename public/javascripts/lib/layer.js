@@ -41,8 +41,8 @@ define(
                 myi18n.changeLan({
                     lan:lan,
                     name:options.name||'',
-                    callback:function () {
-                        $(alertDom).html($.i18n.prop(title));
+                    callback:function (object) {
+                        $(alertDom).html(object[title]);
                         // totalDom.appendTo("body");
                         $(totalDom).after(alertDom);
                         var timer = setTimeout(function () {
@@ -125,8 +125,8 @@ define(
                         myi18n.changeLan({
                             lan:lan,
                             name:name||'',
-                            callback:function () {
-                                $(confirmBodyNode).html($.i18n.prop(title));
+                            callback:function (object) {
+                                $(confirmBodyNode).html(object[title]);
                             }
                         });
                     }

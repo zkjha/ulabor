@@ -259,12 +259,12 @@ requirejs(['lib/jquery','lib/layer',"lib/requstUtil",'lib/myi18n',"lib/webupload
                         //根据当前资源的共享状态来设置共享设置或者取消共享
                         if(data.iIsShare == 1){
                             //当前状态为为共享
-                            str +="<td class='joinType_td groupType_td' style='text-align: center'><span class=' joinType_td notInGroup groupType storage_event i18n' data-id='"+dataId+"' data-title='actionName'>入库</span>" +
-                                "&nbsp&nbsp<span class=' joinType_td notInGroup groupType cancelShare  i18n' data-title='shareTitle_setting'data-number='"+data.iNumber+"' data-id='"+dataId+"'>取消共享</span>"
+                            str +="<td class='joinType_td groupType_td' style='text-align: center'><span class='btn joinType_td notInGroup groupType storage_event i18n' data-id='"+dataId+"' data-title='actionName'>入库</span>" +
+                                "&nbsp&nbsp<span class='btn joinType_td notInGroup groupType cancelShare  i18n' data-title='shareTitle_setting'data-number='"+data.iNumber+"' data-id='"+dataId+"'>取消共享</span>"
                             "</td>";
                         }else{
-                            str +="<td class='joinType_td groupType_td' style='text-align: center'><span class=' joinType_td notInGroup groupType storage_event i18n' data-id='"+dataId+"' data-title='actionName'>入库</span>" +
-                                "&nbsp&nbsp<span class=' joinType_td notInGroup groupType shareSetting  i18n' data-title='shareTitle_setting'data-number='"+data.iNumber+"' data-id='"+dataId+"' >共享设置</span>"
+                            str +="<td class='joinType_td groupType_td' style='text-align: center'><span class='btn joinType_td notInGroup groupType storage_event i18n' data-id='"+dataId+"' data-title='actionName'>入库</span>" +
+                                "&nbsp&nbsp<span class='btn joinType_td notInGroup groupType shareSetting  i18n' data-title='shareTitle_setting'data-number='"+data.iNumber+"' data-id='"+dataId+"' >共享设置</span>"
                             "</td>";
                         }
 
@@ -275,11 +275,11 @@ requirejs(['lib/jquery','lib/layer',"lib/requstUtil",'lib/myi18n',"lib/webupload
 
                         if(data.iIsShare == 1){
                             //当前状态为为共享
-                            str +="<td class='joinType_td groupType_td' style='text-align: center'><span class='joinType_td notInGroup groupType storage_event i18n' data-id='"+dataId+"' data-title='actionName'>入库</span>" +
+                            str +="<td class='joinType_td groupType_td' style='text-align: center'><span class='btn joinType_td notInGroup groupType storage_event i18n' data-id='"+dataId+"' data-title='actionName'>入库</span>" +
                                 "&nbsp&nbsp<span class=' joinType_td  groupType  i18n btn notInGroup' data-title='shareTitle_setting' data-number='"+data.iNumber+"' data-id='"+dataId+"' disabled='disabled'>取消共享</span>"+
                             "</td>";
                         }else{
-                            str +="<td class='joinType_td groupType_td' style='text-align: center'><span class=' joinType_td notInGroup groupType storage_event i18n' data-id='"+dataId+"' data-title='actionName'>入库</span>" +
+                            str +="<td class='joinType_td groupType_td' style='text-align: center'><span class='btn joinType_td notInGroup groupType storage_event i18n' data-id='"+dataId+"' data-title='actionName'>入库</span>" +
                                 "&nbsp&nbsp<span class=' joinType_td  groupType   i18n btn notInGroup ' data-title='shareTitle_setting' data-number='"+data.iNumber+"' data-id='"+dataId+"' disabled='disabled'>共享设置</span>"+
                             "</td>";
                         }

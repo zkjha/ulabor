@@ -8,8 +8,8 @@ require.config({
     shim: {
     	'lib/bootstrap': {
     		deps: ['lib/jquery']
-		},
-	}
+		}
+	},
 });
 
 // Start the main app logic.

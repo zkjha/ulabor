@@ -140,7 +140,7 @@ requirejs(['lib/jquery',"lib/layer","lib/myi18n",'lib/requstUtil',"lib/webupload
                     options.msg = "请输入数字类型的共享数量";
                     return options;
                 }
-                if(options.iShareNumber>Add.num){
+                if(Number(options.iShareNumber)>Number(Add.num)){
                     options.msg = "输入的共享数量不能超过资源数量";
                     return options;
                 }
