@@ -158,6 +158,41 @@ router.post("/piShareResource",function(req, res, next){
 
 
 });
+
+
+//管理员取消共享资源
+router.post("/cancelShare",function(req, res, next){
+    var session  =req.session;
+    var data = securityUtil(req);
+    var options = {
+        form:data,
+        headers:{
+            session_id:session.api_session_id
+        }
+    }
+    console.log(options);
+    request.post(remoteUrl.cancelShare,options, function (error, response, body) {
+        if (!error) {
+            try {
+                var json_body = JSON.parse(body);
+                console.log(json_body);
+                res.send(json_body);
+            }
+            catch (err) {
+                console.error(err);
+                res.send({"code":codeEnum.SYSTEM_ERROR,"msg":err.message});
+            }
+
+
+        }else{
+            console.error(error);
+            res.send({"code":codeEnum.SYSTEM_ERROR,"msg":error.message});
+        }
+
+    })
+
+
+});
 //获取分组
 router.post("/getGroups",function(req, res, next){
     var session  =req.session;

@@ -26,6 +26,7 @@ var  RemoteUrl= {
             getGroups:staticValue.API_BASE_PATH+"/app/had-login/groupmanagement/get/user/groups",//获取当前用户的所有分组
             setShare:staticValue.API_BASE_PATH+"app/had-login/resources/set/share",//共享设置
             getDataById:staticValue.API_BASE_PATH+"/app/resources/get/resource/id",//获取单条资源信息
+            cancelShare:staticValue.API_BASE_PATH+"/app/had-login/resources/set/close/share",//取消共享
 
 
             //轮播图管理
@@ -83,6 +84,9 @@ var  RemoteUrl= {
             //实验室审核列表
             getLaborList:staticValue.API_BASE_PATH+"/admin/had-login/review/create/labor/list",//获取实验室列表
             agreeOrRefuse:staticValue.API_BASE_PATH+"admin/had-login/review/create/Labor/review",//获取实验室列表
+
+            //上传文件
+            superUpload:staticValue.API_BASE_PATH+"/admin/had-login/file/imageUpload",//上传图片
 
 
 

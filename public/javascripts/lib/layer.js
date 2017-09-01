@@ -56,7 +56,7 @@ define(
             },
             createBackDom:function (dom) {
                 if($(dom).find('div.background_doom').length == 0){
-                    var totalDom = $("<div class='background_doom' style='position:fixed;left:0px;top:0px;width: 100%;height: 100%;opacity: 0.5;background: black;z-index: 2000'></div>");
+                    var totalDom = $("<div class='background_doom' style='position:fixed;left:0px;top:0px;width: 100%;height: 100%;opacity: 0.5;filter:alpha(opacity=0.5); background: black;z-index: 2000'></div>");
                     $(totalDom).appendTo($(dom));
                     return totalDom;
                 }else{
@@ -224,8 +224,9 @@ define(
                     "left": "45%",
                     "top":"350px",
                     "z-index": "9999",
-                    'opacity': '0.3'
-                });
+                    'opacity': '0.3',
+                    'filter':'alpha(opacity=0)'
+            });
                 $(backDom).after(imgNode);
                 this.showDom.push(backDom);
                 this.showDom.push(imgNode);

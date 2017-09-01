@@ -513,11 +513,19 @@ define(["lib/jquery","lib/webuploader"],function ($,WebUploader) {
             };
             uploader.on("uploadSuccess",function (file,res) {
                 var imgArr = [];
-                var imgsrc = $("#uploader").val();
-                imgArr.push(imgsrc);
-                imgArr.push(res.data.picPath);
+                if(res.code == 1){
+                    var imgsrc = $("#uploader").val();
+                    if(imgsrc){
+                        imgArr.push(imgsrc);
+                    }
+                    imgArr.push(res&&res.data&&res.data.picPath);
+                    $("#uploader").val(imgArr.join(","));
+                }else{
+                    return;
+                }
 
-                $("#uploader").val(imgArr.join(","));
+
+
             });
 
             uploader.on('all', function (type) {

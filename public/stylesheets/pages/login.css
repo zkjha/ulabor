@@ -6888,13 +6888,19 @@ select {
 .loginBtn {
   height: 46px;
 }
+.phoneInput {
+  display: inline;
+  *display: inline;
+  *zoom: 1;
+}
 .flex1 {
-  flex: 1;
+  display: inline;
+  *display: inline;
+  *zoom: 1;
   line-height: 44px;
 }
 .phoneLogin {
   margin-bottom: 10px;
-  display: flex;
   height: 40px;
   color: white;
 }
@@ -6903,6 +6909,9 @@ select {
 }
 .hidden {
   display: none;
+}
+.flex1 label {
+  width: 65px;
 }
 .form-signin .form-control {
   position: relative;

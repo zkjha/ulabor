@@ -33,13 +33,18 @@
 </html>-->
 
 
+
+<!--<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">-->
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--<meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=9" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+
 
     <!--在此配置本页面国际化文件的名字-->
     <meta id="i18n_pagename" content="index">
@@ -47,6 +52,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
+
 
     <title><%= title %></title>
     <% include version.ejs%>
@@ -57,6 +63,7 @@
             document.write(css);
         })();
     </script>
+
 </head>
 
 <body>
@@ -72,7 +79,7 @@
         <!--<label for="inputPassword" class="sr-only">密码</label>-->
 
 
-        <div id="loginBtn" class=" btn btn-lg btn-primary btn-block i18n loginBtn" data-type="email" data-title="login"></div>
+        <div id="loginBtn" class=" btn btn-lg btn-primary btn-block i18n loginBtn" data-type="email" data-title="login">登录</div>
         <div><span class="changeLoginMethod i18n" data-title="phoneLogin" data-method="email">手机登录</span></div>
     </form>
     <div class="form-signin phone hidden">
@@ -81,7 +88,7 @@
             <div class="flex1">
                 <label class="i18n" data-title="area">地区</label>
             </div>
-            <div class="">
+            <div class="phoneInput">
                 <select id="areaNo">
                     <option value="+86" selected>中国</option>
                     <option value="+001">America</option>
@@ -94,7 +101,7 @@
             <div class="flex1">
                 <label class="areaNo">+86</label>
             </div>
-            <div class="">
+            <div class="phoneInput">
                 <input type="text" id="strUserPhone" class="phoneNum">
             </div>
         </div>
@@ -102,11 +109,11 @@
             <div class="flex1">
                 <label class="i18n" data-title="password_placeholder" >密码</label>
             </div>
-            <div>
+            <div class="phoneInput">
                 <input id="phonePassword" type="password" class="phone-password password i18n-input" data-type="phone" selectattr="password_placeholder" placeholder="请输入密码">
             </div>
         </div>
-        <div id="loginBtn1" class=" btn btn-lg btn-primary btn-block i18n loginBtn" data-type="phone" data-title="login"></div>
+        <div id="loginBtn1" class=" btn btn-lg btn-primary btn-block i18n loginBtn" data-type="phone" data-title="login">登录</div>
         <div><span class="changeLoginMethod i18n" data-title="emailLogin" data-method="phone">邮箱登录</span></div>
     </div>
 
@@ -124,5 +131,6 @@
     })();
 
 </script>
+
 </html>
 

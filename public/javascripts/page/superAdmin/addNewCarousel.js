@@ -147,7 +147,7 @@ requirejs(['lib/jquery',"lib/layer","lib/myi18n",'lib/requstUtil',"lib/webupload
             },
 
             initWebuploader:function () {
-                requirejs(["lib/upload"]);
+                requirejs(["lib/superUpload"]);
             }
         };
         Add.init();

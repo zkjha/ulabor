@@ -34,7 +34,9 @@ requirejs(['lib/jquery',"lib/layer","lib/myi18n",'lib/requstUtil',"lib/webupload
                 //处理参数
                 var param= location.href.split("?")[1].split("=")[1];
                 var strId = Add.strId = param.split(",")[0] ;
+
                 Add.num =param.split(",")[1] ;
+                Add.strType = param.split(",")[2];
                 requstUtil.request({
                     url:"/admin/manage/ajaxResourse/getDateByStrResourcesId",
                     data:{
@@ -74,7 +76,7 @@ requirejs(['lib/jquery',"lib/layer","lib/myi18n",'lib/requstUtil',"lib/webupload
                         callback:function (data) {
                             if(data.code == 1){
                                 alert("操作成功");
-                                location.href = "/admin/manage/resourse/resourseList";
+                                location.href = "/admin/manage/resourse/resourseList?"+Add.strType;
                             }else{
                                 alert(data.msg);
                                 return;

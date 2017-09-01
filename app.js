@@ -73,6 +73,9 @@ var ajaxLaborManage = require('./routes/ajax/superAdmin/laborManage');
 //文件上传
 var upload = require('./routes/ajax/upload');
 
+//超级管理员
+var superUpload = require('./routes/ajax/superAdmin/superUpload');
+
 
 var app = express();
 app.use(helmet());
@@ -168,6 +171,9 @@ app.use("/superAdmin/ajax-sign-in-web",ajaxSuperLogin);
 
 //超级管理员主页
 app.use("/superAdmin/manage",superManage);
+
+//超级管理员上传图片
+app.use("/superAdmin/manage/upload",superUpload);
 
 
 

@@ -98,7 +98,11 @@
 
         settings.filesLoaded = 0;
 
-        files.forEach(function (file) {
+
+        for(var i=0,l=files.length;i<l;i++){
+            var file = files[i];
+        // }
+        // files.forEach(function (file) {
 
             var defaultFileName, shortFileName, longFileName, fileNames;
             // 1. load base (eg, Messages.properties)
@@ -115,7 +119,7 @@
                 fileNames = [defaultFileName, shortFileName];
             }
             loadAndParseFiles(fileNames, settings);
-        });
+        };
 
         // call callback
         if (settings.callback && !settings.async) {

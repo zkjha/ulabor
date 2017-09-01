@@ -57,36 +57,13 @@ requirejs(["lib/jquery","lib/requstUtil","lib/layer","lib/jqueryPage","lib/boots
                 List.getPage(1);
             })
 
-            //监听点击删除按钮
-            $("#j_body").on("click",".iIsDelete",function () {
-                Layer.loading();
-                var strCarouselID = $(this).attr("data-id");
-                var iIsDelete = -1;
-                requstUtil.request({
-                    url:'/superAdmin/manage/ajaxCarousel/delete',
-                    data:{
-                        strCarouselID:strCarouselID,
-                        iIsDelete:iIsDelete
-                    },
-                    callback:function (data) {
-                        Layer.removeLoading();
-                        if(data.code == 1){
-                            //alert("操作成功");
-                            location.href = "/superAdmin/manage/carousel/carouselList";
-                        }else{
-                            alert(data.msg);
-                            return
-                        }
-
-                    }
-                })
-            });
 
 
-            //新增按钮点击事件
-            $("#addResourse").on("click",function () {
-                location.href="/superAdmin/manage/carousel/addNewCarousel"
-            })
+
+            // //新增按钮点击事件
+            // $("#addResourse").on("click",function () {
+            //     location.href="/superAdmin/manage/carousel/addNewCarousel"
+            // })
 
         },
         getAgreeRequest:function (options) {
@@ -96,7 +73,7 @@ requirejs(["lib/jquery","lib/requstUtil","lib/layer","lib/jqueryPage","lib/boots
                 callback:function (data) {
                     if(data.code == 1){
                         alert("操作成功");
-                        location.href = "/admin/manage/review/loanList";
+                        location.href = "/superAdmin/manage/laborManage/list";
                     }else{
                         // alert(data.msg);
                         return;
@@ -173,7 +150,7 @@ requirejs(["lib/jquery","lib/requstUtil","lib/layer","lib/jqueryPage","lib/boots
                     switch (data.strReviewResult){
                         case "0":
                             str +="<td class='groupType_td' ><span class='notInGroup groupType i18n'  data-title='Shared'>未审核</span></td>";//是否审核
-                            str +="<td class='groupType_td' <span class=' i18n action_span agree_group in_group' data-title='' data-id='"+dataId+"'>同意</span>" +
+                            str +="<td class='groupType_td'><span class=' i18n action_span agree_group in_group' data-title='' data-id='"+dataId+"'>同意</span>" +
                                 "<span class=' action_span i18n refuse_group in_group' data-title='' data-id='"+dataId+"'>拒绝</span></td>";//操作
                             break;
                         case "1":

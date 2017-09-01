@@ -101,6 +101,7 @@ router.post("/addNewCarousel",function(req, res, next){
             session_id:session.api_session_id
         }
     }
+    console.log(data);
     request.post(remoteUrl.addCarousel,options, function (error, response, body) {
         if (!error) {
             try {

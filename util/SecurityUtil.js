@@ -28,7 +28,14 @@ var SecurityUtil=function(req){
     sign_body.time_str=time_str;
     sign_body.nonce_str=nonce_str;
     //处理参数名称排序
-    paramArray.sort();
+    // Arrays.sort(paramArray, String.CASE_INSENSITIVE_ORDER);
+    paramArray.sort(function (s,t) {
+        var a = s.toLowerCase();
+        var b = t.toLowerCase();
+        if (a < b) return -1;
+        if (a > b) return 1;
+        return 0;
+    });
 
 
     var result_array=[];

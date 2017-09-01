@@ -99,12 +99,12 @@ requirejs(['lib/jquery',"lib/layer","lib/myi18n",'lib/requstUtil',"lib/bootstrap
                             return msg = "单价请输入数字";
                         }
                     }
-                    if(name=="iNumber"){
-                        if(isNaN(value)){
-
-                            return msg = "库存请输入数字";
-                        }
-                    }
+                    // if(name=="iNumber"){
+                    //     if(isNaN(value)){
+                    //
+                    //         return msg = "库存请输入数字";
+                    //     }
+                    // }
                 }
                 return msg;
             },

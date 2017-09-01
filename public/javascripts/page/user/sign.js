@@ -29,6 +29,8 @@ requirejs(
                 //登录界面根据浏览器转换语言
                 Sign.changeLan();
 
+                // $('input, textarea').placeholder();
+
             },
             event:function() {
 
@@ -100,6 +102,7 @@ requirejs(
                     data: options,
                     callback: function (data) {
                         if (data.code == 1) {
+                            localStorage.setItem("superAdmin","");
                             layer.alert("loginSuc",1000);
                             location.href = "/admin/manage";
                         } else {

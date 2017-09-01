@@ -7438,6 +7438,11 @@ select {
   border-radius: 5px;
   padding: 5px;
 }
+.disabled-action {
+  background: #eee;
+  border-radius: 5px;
+  padding: 5px;
+}
 .joinGroup,
 .colorSpan_green {
   background: #5cb85c;
