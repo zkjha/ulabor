@@ -11,12 +11,12 @@ define([],function () {
     resourseName:'资源名称',
     resourseType:'资源类型',
     unit:'单位',
-    strSpecifications:'获取规格',
+    strSpecifications:'规格',
     isShare:'共享状态',
     iNumber:'库存',
-    strCompany:'公司品牌',
+    strCompany:'公司',
     strModel:'货号',
-    strRemarks:'备注信息',
+    strRemarks:'信息',
     action:'操作',
 
 
@@ -37,7 +37,7 @@ define([],function () {
     shareTitle_cancel:'取消共享',
     shareTitle_setting:'共享设置',
     Shared:'共享中',
-    unShare:'不共享',
+    unShare:'未共享',
 
 ////////底部页码
     First:'首页',

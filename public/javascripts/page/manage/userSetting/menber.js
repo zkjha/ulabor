@@ -96,23 +96,23 @@ requirejs(['lib/jquery','lib/layer',"lib/requstUtil",'lib/myi18n',"lib/jqueryPag
                     switch (data.strUserType){//状态
                         case '0':
                             str +="<td class='joinType_td groupType_td ' ><span class='joinType_td notInGroup groupType i18n'  data-title='Shared'>成员 </span></td>";//是否加入
-                            str +="<td><span class=' i18n action_span agree_group in_group joinType_td' data-title='' data-id='"+dataId+"'>踢出</span></td>"
+                            str +="<td class='joinType_td' style='line-height: 50px'><span class='btn imgaction i18n action_span agree_group in_group joinType_td' data-title='' data-id='"+dataId+"'>踢出</span></td>"
                             break;
                         case '1':
                             str +="<td class='joinType_td groupType_td ' ><span class='joinType_td groupType joinGroup i18n'  data-title='Shared'>管理员</span></td>";//是否加入
                             if(isPI){
-                                str +="<td><span class=' i18n action_span agree_group in_group joinType_td' data-title='' data-id='"+dataId+"'>踢出</span></td>"
+                                str +="<td style='line-height: 50px'><span class='btn i18n action_span imgaction agree_group in_group joinType_td' data-title='' data-id='"+dataId+"'>踢出</span></td>"
                             }else{
-                                str +="<td></td>"
+                                str +="<td style='line-height: 50px'></td>"
                             }
                             break;
                         case '2':
                             str +="<td class='joinType_td groupType_td ' ><span class='joinType_td groupType refuseGroup i18n'  data-title='Shared'>PI </span></td>";//是否加入
-                            str +="<td class='joinType_td groupType_td ' ></td>";//是否加入
+                            str +="<td class='joinType_td groupType_td ' style='line-height: 50px'></td>";//是否加入
                             break;
                         default:
                             str +="<td class='joinType_td groupType_td ' ><span class='joinType_td notInGroup groupType i18n'  data-title='Shared'>成员</span></td>";
-                            str +="<td><span class=' i18n action_span agree_group in_group joinType_td' data-title='' data-id='"+dataId+"'>踢出</span>"
+                            str +="<td class='joinType_td' style='line-height: 50px'><span class='btn  i18n action_span imgaction agree_group in_group joinType_td' data-title='' data-id='"+dataId+"'>踢出</span>"
                     }
                     //获取用户信息用来处理不同操作
 

@@ -121,7 +121,7 @@ requirejs(['lib/jquery','lib/layer',"lib/requstUtil",'lib/myi18n',"lib/jqueryPag
                         str +="<tr>";
                         str +="<td><img class='userImg' src='"+(root+data.strHeadImage)+"'></td>";//头像
                         str +="<td>"+(data.strNickName||'')+"</td>";//姓名
-                        str +="<td>"+(data.strRegionNumber+" "+data.strUserPhone||'')+"</td>";//电话
+                        str +="<td>"+(data.strUserEmail?data.strUserEmail:(data.strRegionNumber+" "+data.strUserPhone||''))+"</td>";//电话
                         str +="<td>"+(data.strCreateTime||"")+"</td>";//申请时间
                         switch (data.strReviewResult){//状态
                             case '0':
@@ -140,8 +140,8 @@ requirejs(['lib/jquery','lib/layer',"lib/requstUtil",'lib/myi18n',"lib/jqueryPag
 
                         //如果还没有加入，则只能处理是否加入
                         if(data.strReviewResult == 0){
-                            str +="<td><span class='i18n action_span agree_group in_group joinType_td' data-title='' data-id='"+dataId+"'>同意</span>" +
-                                "<span class='action_span i18n refuse_group in_group joinType_td' data-title='' data-id='"+dataId+"'>拒绝</span>"
+                            str +="<td style='line-height: 50px'><span class='btn imgaction i18n action_span agree_group in_group joinType_td' data-title='' data-id='"+dataId+"'>同意</span>" +
+                                "<span class='btn imgaction action_span i18n refuse_group in_group joinType_td' data-title='' data-id='"+dataId+"'>拒绝</span>"
                         }else{
                             // //查看群成员
                             // str +="<td><span class='i18n detail action_span' data-name='"+data.strGroupName+"' data-id='"+dataId+"' data-title=''>查看</span>";

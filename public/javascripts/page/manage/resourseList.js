@@ -20,9 +20,21 @@ requirejs(['lib/jquery','lib/layer',"lib/requstUtil",'lib/myi18n',"lib/webupload
     function ($,Layer,requstUtil,myi18n,WebUploader) {
     var resourseList = {
         nowPage:'',
+        animalTitle:[],
         init:function () {
+
+
             //获取当前页面的type
             resourseList.strType = location.href.split("?")[1];
+
+            /*根据当前所选种类来控制顶部按钮的国际化字段data-title的值来控制显示，
+                主要解决动物类型与其他的类型名称不一致的问题
+            */
+            // resourseList.changeTitleShow();
+
+            //国际化
+            resourseList.changeLan();
+
             //根据当前的页面的type来更改相应的表格顶部的
             // resourseList.changeTitle();
 
@@ -139,7 +151,7 @@ requirejs(['lib/jquery','lib/layer',"lib/requstUtil",'lib/myi18n',"lib/webupload
             $(parent.document.body).on("change","#changLan_select",function (e) {
                 // Layer.loading();
                 var lan =resourseList.lan =  e.target.value;
-                // resourseList.changeLan(lan);
+                resourseList.changeLan(lan);
             });
 
         },
@@ -154,6 +166,12 @@ requirejs(['lib/jquery','lib/layer',"lib/requstUtil",'lib/myi18n',"lib/webupload
                 }
             })
         },
+
+        //改变表格顶部的内容
+        // changeTitleShow:function () {
+        //     //获取节点
+        //     var titleList = $(".rs_title");
+        // },
         getPageToView:function (nowPage,options) {
             var option = {
                 pageSize:10,
@@ -205,10 +223,15 @@ requirejs(['lib/jquery','lib/layer',"lib/requstUtil",'lib/myi18n',"lib/webupload
                         str+="<td></td>"
 
                 };
-                //str +="<td>"+(data.strType||'')+"</td>";//资源类型
-                str +="<td>"+(data.strUnit||0)+"</td>";//单位
-
+                str +="<td>"+(data.strModel||'')+"</td>";//货号
                 str +="<td>"+(data.strSpecifications||'')+"</td>";//获取规格
+                str +="<td>"+(data.iNumber||0)+"</td>";//库存
+                str +="<td>"+(data.strUnit||0)+"</td>";//单位
+                str +="<td>"+(data.strCompany||'')+"</td>";//公司
+                str +="<td class='remarks_td'>"+(data.strRemarks||'')+"</td>";//获取备注
+                str +="<td>"+(data.strPostion||'')+"</td>";//位置
+
+
                 if(data.iCanShare ==0 ){
                     //如果pi设置为不能共享，则显示未共享
                     str +="<td class='unShare_td'><span class='i18n unShare ' data-title='unShare'>未共享</span></td>";//是否共享
@@ -221,11 +244,11 @@ requirejs(['lib/jquery','lib/layer',"lib/requstUtil",'lib/myi18n',"lib/webupload
                 }
 
                 // str +="<td>"+(data.iIsShare||'')+"</td>";//是否共享
-                str +="<td>"+(data.iNumber||0)+"</td>";//库存
-                str +="<td>"+(data.strCompany||'')+"</td>";//公司品牌
-                str +="<td>"+(data.strModel||'')+"</td>";//公司型号
+
+
+
                 // str +="<td>"+(data.strPosition||'')+"</td>";//存放位置
-                str +="<td>"+(data.strRemarks||'')+"</td>";//获取备注
+
                 if(resourseList.userType == 2){
                     //pi
                     //pi是能设置该资源是否可以共享，字段是icanshare，具体是否共享由管理员操作
@@ -236,15 +259,15 @@ requirejs(['lib/jquery','lib/layer',"lib/requstUtil",'lib/myi18n',"lib/webupload
                         //     "&nbsp&nbsp<span class=joinType_td notInGroup groupType''><a href='#'   class='shareBtn "+dataId+" i18n' data-type='1' data-title='shareTitle_share'  data-id='"+dataId+"'>共享</a></span>" +
                         //     "<span class='joinType_td notInGroup groupType'><a href='#' style='display: none' class='shareBtn "+dataId+" i18n ' data-type='0' data-title='shareTitle_cancel'  data-id='"+dataId+"'>取消共享</a></span>" +
                         //     "</td>";//操作
-                        str +="<td class='joinType_td groupType_td' style='text-align: center'><span class=' joinType_td notInGroup groupType storage_event i18n' data-title='actionName'  data-id='"+dataId+"'>入库</span>" +
-                            "&nbsp&nbsp<span class=' joinType_td notInGroup groupType shareBtn "+dataId+" i18n' data-type='1' data-title='shareTitle_share'  data-id='"+dataId+"'>共享</span>" +
-                            "<span class=' joinType_td notInGroup groupType shareBtn "+dataId+" i18n ' data-type='0' data-title='shareTitle_cancel'  data-id='"+dataId+"'  style='display: none' >取消共享</span>" +
+                        str +="<td class='joinType_td groupType_td' style='text-align: center'><span class='btn joinType_td notInGroup groupType storage_event i18n' data-title='actionName'  data-id='"+dataId+"'>入库</span>" +
+                            "&nbsp&nbsp<span class='btn joinType_td notInGroup groupType shareBtn "+dataId+" i18n' data-type='1' data-title='shareTitle_share'  data-id='"+dataId+"'>共享</span>" +
+                            "<span class='btn joinType_td notInGroup groupType shareBtn "+dataId+" i18n ' data-type='0' data-title='shareTitle_cancel'  data-id='"+dataId+"'  style='display: none' >取消共享</span>" +
                             "</td>";//操作
                     }else if(data.iCanShare == 1){
                         //取消共享
-                        str +="<td class='joinType_td groupType_td' style='text-align: center'><span class=' joinType_td notInGroup groupType storage_event i18n' data-title='actionName'  data-id='"+dataId+"'>入库</span>" +
-                            "&nbsp&nbsp<span class=' joinType_td notInGroup groupType shareBtn "+dataId+" i18n'  data-type='1' data-title='shareTitle_share'  data-id='"+dataId+"' style='display: none'>共享</span>" +
-                            "<span class=' joinType_td notInGroup groupType shareBtn "+dataId+" i18n '  data-type='0' data-title='shareTitle_cancel'  data-id='"+dataId+"'>取消共享</span>" +
+                        str +="<td class='joinType_td groupType_td' style='text-align: center'><span class='btn joinType_td notInGroup groupType storage_event i18n' data-title='actionName'  data-id='"+dataId+"'>入库</span>" +
+                            "&nbsp&nbsp<span class='btn joinType_td notInGroup groupType shareBtn "+dataId+" i18n'  data-type='1' data-title='shareTitle_share'  data-id='"+dataId+"' style='display: none'>共享</span>" +
+                            "<span class='btn joinType_td notInGroup groupType shareBtn "+dataId+" i18n '  data-type='0' data-title='shareTitle_cancel'  data-id='"+dataId+"'>取消共享</span>" +
                             "</td>";//操作
                     }
                 }else{
@@ -306,15 +329,15 @@ requirejs(['lib/jquery','lib/layer',"lib/requstUtil",'lib/myi18n',"lib/webupload
             });
 
             //转换语言
-            // resourseList.changeLan();
+            resourseList.changeLan();
         },
-        // changeLan:function (lan) {
-        //     var lan  = resourseList.lan=lan||localStorage.getItem("lan");
-        //     myi18n.common({
-        //         name:"resourse",
-        //         lan:lan
-        //     })
-        // },
+        changeLan:function (lan) {
+            var lan  = resourseList.lan=lan||localStorage.getItem("lan");
+            myi18n.common({
+                name:"resourse",
+                lan:lan
+            })
+        },
         initUploadFile:function () {
             jQuery(function() {
                 var $ = jQuery,

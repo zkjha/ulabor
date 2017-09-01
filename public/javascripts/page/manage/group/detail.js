@@ -62,21 +62,21 @@ requirejs([
                 var data = list[i]||{};
                 var dataId = data.strLaboratoryId||'';
                 str +="<tr>";
-                str +="<td><img src='"+(rootPath+data.strImage)+"'></td>";//头像
+                str +="<td><img class='userImg' src='"+(rootPath+data.strImage)+"'></td>";//头像
                 str +="<td>"+(data.strName||'')+"</td>";//实验室名称
                 str +="<td>"+(data. strParentUnit||'')+"</td>";//所属机构
                 switch (data.isAgree){
                     case 0:
-                        str +="<td class='groupType_td' ><span class='notInGroup groupType i18n'  data-title='Shared'>未加入</span></td>";//是否加入
+                        str +="<td class='groupType_td  group_detail_lineheight' ><span class='joinType_td notInGroup groupType i18n'  data-title='Shared'>未加入</span></td>";//是否加入
                         break;
                     case 1:
-                        str +="<td class='groupType_td' ><span class='groupType joinGroup i18n'  data-title='Shared'>已加入</span></td>";//是否加入
+                        str +="<td class='groupType_td joinType_td group_detail_lineheight' ><span class='joinType_td groupType joinGroup i18n'  data-title='Shared'>已加入</span></td>";//是否加入
                         break;
                     case -1:
-                        str +="<td class='groupType_td' ><span class='groupType refuseGroup i18n'  data-title='Shared'>已拒绝</span></td>";//是否加入
+                        str +="<td class='groupType_td joinType_td group_detail_lineheight' ><span class='joinType_td groupType refuseGroup i18n'  data-title='Shared'>已拒绝</span></td>";//是否加入
                         break;
                     default:
-                        str +="<td class='groupType_td' ><span class='groupType i18n'  data-title='Shared'></td>";
+                        str +="<td class='groupType_td group_detail_lineheight' ><span class='joinType_td groupType i18n'  data-title='Shared'></td>";
                 }
                 str +="</tr>"
 

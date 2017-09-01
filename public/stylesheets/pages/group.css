@@ -7269,3 +7269,13 @@ button.close {
   float: right;
   margin-top: -25px;
 }
+.group_detail_lineheight {
+  line-height: 50px;
+}
+.groupListLineHeight {
+  line-height: 28px;
+}
+.imgaction {
+  height: 24px;
+  line-height: 14px;
+}
