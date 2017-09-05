@@ -29,19 +29,19 @@
 
     <div class="flex">
         <div class="Storage_option">
-            <label class="i18n" data-title="">申请状态:</label>
+            <label class="i18n" data-title="reviewStatus">申请状态:</label>
             <select id="strReviewResult">
-                <option class="i18n" data-title="objectType1" value="" selected>全部</option>
-                <option class="i18n" data-title="objectType1" value="REVIEWPASS">审核通过</option>
-                <option class="i18n" data-title="objectType2" value="REVIEWREJECT">审核拒绝</option>
-                <option class="i18n" data-title="objectType3" value="REVIEWING">待审核</option>
+                <option class="i18n" data-title="all" value="" selected>全部</option>
+                <option class="i18n" data-title="Audited" value="REVIEWPASS">审核通过</option>
+                <option class="i18n" data-title="AuditedReject" value="REVIEWREJECT">审核拒绝</option>
+                <option class="i18n" data-title="AuditPending" value="REVIEWING">待审核</option>
             </select>
         </div>
         <div class="Storage_option">
-            <label class="i18n" data-title="">审核状态:</label>
+            <label class="i18n" data-title="AuditStatus">审核状态:</label>
             <select id="strIsHadReview">
-                <option class="i18n" data-title="objectType1" value="" selected>全部</option>
-                <option class="i18n" data-title="objectType2" value="true">已审核</option>
+                <option class="i18n" data-title="all" value="" selected>全部</option>
+                <option class="i18n" data-title="Audited" value="true">已审核</option>
             </select>
         </div><!-- /btn-group -->
         <!--<div class="searchInput">-->
@@ -57,12 +57,12 @@
         <thead>
         <tr>
             <th class="i18n" data-title="resourseName">资源名称</th>
-            <th class="i18n" data-title="resourseName">所属单位</th>
-            <th class="i18n" data-title="resourseName">申请人姓名</th>
-            <th class="i18n" data-title="resourseName">联系方式</th>
-            <th class="i18n" data-title="resourseType">申请时间</th>
-            <th class="i18n" data-title="resourseType">状态</th>
-            <th class="i18n" data-title="resourseType">操作</th>
+            <th class="i18n" data-title="unit">所属单位</th>
+            <th class="i18n" data-title="userName">申请人姓名</th>
+            <th class="i18n" data-title="ContactWay">联系方式</th>
+            <th class="i18n" data-title="applicationTime">申请时间</th>
+            <th class="i18n" data-title="status">状态</th>
+            <th class="i18n" data-title="action">操作</th>
         </tr>
         </thead>
         <tbody id="j_body"></tbody>

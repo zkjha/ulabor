@@ -12,7 +12,8 @@ require.config({
         }
     }
 });
-requirejs(["lib/jquery","lib/requstUtil","lib/layer","lib/jqueryPage","lib/bootstrap"],function ($,requstUtil,Layer) {
+requirejs(["lib/jquery","lib/requstUtil","lib/layer",'lib/myi18n',"lib/jqueryPage","lib/bootstrap"],
+    function ($,requstUtil,Layer,myi18n) {
     var List = {
         init:function () {
             //获取资源id和当前资源类型
@@ -27,7 +28,12 @@ requirejs(["lib/jquery","lib/requstUtil","lib/layer","lib/jqueryPage","lib/boots
             //新增入库按钮点击事件
             $("#addResourse").on("click",function () {
                 location.href = "/admin/manage/resourse/storage?strResourcesId="+List.strResourcesId+","+List.strType;
-            })
+            });
+            $(parent.document.body).on("change","#changLan_select",function (e) {
+                // Layer.loading();
+                var lan =List.lan =  e.target.value;
+                List.changeLan(lan);
+            });
 
         },
         getPage:function (nowPage) {
@@ -114,7 +120,14 @@ requirejs(["lib/jquery","lib/requstUtil","lib/layer","lib/jqueryPage","lib/boots
             });
 
             //转换语言
-            // list.changeLan();
+            List.changeLan();
+        },
+        changeLan:function (lan) {
+            var lan  = List.lan=lan||localStorage.getItem("lan");
+            myi18n.common({
+                name:"resourse",
+                lan:lan
+            })
         },
     };
     List.init();

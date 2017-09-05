@@ -86,5 +86,8 @@ define([],function () {
     strProductionDate:'Storage time',
     strProductionDate_placeholder:'Please enter the time',
 
+    //入库列表
+    addStorage:'New Storage',
+
 }
 })

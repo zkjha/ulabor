@@ -29,6 +29,12 @@ requirejs(['lib/jquery','lib/layer',"lib/requstUtil",'lib/myi18n',"lib/jqueryPag
                     })
                 });
 
+                //监听顶部语言切换事件
+                $(parent.document.body).on("change","#changLan_select",function (e) {
+                    // Layer.loading();
+                    var lan =List.lan =  e.target.value;
+                    List.changeLan(lan);
+                });
 
 
 
@@ -90,22 +96,22 @@ requirejs(['lib/jquery','lib/layer',"lib/requstUtil",'lib/myi18n',"lib/jqueryPag
                     str +="<td>"+(data.strregisterTime||"")+"</td>";//申请时间
                     switch (data.strUserType){//状态
                         case '0':
-                            str +="<td class='joinType_td groupType_td ' ><span class='joinType_td notInGroup groupType i18n'  data-title='Shared'>成员 </span></td>";//是否加入
+                            str +="<td class='joinType_td groupType_td ' ><span class='joinType_td notInGroup groupType i18n'  data-title='menber'>成员 </span></td>";//是否加入
                             break;
                         case '1':
-                            str +="<td class='joinType_td groupType_td ' ><span class='joinType_td groupType joinGroup i18n'  data-title='Shared'>管理员</span></td>";//是否加入
+                            str +="<td class='joinType_td groupType_td ' ><span class='joinType_td groupType joinGroup i18n'  data-title='manager'>管理员</span></td>";//是否加入
                             break;
                         case '2':
-                            str +="<td class='joinType_td groupType_td ' ><span class='joinType_td groupType refuseGroup i18n'  data-title='Shared'>PI </span></td>";//是否加入
+                            str +="<td class='joinType_td groupType_td ' ><span class='joinType_td groupType refuseGroup i18n'  data-title='PI'>PI </span></td>";//是否加入
                             break;
                         default:
-                            str +="<td class='joinType_td groupType_td ' ><span class='joinType_td notInGroup groupType i18n'  data-title='Shared'>成员</span></td>";
+                            str +="<td class='joinType_td groupType_td ' ><span class='joinType_td notInGroup groupType i18n'  data-title='menber'>成员</span></td>";
                     }
                     //获取用户信息用来处理不同操作
 
                     //如果还没有加入，则只能处理是否加入
                     if(data.strUserType == 0){
-                        str +="<td style='line-height: 50px'><span class='btn imgaction i18n action_span agree_group in_group joinType_td' data-title='' data-id='"+dataId+"'>设为管理员</span>"
+                        str +="<td style='line-height: 50px'><span class='btn imgaction i18n action_span agree_group in_group joinType_td' data-title='actionManager' data-id='"+dataId+"'>设为管理员</span>"
                     }else if(data.strUserType == 1){
                         // //查看群成员
                         // str +="<td><span class='i18n detail action_span' data-name='"+data.strGroupName+"' data-id='"+dataId+"' data-title=''>查看</span>";
@@ -120,7 +126,7 @@ requirejs(['lib/jquery','lib/layer',"lib/requstUtil",'lib/myi18n',"lib/jqueryPag
                         //     //否则就只能退出
                         //     str +="<span class='i18n quit_group action_span'>退出</span>"
                         // }
-                        str +="<td style='line-height: 58px'><span class='btn imgaction i18n action_span agree_group in_group joinType_td' data-title='' data-id='"+dataId+"'>设为成员</span>"
+                        str +="<td style='line-height: 58px'><span class='btn imgaction i18n action_span agree_group in_group joinType_td' data-title='actionMenber' data-id='"+dataId+"'>设为成员</span>"
 
 
                     }else{
@@ -151,8 +157,15 @@ requirejs(['lib/jquery','lib/layer',"lib/requstUtil",'lib/myi18n',"lib/jqueryPag
                 // });
 
                 //转换语言
-                //list.changeLan();
+                List.changeLan();
             },
+            changeLan:function (lan) {
+                var lan  = List.lan=(lan||localStorage.getItem("lan"));
+                myi18n.common({
+                    name:"userSetting",
+                    lan:lan
+                })
+            }
         };
         List.init();
     });

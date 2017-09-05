@@ -15,8 +15,9 @@ require.config({
 requirejs([
     'lib/jquery',
     "lib/requstUtil",
+    "lib/myi18n",
     "lib/jqueryPage"
-],function ($,requstUtil) {
+],function ($,requstUtil,myi18n) {
     var detail = {
         init:function () {
             //初始化所有实验室成员列表问题
@@ -25,7 +26,17 @@ requirejs([
             var strGroupId = arr[0];
             var groupName = decodeURI(arr[1]);
             $(".groupName").html(groupName);
+            detail.event();
             detail.getPageToView(1,{strGroupId:strGroupId});
+
+        },
+        event:function () {
+            //监听顶部语言切换事件
+            $(parent.document.body).on("change","#changLan_select",function (e) {
+                // Layer.loading();
+                var lan =detail.lan =  e.target.value;
+                detail.changeLan(lan);
+            });
 
         },
         getPageToView:function (nowPage,options) {
@@ -67,16 +78,16 @@ requirejs([
                 str +="<td>"+(data. strParentUnit||'')+"</td>";//所属机构
                 switch (data.isAgree){
                     case 0:
-                        str +="<td class='groupType_td  group_detail_lineheight' ><span class='joinType_td notInGroup groupType i18n'  data-title='Shared'>未加入</span></td>";//是否加入
+                        str +="<td class='groupType_td  group_detail_lineheight' ><span class='joinType_td notInGroup groupType i18n'  data-title='notJoin'>未加入</span></td>";//是否加入
                         break;
                     case 1:
-                        str +="<td class='groupType_td joinType_td group_detail_lineheight' ><span class='joinType_td groupType joinGroup i18n'  data-title='Shared'>已加入</span></td>";//是否加入
+                        str +="<td class='groupType_td joinType_td group_detail_lineheight' ><span class='joinType_td groupType joinGroup i18n'  data-title='join'>已加入</span></td>";//是否加入
                         break;
                     case -1:
-                        str +="<td class='groupType_td joinType_td group_detail_lineheight' ><span class='joinType_td groupType refuseGroup i18n'  data-title='Shared'>已拒绝</span></td>";//是否加入
+                        str +="<td class='groupType_td joinType_td group_detail_lineheight' ><span class='joinType_td groupType refuseGroup i18n'  data-title='refuse'>已拒绝</span></td>";//是否加入
                         break;
                     default:
-                        str +="<td class='groupType_td group_detail_lineheight' ><span class='joinType_td groupType i18n'  data-title='Shared'></td>";
+                        str +="<td class='groupType_td group_detail_lineheight' ><span class='joinType_td groupType i18n'  data-title='notJoin'></td>";
                 }
                 str +="</tr>"
 
@@ -97,8 +108,15 @@ requirejs([
             });
 
             //转换语言
-            // list.changeLan();
+            detail.changeLan();
 
+        },
+        changeLan:function (lan) {
+            var lan  = detail.lan=(lan||localStorage.getItem("lan"));
+            myi18n.common({
+                name:"group",
+                lan:lan
+            })
         }
     };
     detail.init();

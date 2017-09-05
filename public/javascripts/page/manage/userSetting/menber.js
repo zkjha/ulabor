@@ -22,6 +22,14 @@ requirejs(['lib/jquery','lib/layer',"lib/requstUtil",'lib/myi18n',"lib/jqueryPag
             },
             event:function () {
 
+                //监听顶部语言切换事件
+                $(parent.document.body).on("change","#changLan_select",function (e) {
+                    // Layer.loading();
+                    var lan =List.lan =  e.target.value;
+                    List.changeLan(lan);
+                });
+
+
                 //监听踢出事件
                 $("#j_body").on("click",".in_group",function () {
                     var User_Id = $(this).attr("data-id");
@@ -95,24 +103,24 @@ requirejs(['lib/jquery','lib/layer',"lib/requstUtil",'lib/myi18n',"lib/jqueryPag
                     str +="<td>"+(data.strregisterTime||"")+"</td>";//申请时间
                     switch (data.strUserType){//状态
                         case '0':
-                            str +="<td class='joinType_td groupType_td ' ><span class='joinType_td notInGroup groupType i18n'  data-title='Shared'>成员 </span></td>";//是否加入
-                            str +="<td class='joinType_td' style='line-height: 50px'><span class='btn imgaction i18n action_span agree_group in_group joinType_td' data-title='' data-id='"+dataId+"'>踢出</span></td>"
+                            str +="<td class='joinType_td groupType_td ' ><span class='joinType_td notInGroup groupType i18n'  data-title='menber'>成员 </span></td>";//是否加入
+                            str +="<td class='joinType_td' style='line-height: 50px'><span class='btn imgaction i18n action_span agree_group in_group joinType_td' data-title='kickOut' data-id='"+dataId+"'>踢出</span></td>"
                             break;
                         case '1':
-                            str +="<td class='joinType_td groupType_td ' ><span class='joinType_td groupType joinGroup i18n'  data-title='Shared'>管理员</span></td>";//是否加入
+                            str +="<td class='joinType_td groupType_td ' ><span class='joinType_td groupType joinGroup i18n'  data-title='manager'>管理员</span></td>";//是否加入
                             if(isPI){
-                                str +="<td style='line-height: 50px'><span class='btn i18n action_span imgaction agree_group in_group joinType_td' data-title='' data-id='"+dataId+"'>踢出</span></td>"
+                                str +="<td style='line-height: 50px'><span class='btn i18n action_span imgaction agree_group in_group joinType_td' data-title='kickOut' data-id='"+dataId+"'>踢出</span></td>"
                             }else{
                                 str +="<td style='line-height: 50px'></td>"
                             }
                             break;
                         case '2':
-                            str +="<td class='joinType_td groupType_td ' ><span class='joinType_td groupType refuseGroup i18n'  data-title='Shared'>PI </span></td>";//是否加入
+                            str +="<td class='joinType_td groupType_td ' ><span class='joinType_td groupType refuseGroup i18n'  data-title='PI'>PI </span></td>";//是否加入
                             str +="<td class='joinType_td groupType_td ' style='line-height: 50px'></td>";//是否加入
                             break;
                         default:
-                            str +="<td class='joinType_td groupType_td ' ><span class='joinType_td notInGroup groupType i18n'  data-title='Shared'>成员</span></td>";
-                            str +="<td class='joinType_td' style='line-height: 50px'><span class='btn  i18n action_span imgaction agree_group in_group joinType_td' data-title='' data-id='"+dataId+"'>踢出</span>"
+                            str +="<td class='joinType_td groupType_td ' ><span class='joinType_td notInGroup groupType i18n'  data-title='menber'>成员</span></td>";
+                            str +="<td class='joinType_td' style='line-height: 50px'><span class='btn  i18n action_span imgaction agree_group in_group joinType_td' data-title='kickOut' data-id='"+dataId+"'>踢出</span>"
                     }
                     //获取用户信息用来处理不同操作
 
@@ -140,8 +148,15 @@ requirejs(['lib/jquery','lib/layer',"lib/requstUtil",'lib/myi18n',"lib/jqueryPag
                 // });
 
                 //转换语言
-                //list.changeLan();
+                List.changeLan();
             },
+            changeLan:function (lan) {
+                var lan  = List.lan=(lan||localStorage.getItem("lan"));
+                myi18n.common({
+                    name:"userSetting",
+                    lan:lan
+                })
+            }
         };
         List.init();
     });

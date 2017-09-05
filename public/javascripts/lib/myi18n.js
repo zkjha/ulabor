@@ -81,7 +81,7 @@ define(
                     //     item.html($.i18n.prop(item.attr('data-title')));
                     // });
                     var insertInputEle = $(".i18n-input");
-                    for(var i=0,l=insertInputEle;i<l;i++){
+                    for(var i=0,l=insertInputEle.length;i<l;i++){
                         var item = $(insertInputEle[i]);
                         var selectAttr = item.attr('selectattr');
                         var attrName = selectAttr.split("_")[1];

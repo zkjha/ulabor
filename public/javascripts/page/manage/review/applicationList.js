@@ -21,6 +21,13 @@ requirejs(['lib/jquery','lib/layer',"lib/requstUtil",'lib/myi18n',"lib/jqueryPag
                 },
                 event:function () {
 
+                    //监听顶部语言切换事件
+                    $(parent.document.body).on("change","#changLan_select",function (e) {
+                        // Layer.loading();
+                        var lan =List.lan =  e.target.value;
+                        List.changeLan(lan);
+                    });
+
                     //监听查询按钮点击事件
                     $("#searchBtn").on("click",function () {
                         //获取审核状态及申请状态值，如果审核状态值为true，则，不在获取申请状态
@@ -125,23 +132,23 @@ requirejs(['lib/jquery','lib/layer',"lib/requstUtil",'lib/myi18n',"lib/jqueryPag
                         str +="<td>"+(data.strCreateTime||"")+"</td>";//申请时间
                         switch (data.strReviewResult){//状态
                             case '0':
-                                str +="<td class='joinType_td groupType_td ' ><span class='joinType_td notInGroup groupType i18n'  data-title='Shared'>审核中</span></td>";//是否加入
+                                str +="<td class='joinType_td groupType_td ' ><span class='joinType_td notInGroup groupType i18n'  data-title='Auditing'>审核中</span></td>";//是否加入
                                 break;
                             case '1':
-                                str +="<td class='joinType_td groupType_td ' ><span class='joinType_td groupType joinGroup i18n'  data-title='Shared'>已通过</span></td>";//是否加入
+                                str +="<td class='joinType_td groupType_td ' ><span class='joinType_td groupType joinGroup i18n'  data-title='agree'>已通过</span></td>";//是否加入
                                 break;
                             case '-1':
-                                str +="<td class='joinType_td groupType_td ' ><span class='joinType_td groupType refuseGroup i18n'  data-title='Shared'>已拒绝</span></td>";//是否加入
+                                str +="<td class='joinType_td groupType_td ' ><span class='joinType_td groupType refuseGroup i18n'  data-title='refuse'>已拒绝</span></td>";//是否加入
                                 break;
                             default:
-                                str +="<td class='joinType_td groupType_td ' ><span class='joinType_td notInGroup groupType i18n'  data-title='Shared'>审核中</span></td>";
+                                str +="<td class='joinType_td groupType_td ' ><span class='joinType_td notInGroup groupType i18n'  data-title='Auditing'>审核中</span></td>";
                         }
                         //获取用户信息用来处理不同操作
 
                         //如果还没有加入，则只能处理是否加入
                         if(data.strReviewResult == 0){
-                            str +="<td style='line-height: 50px'><span class='btn imgaction i18n action_span agree_group in_group joinType_td' data-title='' data-id='"+dataId+"'>同意</span>" +
-                                "<span class='btn imgaction action_span i18n refuse_group in_group joinType_td' data-title='' data-id='"+dataId+"'>拒绝</span>"
+                            str +="<td style='line-height: 50px'><span class='btn imgaction i18n action_span agree_group in_group joinType_td' data-title='actionAgree' data-id='"+dataId+"'>同意</span>" +
+                                "<span class='btn imgaction action_span i18n refuse_group in_group joinType_td' data-title='actionRefuse' data-id='"+dataId+"'>拒绝</span>"
                         }else{
                             // //查看群成员
                             // str +="<td><span class='i18n detail action_span' data-name='"+data.strGroupName+"' data-id='"+dataId+"' data-title=''>查看</span>";
@@ -178,15 +185,22 @@ requirejs(['lib/jquery','lib/layer',"lib/requstUtil",'lib/myi18n',"lib/jqueryPag
                         rCount: 1,//最后预留的数量
                         callback: function (options) {
                             List.getPageToView(options.index,{
-                                strReviewResult:list.strReviewResult,
+                                strReviewResult:List.strReviewResult,
                                 strIsHadReview:List.strIsHadReview == "true"?"true":''
                             });
                         }
                     });
 
                     //转换语言
-                    //list.changeLan();
+                    List.changeLan();
                 },
+                changeLan:function (lan) {
+                    var lan  = List.lan=(lan||localStorage.getItem("lan"));
+                    myi18n.common({
+                        name:"audit",
+                        lan:lan
+                    })
+                }
         };
         List.init();
 });

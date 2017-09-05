@@ -15,8 +15,9 @@ require.config({
 requirejs([
     'lib/jquery',
     "lib/requstUtil",
+    "lib/myi18n",
     "lib/jqueryPage"
-],function ($,requstUtil) {
+],function ($,requstUtil,myi18n) {
     var add = {
         init:function () {
             //初始化所有实验室列表问题
@@ -60,6 +61,13 @@ requirejs([
                 }
 
 
+            });
+
+            //监听顶部语言切换事件
+            $(parent.document.body).on("change","#changLan_select",function (e) {
+                // Layer.loading();
+                var lan =add.lan =  e.target.value;
+                add.changLan(lan);
             });
 
             //监听input选中事件,并将获取到的id保存并展示出选中
@@ -140,8 +148,15 @@ requirejs([
                 });
 
                 //转换语言
-                // list.changeLan();
+                add.changLan();
 
+        },
+        changLan:function (lan) {
+            var lan  = add.lan=(lan||localStorage.getItem("lan"));
+            myi18n.common({
+                name:"group",
+                lan:lan
+            })
         }
     };
     add.init();

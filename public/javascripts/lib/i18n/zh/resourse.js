@@ -60,7 +60,7 @@ define([],function () {
     strCompany_placeholder:'请输入公司品牌',
     strModel_placeholder:'请输入公司型号',
     strRemarks_placeholder:'请输入备注信息',
-    addButton:'新增',
+    addButton:'确定',
     strPosition:'存放位置',
 
     //修改资源
@@ -86,6 +86,9 @@ define([],function () {
     strVoucher_placeholder:'请输入凭证',
     strProductionDate:'入库时间',
     strProductionDate_placeholder:'请输入入库时间',
+
+    //入库列表
+    addStorage:'新增入库',
 
 }
 })

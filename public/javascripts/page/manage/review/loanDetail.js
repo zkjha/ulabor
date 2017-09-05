@@ -15,13 +15,23 @@ require.config({
 requirejs([
     'lib/jquery',
     "lib/requstUtil",
+    "lib/myi18n",
     "lib/jqueryPage"
-],function ($,requstUtil) {
+],function ($,requstUtil,myi18n) {
     var detail = {
         init:function () {
            //初始化页面
             var id = location.href.split("?")[1];
             detail.initView(id);
+            detail.event();
+        },
+        event:function () {
+            //监听顶部语言切换事件
+            $(parent.document.body).on("change","#changLan_select",function (e) {
+                // Layer.loading();
+                var lan =detail.lan =  e.target.value;
+                detail.changeLan(lan);
+            });
         },
         initView:function (id) {
             requstUtil.request({
@@ -60,13 +70,25 @@ requirejs([
             //库存
             $("#resiNumber").val((detailData.resiNumber||''));
             //库存
-            var imgArr = detailData.resImages.split(","),str="";
+            var imgArr=[],str="" ;
+            if(detailData.resImages){
+                imgArr = detailData.resImages.split(",");
+            }
+
             for(var i = 0,l=imgArr.length;i<l;i++){
                 if(imgArr){
                     str +="<div ><img class='detailImg' src='"+(root+imgArr[i])+"'></div>";
                 }
             }
             $("#resImg").html(str);
+            detail.changeLan();
+        },
+        changeLan:function (lan) {
+            var lan  = detail.lan=(lan||localStorage.getItem("lan"));
+            myi18n.common({
+                name:"audit",
+                lan:lan
+            })
         }
     };
     detail.init();

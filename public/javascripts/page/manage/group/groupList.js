@@ -16,9 +16,10 @@ requirejs([
     'lib/jquery',
     'lib/layer',
     "lib/requstUtil",
+    "lib/myi18n",
     "lib/bootstrap",
     "lib/jqueryPage",
-    ], function ($,Layer,requstUtil) {
+    ], function ($,Layer,requstUtil,myi18n) {
         var List={
             init:function () {
                 List.event();
@@ -29,6 +30,12 @@ requirejs([
                 $("#addGroup").on("click",function () {
                     // 跳转到新增页面
                     location.href="/admin/manage/group/addGroup";
+                });
+
+                $(parent.document.body).on("change","#changLan_select",function (e) {
+                    // Layer.loading();
+                    var lan =List.lan =  e.target.value;
+                    List.changeLan(lan);
                 });
 
                 //监听同意加入和拒绝加入分组点击事件
@@ -169,36 +176,37 @@ requirejs([
                     str +="<td>"+(data.strParentUnit||"")+"</td>";//实验室所属单位
                     switch (data.isAgree){
                         case 0:
-                            str +="<td class='groupType_td' ><span class='groupListLineHeight notInGroup groupType i18n'  data-title='Shared'>未加入</span></td>";//是否加入
+                            str +="<td class='groupType_td' ><span class='groupListLineHeight notInGroup groupType i18n'  data-title='notJoin'>未加入</span></td>";//是否加入
                             break;
                         case 1:
-                            str +="<td class='groupType_td' ><span class='groupListLineHeight groupType joinGroup i18n'  data-title='Shared'>已加入</span></td>";//是否加入
+                            str +="<td class='groupType_td' ><span class='groupListLineHeight groupType joinGroup i18n'  data-title='join'>已加入</span></td>";//是否加入
                             break;
                         case -1:
-                            str +="<td class='groupType_td' ><span class='groupListLineHeight groupType refuseGroup i18n'  data-title='Shared'>已拒绝</span></td>";//是否加入
+                            str +="<td class='groupType_td' ><span class='groupListLineHeight groupType refuseGroup i18n'  data-title='refuse'>已拒绝</span></td>";//是否加入
                             break;
                         default:
-                            str +="<td class='groupType_td' ><span class='groupListLineHeight groupType i18n'  data-title='Shared'></td>";
+                            str +="<td class='groupType_td' ><span class='groupListLineHeight groupType i18n'  data-title='notJoin'></td>";
                     }
                     //获取用户信息用来处理不同操作
 
                     //如果还没有加入，则只能处理是否加入
                     if(data.isAgree == 0){
-                        str +="<td><span class=' i18n action_span agree_group in_group' data-title='' data-id='"+data.strGroupAndLaboratoryId+"'>同意</span>" +
-                            "<span class=' action_span i18n refuse_group in_group' data-title='' data-id='"+data.strGroupAndLaboratoryId+"'>拒绝</span>"
+                        str +="<td><span class=' i18n action_span agree_group in_group' data-title='action_agree' data-id='"+data.strGroupAndLaboratoryId+"'>同意</span>" +
+                            "<span class=' action_span i18n refuse_group in_group' data-title='action_refuse' data-id='"+data.strGroupAndLaboratoryId+"'>拒绝</span>"
                     }else{
                         //查看群成员
-                        str +="<td><span class='btn i18n detail action_span' data-name='"+data.strGroupName+"' data-id='"+dataId+"' data-title=''>查看</span>";
+                        str +="<td><span class='btn i18n detail action_span' data-name='"+data.strGroupName+"' data-id='"+dataId+"' data-title='action_detail'>查看</span>";
                         //如果该分组为本实验所有
                         if(data.strCreateLaboratory == userInfo.strLaboratoryId){
                             //本实验室可以有修改群名片和解散分组动作
                             if(userInfo.strUserType == 2||userInfo.strUserinfoId == data.strCreateUserId){
                                 //实验室pi和创建者manage可以进行解散分组及修改名称动作
-                                str +="<span class='btn i18n update_groupName action_span' data-id='"+dataId+"' data-title=''>修改</span><span class='btn i18n delete_group action_span' data-id='"+dataId+"' data-title=''>删除</span>"
+                                str +="<span class='btn i18n update_groupName action_span' data-id='"+dataId+"' data-title='action_update'>修改</span>" +
+                                    "<span class='btn i18n delete_group action_span' data-id='"+dataId+"' data-title='action_remove'>删除</span>"
                             }
                         }else{
                             //否则就只能退出
-                            str +="<span class='btn i18n quit_group action_span'>退出</span>"
+                            str +="<span class='btn i18n quit_group action_span' data-title='action_quit'>退出</span>"
                         }
 
 
@@ -225,7 +233,14 @@ requirejs([
                 });
 
                 //转换语言
-                //list.changeLan();
+                List.changeLan();
+            },
+            changeLan:function (lan) {
+                var lan  = List.lan=lan||localStorage.getItem("lan");
+                myi18n.common({
+                    name:"group",
+                    lan:lan
+                })
             },
         };
         List.init();

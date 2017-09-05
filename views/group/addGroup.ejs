@@ -28,19 +28,19 @@
     <form class="add">
 
         <div class="">
-            <label class="addLabel">分组名称:</label>
-            <input id="strGroupName" type="text" class="form-control" placeholder="请输入分组名称">
+            <label class="addLabel i18n" data-title="groupName">分组名称:</label>
+            <input id="strGroupName" type="text" class="form-control i18n-input" selectattr="groupName_placeholder" placeholder="请输入分组名称">
         </div>
         <div class="">
-            <label class="addLabel">选择成员:</label>
+            <label class="addLabel i18n" data-title="chooseMenber">选择成员:</label>
             <span class="checkedname"></span>
             <div>
-                <table class="table table-bordered">
+                <table class="table table-bordered addGroupTable">
                     <thead>
                     <tr>
-                        <th><input type="checkbox" class="allChecked">全选</th>
-                        <th class="i18n" data-title="resourseName">实验室名称</th>
-                        <th class="i18n" data-title="resourseType">所属单位</th>
+                        <th ><input type="checkbox" class="allChecked"><span class="i18n" data-title="slecte_all">全选</span></th>
+                        <th class="i18n" data-title="laborName" >实验室名称</th>
+                        <th class="i18n" data-title="laborUnit">所属单位</th>
 
                     </tr>
                     </thead>
@@ -48,7 +48,7 @@
                 </table>
                 <div>
                     <span id="j_footer"></span>
-                    <span id="j_pageNum" class="j_pageNum"></span>
+                    <span id="j_pageNum" class="j_pageNum addGroup"></span>
                 </div>
             </div>
 
