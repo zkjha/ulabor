@@ -18,6 +18,7 @@ define([],function () {
     strModel:'Model',
     strRemarks:'Remarks',
     action:'handle',
+    animaModel:'Model',
 
 
 
@@ -30,6 +31,8 @@ define([],function () {
     addBtn:'New resources',
     Template_download:'Template Download',
     addBtn_all:'Batch import',
+    qrcode_all:'download qrcode',
+    qrCode:'qrCode',
 
 ////////操作按钮
     actionName:'Storage',
@@ -38,6 +41,7 @@ define([],function () {
     shareTitle_setting:'shareSetting',
     Shared:'Shared',
     unShare:'not shared',
+    detaile_resourse:'detail',
 
 ////////底部页码
     First:'First',
@@ -57,6 +61,10 @@ define([],function () {
     strModel_placeholder:'Please enter the company model',
     strRemarks_placeholder:'Please enter the access notes',
     addButton:'Add',
+    strPosition:'Storage Location',
+
+    //修改资源
+    iInsideIsNeedBack:'need to return',
 
 //////入库
     strDealer:'Dealer',

@@ -35,13 +35,17 @@
                     <!--<option class="i18n" data-title="objectType4" value="4">仪器</option>-->
                 <!--</select>-->
             <!--</div>&lt;!&ndash; /btn-group &ndash;&gt;-->
+
+            <%var url = '/admin/manage/ajaxResourse/domnloadQrCode?strType='+strType%>
+
             <div class="searchInput">
                 <input id="seach_input" type="text" class="form-control">
             </div>
             <a id="searchBtn" class="btn btn-large btn-primary i18n" data-title="searcBtn" >搜索</a>
             <span id="addResourse" class="btn btn-large btn-primary otherBtn "><i class="glyphicon-plus"></i><span class="i18n" data-title="addBtn">新增资源</span></span>
-            <span id="addResourse" class="btn btn-large btn-primary otherBtn "><i class="glyphicon-plus"></i><a class="i18n muban" data-title="Template_download" href="/static/images/muban.xlsx">批量模板下载</a></span>
-            <span id="addResourse_all" class="btn btn-large btn-primary otherBtn "><i class="glyphicon-plus"></i><span class="i18n" data-title="addBtn_all">批量导入</span></span>
+            <span id="addResourse" class="btn btn-large btn-primary otherBtn "><a class="i18n muban" data-title="Template_download" href="/static/images/muban.xlsx">批量模板下载</a></span>
+            <span id="addResourse_all" class="btn btn-large btn-primary otherBtn "><span class="i18n" data-title="addBtn_all">批量导入</span></span>
+            <a id="dowmload_qrcode" class="btn btn-large btn-primary otherBtn " href="<%=url%>"  target="_blank" ><span class="i18n" data-title="qrcode_all">批量导出二维码</span></a>
             <span id="errImg" ></span>
         </div>
         <div id="uploader" class="wu-example" style="display: none">
@@ -60,21 +64,21 @@
                 <tr>
                     <th class="i18n rs_title" data-title="resourseName">资源名称</th>
                     <th class="i18n rs_title" data-title="resourseType">资源类型</th>
-                    <th class="i18n rs_title" data-title="strModel">货号</th>
+                    <th class="i18n rs_title Model" data-title="strModel">货号</th>
                     <th class="i18n rs_title" data-title="strSpecifications">规格</th>
                     <th class="i18n rs_title" data-title="iNumber">库存</th>
                     <th class="i18n rs_title" data-title="unit">单位</th>
                     <th class="i18n rs_title" data-title="strCompany">公司</th>
                     <th class="i18n rs_title" data-title="strRemarks">备注</th>
                     <th class="i18n rs_title remarks_td" data-title="strPostion">位置</th>
-                    <th class="i18n rs_title" data-title="isShare">共享状态</th>
+                    <th class="i18n rs_title" data-title="isShare" width="100px">共享状态</th>
                     <!--<th>存放位置</th>-->
-                    <th class="i18n" data-title="action">操作</th>
+                    <th class="i18n" data-title="action" width="300px">操作</th>
                 </tr>
             </thead>
             <tbody id="j_body"></tbody>
         </table>
-        <div>
+        <div class="page_div">
             <span id="j_footer"></span>
             <span id="j_pageNum" class="j_pageNum"></span>
         </div>

@@ -35,14 +35,21 @@ requirejs(['lib/jquery','lib/requstUtil',"lib/myi18n"],
                         return;
                     }
                     var inputs = $(".form-control");
-                    var options={
+                    var params = [], options={
                         strResourcesId:strResourcesId
                     };
                     inputs.each(function (index,param) {
                         var id = $(param).attr("id");
                         var value = $(param).val();
+                        params.push($(param).val()+"-"+$(param).attr("id"));
                         options[id] = value;
-                    })
+                    });
+                    //输入字段合法性检查
+                    var msg = Add.checkParams(params);
+                    if(msg){
+                        alert(msg);
+                        return;
+                    }
                     requstUtil.request({
                         url:"/admin/manage/ajaxResourse/addStorage",
                         data:options,
@@ -72,18 +79,18 @@ requirejs(['lib/jquery','lib/requstUtil',"lib/myi18n"],
                 for(var i = 0,l=params.length;i<l;i++){
                     var item = params[i].split("-");
                     var name = item[1],value = item[0];
-                    if(name =='strName'&&!value){
-                        return msg="请输入资源名称";
-                    }
-                    if(name =='strType'&&!value){
-                        return msg = "请选择资源类型";
-                    }
-                    if(name == 'strUnit'&&!value){
-                        return msg = "请输入单位";
-                    }
-                    if(name == 'strSpecifications'&&!value){
-                        return msg = "请填写获取规格";
-                    }
+                    // if(name =='strName'&&!value){
+                    //     return msg="请输入资源名称";
+                    // }
+                    // if(name =='strType'&&!value){
+                    //     return msg = "请选择资源类型";
+                    // }
+                    // if(name == 'strUnit'&&!value){
+                    //     return msg = "请输入单位";
+                    // }
+                    // if(name == 'strSpecifications'&&!value){
+                    //     return msg = "请填写获取规格";
+                    // }
                     if(name == "decMoney"){
                         if(isNaN(value)){
 

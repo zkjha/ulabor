@@ -7182,6 +7182,24 @@ button.close {
   padding-bottom: 10px;
   line-height: 22px;
 }
+table {
+  width: 1350px !important;
+}
+.page_div {
+  width: 1350px !important;
+  position: relative;
+}
+.j_pageNum {
+  position: absolute;
+  right: 10px;
+}
+.action_a,
+.action_a:visited {
+  color: white;
+}
+.action_a:hover {
+  color: black;
+}
 .margin30 {
   margin: 30px;
 }
@@ -7360,6 +7378,13 @@ button.close {
 .share_div {
   margin: 10px;
 }
+.resourseDetail {
+  display: inline-block;
+  margin-top: 0px;
+  width: 40%;
+  margin-left: 30px;
+  position: relative;
+}
 .display_inline {
   display: inline-block;
   margin-left: 50px;
@@ -7378,6 +7403,11 @@ select {
 }
 .source_label {
   line-height: 80px;
+}
+.icon_check {
+  position: absolute;
+  left: 75px;
+  top: 0px;
 }
 .group_item {
   word-wrap: break-word;

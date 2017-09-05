@@ -45,6 +45,7 @@ requirejs(['lib/jquery',"lib/layer","lib/myi18n",'lib/requstUtil',"lib/bootstrap
                         alert(msg);
                         return;
                     }
+                    document.getElementById("checked_1").checked == true?(options.isNeedBack=1):(options.isNeedBack=0);//是否归还
                     requstUtil.request({
                         url:"/admin/manage/ajaxResourse/addResourse",
                         data:options,

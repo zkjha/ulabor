@@ -15,6 +15,9 @@ var multipart = require('connect-multiparty');
 var loginIntercepter = require('./intercepter/loginIntercepter');
 
 
+//未登录界面，主要处理页面正确跳转到登录页面
+var notLogin = require('./routes/web/notLogin');
+
 //超级管理员
 var superLogin = require("./routes/web/superLogin");
 var ajaxSuperLogin = require("./routes/ajax/superLogin");
@@ -123,6 +126,8 @@ app.use("/",session({
     saveUninitialized: true,
     rolling:true
 }));
+//处理未登录iframe显示登录界面问题
+app.use("/admin/notLogin",notLogin)
 //用户登陆拦截
 app.use("/admin/manage/*",loginIntercepter);
 app.use("/superAdmin/manage/*",loginIntercepter);

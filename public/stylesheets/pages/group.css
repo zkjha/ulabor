@@ -7182,6 +7182,17 @@ button.close {
   padding-bottom: 10px;
   line-height: 22px;
 }
+table {
+  width: 1350px !important;
+}
+.page_div {
+  width: 1350px !important;
+  position: relative;
+}
+.j_pageNum {
+  position: absolute;
+  right: 10px;
+}
 .groupType_td {
   color: white;
   text-align: center;

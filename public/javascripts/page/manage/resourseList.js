@@ -25,12 +25,13 @@ requirejs(['lib/jquery','lib/layer',"lib/requstUtil",'lib/myi18n',"lib/webupload
 
 
             //获取当前页面的type
+            //1 耗材 2 试剂 3 动物 4仪器
             resourseList.strType = location.href.split("?")[1];
 
             /*根据当前所选种类来控制顶部按钮的国际化字段data-title的值来控制显示，
                 主要解决动物类型与其他的类型名称不一致的问题
             */
-            // resourseList.changeTitleShow();
+            resourseList.changeTitleShow();
 
             //国际化
             resourseList.changeLan();
@@ -46,11 +47,18 @@ requirejs(['lib/jquery','lib/layer',"lib/requstUtil",'lib/myi18n',"lib/webupload
 
         },
         event:function () {
+
+            //资源详情按钮点击事件
+            $("#j_body").on("click",".detail_event",function () {
+                var id = $(this).attr("data-id");
+                location.href = "/admin/manage/resourse/resourseDetail?strId="+id+","+resourseList.strType;
+            })
+
+
             //批量导入按钮点击事件
             $("#addResourse_all").on('click',function () {
                 resourseList.uploadFile();
-            })
-
+            });
             //manager设置资源共享点击事件
             $("#j_body").on("click",".shareSetting",function () {
                 var id = $(this).attr("data-id");
@@ -140,11 +148,12 @@ requirejs(['lib/jquery','lib/layer',"lib/requstUtil",'lib/myi18n',"lib/webupload
                 });
             })
 
-            //入库点击事件
+            //入库列表按钮点击事件
             $("#j_body").on("click",".storage_event",function () {
                 var id= $(this).attr("data-id");
+                location.href = "/admin/manage/resourse/storageList?"+id+","+resourseList.strType;
                 //跳转到入库页面
-                location.href = "/admin/manage/resourse/storage?strResourcesId="+id+","+resourseList.strType;
+                //location.href = "/admin/manage/resourse/storage?strResourcesId="+id+","+resourseList.strType;
             });
 
             //监听topwindow的切换语言
@@ -168,10 +177,16 @@ requirejs(['lib/jquery','lib/layer',"lib/requstUtil",'lib/myi18n',"lib/webupload
         },
 
         //改变表格顶部的内容
-        // changeTitleShow:function () {
-        //     //获取节点
-        //     var titleList = $(".rs_title");
-        // },
+        changeTitleShow:function () {
+            // 如果当前类型为动物，改变顶部货号的data-title的值，并改变其text值
+            if(resourseList.strType == 3){
+                $(".Model").text("品系");
+                $(".Model").attr("data-title","animaModel");
+            }else{
+                $(".Model").text("货号");
+                $(".Model").attr("data-title","strModel");
+            }
+        },
         getPageToView:function (nowPage,options) {
             var option = {
                 pageSize:10,
@@ -259,22 +274,26 @@ requirejs(['lib/jquery','lib/layer',"lib/requstUtil",'lib/myi18n',"lib/webupload
                         //     "&nbsp&nbsp<span class=joinType_td notInGroup groupType''><a href='#'   class='shareBtn "+dataId+" i18n' data-type='1' data-title='shareTitle_share'  data-id='"+dataId+"'>共享</a></span>" +
                         //     "<span class='joinType_td notInGroup groupType'><a href='#' style='display: none' class='shareBtn "+dataId+" i18n ' data-type='0' data-title='shareTitle_cancel'  data-id='"+dataId+"'>取消共享</a></span>" +
                         //     "</td>";//操作
-                        str +="<td class='joinType_td groupType_td' style='text-align: center'><span class='btn joinType_td notInGroup groupType storage_event i18n' data-title='actionName'  data-id='"+dataId+"'>入库</span>" +
+                        str +="<td class='joinType_td groupType_td' style='text-align: center'><span class='btn joinType_td notInGroup groupType detail_event i18n' data-title='detaile_resourse'  data-id='"+dataId+"'>详情</span>" +
+                            "&nbsp&nbsp<span class='btn joinType_td notInGroup groupType storage_event i18n' data-title='actionName'  data-id='"+dataId+"'>入库列表</span>"+
                             "&nbsp&nbsp<span class='btn joinType_td notInGroup groupType shareBtn "+dataId+" i18n' data-type='1' data-title='shareTitle_share'  data-id='"+dataId+"'>共享</span>" +
-                            "<span class='btn joinType_td notInGroup groupType shareBtn "+dataId+" i18n ' data-type='0' data-title='shareTitle_cancel'  data-id='"+dataId+"'  style='display: none' >取消共享</span>" +
+                            "&nbsp&nbsp<span class='btn joinType_td notInGroup groupType shareBtn "+dataId+" i18n ' data-type='0' data-title='shareTitle_cancel'  data-id='"+dataId+"'  style='display: none' >取消共享</span>" +
+                            "&nbsp&nbsp<a class='btn joinType_td notInGroup groupType action_a  joinType_td i18n '  data-title='qrCode'  href='/admin/manage/ajaxResourse/downloadById?strResourcesId="+dataId+"' target='_blank'   >二维码</a>" +
                             "</td>";//操作
                     }else if(data.iCanShare == 1){
                         //取消共享
-                        str +="<td class='joinType_td groupType_td' style='text-align: center'><span class='btn joinType_td notInGroup groupType storage_event i18n' data-title='actionName'  data-id='"+dataId+"'>入库</span>" +
+                        str +="<td class='joinType_td groupType_td' style='text-align: center'><span class='btn joinType_td notInGroup groupType detail_event i18n' data-title='detaile_resourse'  data-id='"+dataId+"'>详情</span>" +
+                            "&nbsp&nbsp<span class='btn joinType_td notInGroup groupType storage_event i18n' data-title='actionName'  data-id='"+dataId+"'>入库列表</span>"+
                             "&nbsp&nbsp<span class='btn joinType_td notInGroup groupType shareBtn "+dataId+" i18n'  data-type='1' data-title='shareTitle_share'  data-id='"+dataId+"' style='display: none'>共享</span>" +
-                            "<span class='btn joinType_td notInGroup groupType shareBtn "+dataId+" i18n '  data-type='0' data-title='shareTitle_cancel'  data-id='"+dataId+"'>取消共享</span>" +
+                            "&nbsp&nbsp<span class='btn joinType_td notInGroup groupType shareBtn "+dataId+" i18n '  data-type='0' data-title='shareTitle_cancel'  data-id='"+dataId+"'>取消共享</span>" +
+                            "&nbsp&nbsp<a class='btn joinType_td notInGroup groupType action_a joinType_td i18n '  data-title='qrCode'  data-id='"+dataId+"' href='/admin/manage/ajaxResourse/downloadById?strResourcesId="+dataId+"' target='_blank'  >二维码</a>" +
                             "</td>";//操作
                     }
                 }else{
                     if(data.iCanShare == 1){
                         //管理员
                         //资源可以共享时，显示共享设置。否则不显示共享设置
-                        // str +="<td class='joinType_td groupType_td' style='text-align: center'><span class='joinType_td notInGroup groupType '><a href='#' class='storage_event i18n' data-title='actionName'  data-id='"+dataId+"'>入库</a></span>" +
+                        // str +="<td class='joinType_td groupType_td' style='text-align: center'><span class='joinType_td notInGroup groupType '><a href='#' class='storage_event i18n' data-title='actionName'  data-id='"+dataId+"'>入库列表</a></span>" +
                         //     "&nbsp&nbsp<span class='joinType_td notInGroup groupType'><a href='#'  class='shareSetting  i18n' data-title='shareTitle_setting'  data-id='"+dataId+"'>共享设置</a></span>"
                         //     "</td>";
 
@@ -282,28 +301,36 @@ requirejs(['lib/jquery','lib/layer',"lib/requstUtil",'lib/myi18n',"lib/webupload
                         //根据当前资源的共享状态来设置共享设置或者取消共享
                         if(data.iIsShare == 1){
                             //当前状态为为共享
-                            str +="<td class='joinType_td groupType_td' style='text-align: center'><span class='btn joinType_td notInGroup groupType storage_event i18n' data-id='"+dataId+"' data-title='actionName'>入库</span>" +
-                                "&nbsp&nbsp<span class='btn joinType_td notInGroup groupType cancelShare  i18n' data-title='shareTitle_setting'data-number='"+data.iNumber+"' data-id='"+dataId+"'>取消共享</span>"
+                            str +="<td class='joinType_td groupType_td' style='text-align: center'><span class='btn joinType_td notInGroup groupType detail_event i18n' data-id='"+dataId+"' data-title='detaile_resourse'>详情</span>" +
+                                "&nbsp&nbsp<span class='btn joinType_td notInGroup groupType storage_event i18n' data-title='actionName'  data-id='"+dataId+"'>入库列表</span>"+
+                                "&nbsp&nbsp<span class='btn joinType_td notInGroup groupType cancelShare  i18n' data-title='shareTitle_setting'data-number='"+data.iNumber+"' data-id='"+dataId+"'>取消共享</span>"+
+                                "&nbsp&nbsp<a class='btn joinType_td notInGroup groupType action_a joinType_td i18n '  data-title='qrCode'   href='/admin/manage/ajaxResourse/downloadById?strResourcesId="+dataId+"' target='_blank'  >二维码</a>"+
                             "</td>";
                         }else{
-                            str +="<td class='joinType_td groupType_td' style='text-align: center'><span class='btn joinType_td notInGroup groupType storage_event i18n' data-id='"+dataId+"' data-title='actionName'>入库</span>" +
-                                "&nbsp&nbsp<span class='btn joinType_td notInGroup groupType shareSetting  i18n' data-title='shareTitle_setting'data-number='"+data.iNumber+"' data-id='"+dataId+"' >共享设置</span>"
+                            str +="<td class='joinType_td groupType_td' style='text-align: center'><span class='btn joinType_td notInGroup groupType detail_event i18n' data-id='"+dataId+"' data-title='detaile_resourse'>详情</span>" +
+                                "&nbsp&nbsp<span class='btn joinType_td notInGroup groupType storage_event i18n' data-title='actionName'  data-id='"+dataId+"'>入库列表</span>"+
+                                "&nbsp&nbsp<span class='btn joinType_td notInGroup groupType shareSetting  i18n' data-title='shareTitle_setting'data-number='"+data.iNumber+"' data-id='"+dataId+"' >共享设置</span>"+
+                                "&nbsp&nbsp<a class='btn joinType_td notInGroup groupType  joinType_td action_a i18n '  data-title='qrCode'   href='/admin/manage/ajaxResourse/downloadById?strResourcesId="+dataId+"' target='_blank'  >二维码</a>"+
                             "</td>";
                         }
 
 
                     }else{
-                        // str +="<td   class='joinType_td groupType_td' style='text-align: center'><span class=' joinType_td notInGroup groupType storage_event i18n' data-title='actionName'  data-id='"+dataId+"'>入库</span>" +
+                        // str +="<td   class='joinType_td groupType_td' style='text-align: center'><span class=' joinType_td notInGroup groupType storage_event i18n' data-title='actionName'  data-id='"+dataId+"'>入库列表</span>" +
                         //     "</td>";
 
                         if(data.iIsShare == 1){
                             //当前状态为为共享
-                            str +="<td class='joinType_td groupType_td' style='text-align: center'><span class='btn joinType_td notInGroup groupType storage_event i18n' data-id='"+dataId+"' data-title='actionName'>入库</span>" +
+                            str +="<td class='joinType_td groupType_td' style='text-align: center'><span class='btn joinType_td notInGroup groupType detail_event i18n' data-id='"+dataId+"' data-title='detaile_resourse'>详情</span>" +
+                            "&nbsp&nbsp<span class='btn joinType_td notInGroup groupType storage_event i18n' data-title='actionName'  data-id='"+dataId+"'>入库列表</span>"+
                                 "&nbsp&nbsp<span class=' joinType_td  groupType  i18n btn notInGroup' data-title='shareTitle_setting' data-number='"+data.iNumber+"' data-id='"+dataId+"' disabled='disabled'>取消共享</span>"+
+                                "&nbsp&nbsp<a class='btn joinType_td notInGroup groupType action_a joinType_td i18n '  data-title='qrCode'   href='/admin/manage/ajaxResourse/downloadById?strResourcesId="+dataId+"' target='_blank'  >二维码</a>"+
                             "</td>";
                         }else{
-                            str +="<td class='joinType_td groupType_td' style='text-align: center'><span class='btn joinType_td notInGroup groupType storage_event i18n' data-id='"+dataId+"' data-title='actionName'>入库</span>" +
+                            str +="<td class='joinType_td groupType_td' style='text-align: center'><span class='btn joinType_td notInGroup groupType detail_event i18n' data-id='"+dataId+"' data-title='detaile_resourse'>详情</span>" +
+                                "&nbsp&nbsp<span class='btn joinType_td notInGroup groupType storage_event i18n' data-title='actionName'  data-id='"+dataId+"'>入库列表</span>"+
                                 "&nbsp&nbsp<span class=' joinType_td  groupType   i18n btn notInGroup ' data-title='shareTitle_setting' data-number='"+data.iNumber+"' data-id='"+dataId+"' disabled='disabled'>共享设置</span>"+
+                                "&nbsp&nbsp<a class='btn joinType_td notInGroup groupType action_a  joinType_td  i18n ' data-title='qrCode' href='/admin/manage/ajaxResourse/downloadById?strResourcesId="+dataId+"' target='_blank'  >二维码</a>"+
                             "</td>";
                         }
                     }

@@ -27,18 +27,18 @@
 <body>
 <div class="margin30">
     <div class="flex">
-        <div class="Storage_option">
-            <select>
-                <option value="1" selected>耗材</option>
-                <option value="2">试剂</option>
-                <option value="3">动物</option>
-                <option value="4">仪器</option>
-            </select>
-        </div><!-- /btn-group -->
-        <div class="searchInput">
-            <input type="text" class="form-control">
-        </div>
-        <a id="addResourse" class="btn btn-large btn-primary ">搜索</a>
+        <!--<div class="Storage_option">-->
+            <!--<select>-->
+                <!--<option value="1" selected>耗材</option>-->
+                <!--<option value="2">试剂</option>-->
+                <!--<option value="3">动物</option>-->
+                <!--<option value="4">仪器</option>-->
+            <!--</select>-->
+        <!--</div>&lt;!&ndash; /btn-group &ndash;&gt;-->
+        <!--<div class="searchInput">-->
+            <!--<input type="text" class="form-control">-->
+        <!--</div>-->
+        <a id="addResourse" class="btn btn-large btn-primary ">新增入库</a>
     </div><!-- /input-group -->
 
 </div>
@@ -47,19 +47,20 @@
             <thead>
                 <tr>
                     <th>资源名称</th>
-                    <th>资源类型</th>
-                    <th>单位</th>
-                    <th>获取规格</th>
-                    <th>单价</th>
-                    <th>公司品牌</th>
-                    <th>公司型号</th>
+                    <th>经销商</th>
+                    <th>来源</th>
+                    <th>入库单价</th>
+                    <th>入库数量</th>
+                    <th>凭证</th>
+                    <th>备注信息</th>
+                    <th>时间</th>
                 </tr>
             </thead>
             <tbody id="j_body"></tbody>
         </table>
-        <div>
+        <div class="page_div">
             <span id="j_footer"></span>
-            <span id="j_pageNum"></span>
+            <span id="j_pageNum" class="j_pageNum"></span>
         </div>
 
     </div>
@@ -67,7 +68,7 @@
 
 <script type="text/javascript">
     (function(){
-        var footer = '<script src="'+ GV.STATIC_ROOT+'javascripts/lib/require.js" data-main="'+ GV.STATIC_ROOT+'javascripts/page/manage/resourseList.js"><\/script>';
+        var footer = '<script src="'+ GV.STATIC_ROOT+'javascripts/lib/require.js" data-main="'+ GV.STATIC_ROOT+'javascripts/page/manage/storageList.js"><\/script>';
         document.write(footer);
     })();
 

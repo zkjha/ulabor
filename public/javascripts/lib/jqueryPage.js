@@ -120,10 +120,10 @@
             jPager.append(jA);
         }
         function appendFirstAndLast() {
-            var jFirst = $("<a>首页</a>", { text: _first });
-            var jBefore = $("<a>上一页</a>", { text: _before });
-            var jLast = $("<a>尾页</a>", { text: _last });
-            var jNext = $("<a>下一页</a>", { text: _next });
+            var jFirst = $("<a class='i18n' data-title='First'>首页</a>", { text: _first });
+            var jBefore = $("<a class='i18n' data-title='Before'>上一页</a>", { text: _before });
+            var jLast = $("<a class='i18n' data-title='Last'>尾页</a>", { text: _last });
+            var jNext = $("<a class='i18n' data-title='Next'>下一页</a>", { text: _next });
             // var jFirst = $("<a class='i18n' data-title='First'>", { text: _first });
             // var jBefore = $("<a class='i18n' data-title='Before'>", { text: _before });
             // var jLast = $("<a class='i18n' data-title='Last'>", { text: _last });

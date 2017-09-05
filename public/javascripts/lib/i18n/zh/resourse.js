@@ -18,6 +18,7 @@ define([],function () {
     strModel:'货号',
     strRemarks:'信息',
     action:'操作',
+    animaModel:"品系",
 
 
 //////列表搜索部分
@@ -29,10 +30,13 @@ define([],function () {
     addBtn:'新增资源',
     Template_download:'批量模板下载',
     addBtn_all:'批量导入',
+    qrcode_all:'批量导出二维码',
+    qrCode:'二维码',
 
 
 ////////操作按钮
-    actionName:'入库',
+    actionName:'入库列表',
+    detaile_resourse:'详情',
     shareTitle_share:'共享',
     shareTitle_cancel:'取消共享',
     shareTitle_setting:'共享设置',
@@ -57,6 +61,10 @@ define([],function () {
     strModel_placeholder:'请输入公司型号',
     strRemarks_placeholder:'请输入备注信息',
     addButton:'新增',
+    strPosition:'存放位置',
+
+    //修改资源
+    iInsideIsNeedBack:'内部是否归还',
 
 
 //////入库

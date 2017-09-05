@@ -18,7 +18,8 @@ var loginIntercepter=function(req, res, next) {
             if (req.session.api_session_id) {  // 判断用户是否登录
                 next();
             } else {
-                res.redirect("/admin/sign-in-web/?url="+req.originalUrl);
+                // res.redirect("/admin/sign-in-web/?url="+req.originalUrl);
+                res.redirect("/admin/notLogin");
           }
     }
 

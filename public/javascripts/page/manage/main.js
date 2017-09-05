@@ -28,7 +28,7 @@ requirejs(['lib/jquery','lib/bootstrap','lib/myi18n'],function($,bootstrap,myi18
 	}
 
 	//切换语言
-    var lan = localStorage.getItem("lan")||$(".changLan select")[0].value||localStorage.getItem("navigatorLan");
+    var lan = (localStorage.getItem("lan")||$(".changLan select")[0].value||localStorage.getItem("navigatorLan")||"zh");
 	changLan(lan);
 
 

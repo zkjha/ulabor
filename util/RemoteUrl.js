@@ -12,6 +12,10 @@ var  RemoteUrl= {
             upload:staticValue.API_BASE_PATH+"/app/had-login/file/imageUpload",
             uploadFile:staticValue.API_BASE_PATH+"/app/had-login/resources/batch/add",
 
+            //批量下载二维码
+            domnLoad:"/app/had-login/resources/export/resorce/qrcode/zip",//批量下载二维码
+            qrCodeById:"/app/had-login/resources/export/resorce/qrcode",//下载单条二维码
+
             //登录接口
             userLogin:staticValue.API_BASE_PATH+"/app/email/password/login",//邮箱登录
             phoneLogin:staticValue.API_BASE_PATH+"/app/phone/password/login", //电话登录
@@ -21,10 +25,13 @@ var  RemoteUrl= {
             //资源管理
             addResourse:staticValue.API_BASE_PATH+"/app/had-login/resources/add", //新增资源
             getResourseList:staticValue.API_BASE_PATH+"/app/had-login/resources/labor/resource/list",//获取资源列表
+            getResourseById:staticValue.API_BASE_PATH+"/app/resources/get/resource/id",//获取单条资源的数据
+            changeDetail:staticValue.API_BASE_PATH+"/app/had-login/resources/change/resource/info",//修改资源详情
             addStorage:staticValue.API_BASE_PATH+"/app/had-login/resourcesstock/push-in",//新增入库
+            storageList:staticValue.API_BASE_PATH+"/app/had-login/resourcesstock//get/stock/list",//入库列表
             setResourceSharing:staticValue.API_BASE_PATH+"/app/had-login/resources/set/iscan/share",//pi设置资源是否可以共享
             getGroups:staticValue.API_BASE_PATH+"/app/had-login/groupmanagement/get/user/groups",//获取当前用户的所有分组
-            setShare:staticValue.API_BASE_PATH+"app/had-login/resources/set/share",//共享设置
+            setShare:staticValue.API_BASE_PATH+"/app/had-login/resources/set/share",//共享设置
             getDataById:staticValue.API_BASE_PATH+"/app/resources/get/resource/id",//获取单条资源信息
             cancelShare:staticValue.API_BASE_PATH+"/app/had-login/resources/set/close/share",//取消共享
 
@@ -38,9 +45,9 @@ var  RemoteUrl= {
             getAllLabor:staticValue.API_BASE_PATH+"/app/select/labor",//获取所有实验室列表;
             addGroup:staticValue.API_BASE_PATH+"/app/had-login/groupmanagement/create-group",//创建分组;
             getAllGroups:staticValue.API_BASE_PATH+"/app/had-login/groupmanagement/get/user/groups",//获取所有分组信息;
-            joinGroups:staticValue.API_BASE_PATH+"app/had-login/groupmanagement/whether/join-groups",//是否接受分组要求;
-            changeGroupName:staticValue.API_BASE_PATH+"app/had-login/groupmanagement/change/groupname",//修改组名;
-            deleteGroup:staticValue.API_BASE_PATH+"app/had-login/groupmanagement/dissolution-groups",//删除分组;
+            joinGroups:staticValue.API_BASE_PATH+"/app/had-login/groupmanagement/whether/join-groups",//是否接受分组要求;
+            changeGroupName:staticValue.API_BASE_PATH+"/app/had-login/groupmanagement/change/groupname",//修改组名;
+            deleteGroup:staticValue.API_BASE_PATH+"/app/had-login/groupmanagement/dissolution-groups",//删除分组;
             groupDetail:staticValue.API_BASE_PATH+"/app/had-login/groupmanagement/get/group/detail",//获取分组成员列表;
 
 
@@ -60,8 +67,8 @@ var  RemoteUrl= {
 
 
             //用户管理
-            getAllMenbers:staticValue.API_BASE_PATH+"app/had-login/usercenter/access/information",//获取所有实验室成员
-            changeRole:staticValue.API_BASE_PATH+"app/had-login/usercenter/access/userright",//改变权限
+            getAllMenbers:staticValue.API_BASE_PATH+"/app/had-login/usercenter/access/information",//获取所有实验室成员
+            changeRole:staticValue.API_BASE_PATH+"/app/had-login/usercenter/access/userright",//改变权限
             removeMenber:staticValue.API_BASE_PATH+"/app/kick/out/labor",//踢出成员
 
 
@@ -83,7 +90,7 @@ var  RemoteUrl= {
 
             //实验室审核列表
             getLaborList:staticValue.API_BASE_PATH+"/admin/had-login/review/create/labor/list",//获取实验室列表
-            agreeOrRefuse:staticValue.API_BASE_PATH+"admin/had-login/review/create/Labor/review",//获取实验室列表
+            agreeOrRefuse:staticValue.API_BASE_PATH+"/admin/had-login/review/create/Labor/review",//获取实验室列表
 
             //上传文件
             superUpload:staticValue.API_BASE_PATH+"/admin/had-login/file/imageUpload",//上传图片

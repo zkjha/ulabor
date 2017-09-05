@@ -6839,6 +6839,17 @@ button.close {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
+table {
+  width: 1350px !important;
+}
+.page_div {
+  width: 1350px !important;
+  position: relative;
+}
+.j_pageNum {
+  position: absolute;
+  right: 10px;
+}
 body {
   padding-top: 40px;
   padding-bottom: 40px;
